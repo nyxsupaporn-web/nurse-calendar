@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#e7f4ea"><meta name="description" content="ปฏิทินบันทึกเวรและวันสำคัญสำหรับพยาบาล">
-<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./medical-calendar.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.webmanifest?v=30"><link rel="icon" href="./favicon-48.png?v=30" type="image/png"><link rel="apple-touch-icon" href="./apple-touch-icon.png?v=30">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ปฏิทินบันทึกเวร"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>ปฏิทินบันทึกเวร</title>
 <style>
@@ -91,7 +91,7 @@ html,body{touch-action:pan-x pan-y}button,a{touch-action:manipulation}@media(max
 .roster-wings{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.roster-wings .active{background:#398565;color:white;border-color:#398565}.roster-table{border-collapse:separate;border-spacing:0}.roster-table td,.roster-table th{border:0;border-right:1px solid #ccdbd1;border-bottom:1px solid #ccdbd1;padding:7px 9px;min-width:60px;white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;background:white;font-weight:400}.roster-table thead{position:sticky;top:0;z-index:3}.roster-table thead th{background:#edf7ef;font-weight:600}.roster-table .frozen-date{position:sticky;left:0;z-index:2;box-shadow:2px 0 0 #b9d2c2}.roster-table thead .frozen-date{z-index:4}.roster-scroll{isolation:isolate;max-height:65vh;position:relative}.roster-document-image{display:block;width:100%;height:auto}.roster-document-frame{display:block;width:100%;height:65vh;border:1px solid #d6e6da;border-radius:10px}#rosterDocument{margin-top:12px;min-width:0}#rosterDocument a{display:inline-block;margin:8px 0;color:#286c4b}#rosterFreezeRows{padding:7px;border:1px solid #c8dfd0;border-radius:8px;background:white;color:#315948}#rosterFreezeControls{margin-bottom:8px}
 .cloud-panel{padding:16px;margin-bottom:16px}.cloud-panel h2{font-size:16px;margin:0}.cloud-panel h2 span{display:block;font-size:12px;overflow-wrap:anywhere;font-weight:400}.cloud-panel p{font-size:12px;line-height:1.6}.cloud-actions{display:flex;gap:8px;flex-wrap:wrap}.cloud-actions a{text-decoration:none}.cloud-actions .btn,#cloudConflict .btn{font-size:12px;padding:9px}#cloudConflict{padding:10px;margin-top:12px;background:#fff2dc;border-radius:12px}#cloudApp{min-width:0}
 .email-overlay{position:fixed;inset:0;z-index:10000;background:#25483b66;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}.email-overlay[hidden]{display:none}.email-dialog{background:white;border-radius:24px;padding:24px;width:100%;max-width:430px;max-height:90dvh;overflow:auto;box-sizing:border-box}.email-dialog input{display:block;box-sizing:border-box;width:100%;min-width:0;font-size:16px;margin:8px 0 16px}.email-dialog label{display:block;margin-top:16px}.email-dialog p{line-height:1.6;font-size:14px}</style>
-<link rel="stylesheet" href="./login-screen.css">
+<link rel="stylesheet" href="./login-screen.css?v=30">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -215,25 +215,40 @@ html,body{touch-action:pan-x pan-y}button,a{touch-action:manipulation}@media(max
 <script src="./holiday-data.js"></script>
 <section id="emailLogin" class="email-overlay nc-login-overlay" aria-label="เข้าสู่ระบบปฏิทินบันทึกเวร">
   <div class="email-dialog nc-login-scene" role="dialog" aria-modal="true" aria-labelledby="ncLoginTitle">
-    <h2 class="nc-screen-reader" id="ncLoginTitle">เข้าสู่ระบบปฏิทินบันทึกเวร</h2>
-    <!-- Decoration and labels match the supplied artwork; these are real, accessible inputs. -->
-    <label class="nc-screen-reader" for="emailAddress">อีเมลสำหรับเข้าสู่ระบบ</label>
-    <div class="nc-login-field nc-login-email"><input id="emailAddress" type="email" required autocomplete="email" inputmode="email" placeholder="ชื่อผู้ใช้งาน (อีเมล)" aria-label="อีเมลที่ใช้ลงทะเบียน" title="ใช้อีเมลที่สมัคร เช่น name@gmail.com"></div>
-    <label class="nc-screen-reader" for="emailPassword">รหัสผ่าน</label>
-    <div class="nc-login-field nc-login-password"><input id="emailPassword" type="password" minlength="8" required autocomplete="current-password" placeholder="รหัสผ่าน" aria-label="รหัสผ่าน Nurse Calendar"></div>
-    <button id="ncPasswordVisibility" class="nc-password-visibility" type="button" aria-label="แสดงรหัสผ่าน" aria-pressed="false"></button>
-    <button id="emailSignIn" class="nc-login-main-button" type="button" aria-label="เข้าสู่ระบบ"><span class="nc-screen-reader">เข้าสู่ระบบ</span></button>
-    <div class="nc-login-options">
-      <button id="emailSignUp" class="nc-login-option" type="button">สมัครสมาชิก</button>
-      <span aria-hidden="true">•</span>
-      <button id="emailReset" class="nc-login-option" type="button">ลืมรหัสผ่าน</button>
+    <div class="nc-login-card">
+      <div class="nc-login-heading">
+        <img class="nc-login-logo" src="./login-logo-v30.jpg" width="1536" height="1024" alt="โลโก้ปฏิทินบันทึกเวร รูปบุคลากรทางการแพทย์กับปฏิทิน">
+        <h2 id="ncLoginTitle">เข้าสู่ระบบปฏิทินบันทึกเวร</h2>
+        
+      </div>
+      <div class="nc-login-form">
+        <label class="nc-login-label" for="emailAddress">Username</label>
+        <div class="nc-login-input-row nc-login-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="4"/><path d="M4.5 21c.1-4.5 3.1-7 7.5-7s7.4 2.5 7.5 7"/></svg>
+          <input id="emailAddress" type="email" required autocomplete="email" inputmode="email" placeholder="ชื่อผู้ใช้งาน (อีเมล)" aria-label="อีเมลที่ใช้ลงทะเบียน" title="ใช้อีเมลที่สมัคร เช่น name@gmail.com">
+        </div>
+        <label class="nc-login-label" for="emailPassword">รหัสผ่าน</label>
+        <div class="nc-login-input-row nc-login-password">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="12" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1"/></svg>
+          <input id="emailPassword" type="password" minlength="8" required autocomplete="current-password" placeholder="รหัสผ่าน" aria-label="รหัสผ่าน Nurse Calendar">
+          <button id="ncPasswordVisibility" class="nc-password-visibility" type="button" aria-label="แสดงรหัสผ่าน" aria-pressed="false">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3 21 21"/><path d="M10 5.2A11 11 0 0 1 12 5c5.2 0 9 4.3 10 7-0.4 1.2-1.2 2.5-2.3 3.6M6.8 6.8C4.6 8.2 3 10.7 2 12c1 2.8 4.8 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.7 9.7A3.2 3.2 0 0 0 14.3 14.3"/></svg>
+          </button>
+        </div>
+        <button id="emailSignIn" class="nc-login-main-button" type="button">เข้าสู่ระบบ</button>
+        <div class="nc-login-options">
+          <button id="emailSignUp" class="nc-login-option" type="button">สมัครสมาชิก</button>
+          <span class="nc-login-option-dot" aria-hidden="true">•</span>
+          <button id="emailReset" class="nc-login-option" type="button">ลืมรหัสผ่าน</button>
+        </div>
+        <p id="emailStatus" class="nc-login-status" role="status" aria-live="polite">สมัครครั้งแรกจะได้รับอีเมลยืนยันบัญชี</p>
+      </div>
     </div>
     <div id="emailRecovery" class="nc-recovery-panel" hidden>
-      <label for="emailNewPassword">ตั้งรหัสผ่านใหม่</label>
+      <div class="nc-recovery-card"><label for="emailNewPassword">ตั้งรหัสผ่านใหม่</label>
       <input id="emailNewPassword" type="password" minlength="8" required autocomplete="new-password" placeholder="รหัสผ่านใหม่อย่างน้อย 8 ตัวอักษร">
-      <button id="emailSavePassword" class="btn primary" type="button">บันทึกรหัสผ่านใหม่</button>
+      <button id="emailSavePassword" class="btn primary" type="button">บันทึกรหัสผ่านใหม่</button></div>
     </div>
-    <p id="emailStatus" class="nc-login-status" role="status" aria-live="polite">สมัครครั้งแรกจะได้รับอีเมลยืนยันบัญชี</p>
     <button id="emailClose" class="nc-screen-reader" type="button" hidden>ปิด</button>
   </div>
 </section>

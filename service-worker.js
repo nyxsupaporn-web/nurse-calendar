@@ -1,7 +1,7 @@
-const CACHE='nurse-calendar-static-v27-20261020-3';
+const CACHE='nurse-calendar-static-v30-20261021-layout';
 const ROOT=new URL('./',self.registration.scope);
 const SCOPE_PATH=ROOT.pathname;
-const files=['./','./index.html','./manifest.webmanifest','./medical-calendar.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./vendor/jszip.min.js','./roster-import.js','./roster.js','./holiday-data.js','./holiday-data.json','./cloud.js','./email-cloud.js'];
+const files=['./','./index.html','./manifest.webmanifest','./medical-calendar.svg','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-48.png','./login-logo-v30.jpg','./login-bg-top.jpg','./login-bg-bottom.jpg','./login-screen.css','./login-screen.js','./login-medical-decor.svg','./vendor/jszip.min.js','./roster-import.js','./roster.js','./holiday-data.js','./holiday-data.json','./cloud.js','./email-cloud.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(c=>c.addAll(files.map(x=>new URL(x,ROOT).href))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('nurse-calendar-static-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

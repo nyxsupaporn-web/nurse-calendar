@@ -1,71 +1,154 @@
-/* Nurse Calendar v27 - login visual only. No calendar, storage or Supabase logic changed. */
+/* Nurse Calendar v30: login artwork/layout only.  No changes to app or auth logic. */
 .nc-screen-reader{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.nc-login-overlay.email-overlay{position:fixed;inset:0;z-index:10000;display:flex;justify-content:center;align-items:center;overflow-y:auto;overscroll-behavior:contain;background:linear-gradient(140deg,#edfbf1,#e0f9ed 60%,#f9fff8);padding:0}
+.nc-login-overlay.email-overlay{
+  position:fixed;inset:0;z-index:10000;isolation:isolate;box-sizing:border-box;
+  display:flex;flex-direction:column;justify-content:flex-start;align-items:center;
+  overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:clamp(132px,19.5svh,195px) 0 clamp(96px,12.8svh,150px);
+  background:radial-gradient(ellipse at 0% 56%,#d5f1e3 0%,transparent 33%),
+    radial-gradient(ellipse at 100% 52%,#ddf5e9 0%,transparent 36%),
+    linear-gradient(128deg,#f7fff9 0%,#e6f9ef 57%,#f2fffc 100%);
+  overscroll-behavior:contain
+}
 .nc-login-overlay.email-overlay[hidden]{display:none!important}
+.nc-login-overlay.email-overlay::before,
+.nc-login-overlay.email-overlay::after{
+  position:fixed;left:0;right:0;pointer-events:none;z-index:-1;content:"";
+  background-repeat:no-repeat;background-position:center;background-size:cover;
+}
+.nc-login-overlay.email-overlay::before{
+  top:0;height:clamp(136px,20.9svh,210px);
+  background-image:url('./login-bg-top.jpg');
+}
+.nc-login-overlay.email-overlay::after{
+  bottom:0;height:clamp(103px,15.1svh,155px);
+  background-image:url('./login-bg-bottom.jpg');
+}
 .nc-login-scene.email-dialog{
-  position:relative;flex:0 0 auto;overflow:hidden;box-sizing:border-box;
-  width:min(100vw,540px);height:100svh;max-width:none;max-height:none;
-  margin:auto;padding:0;border:0;border-radius:0;
-  background-color:#e6f8ed;
-  background-image:url('./login-screen-reference.jpg');
-  background-position:center;background-repeat:no-repeat;background-size:100% 100%;
-  box-shadow:none;
+  position:relative;display:flex;flex-direction:column;flex:0 0 auto;
+  width:min(84.9vw,460px);max-width:460px;max-height:none;height:auto;
+  box-sizing:border-box;margin:0 auto;padding:0;overflow:visible;
+  border:1.5px solid #a9dfc5;border-radius:32px;background:#fff;
+  box-shadow:0 13px 34px rgba(38,110,83,.12),0 3px 10px rgba(48,113,86,.08);
+  color:#235844;
 }
-.nc-login-scene .nc-login-field{position:absolute;left:12.5%;width:75.4%;height:5.8%;margin:0;pointer-events:none}
-.nc-login-scene .nc-login-email{top:57.08%}
-.nc-login-scene .nc-login-password{top:67.95%}
-.nc-login-scene .nc-login-field input{
-  pointer-events:auto;position:absolute;top:10%;left:14%;width:76%;height:79%;
-  display:block;min-width:0;box-sizing:border-box;margin:0;padding:0 1%;
-  border:0;border-radius:5px;outline:0;
-  background:#fdfdfd;color:#294f45;
-  font-family:'Prompt','Kanit',system-ui,sans-serif;
-  font-size:clamp(14px,3.4vw,20px);font-weight:500;
-  line-height:1.2;-webkit-appearance:none;appearance:none;
+.nc-login-card{width:100%;box-sizing:border-box;overflow:hidden;border-radius:inherit;background:#fff}
+.nc-login-heading{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-sizing:border-box;padding:24px 14px 23px;text-align:center;background:#fff;
 }
-.nc-login-scene .nc-login-field input::placeholder{color:#b9b9be;opacity:1}
-.nc-login-scene .nc-login-field input:focus-visible{outline:2px solid #5ab49a;outline-offset:3px}
-.nc-login-scene .nc-login-main-button{
-  position:absolute;left:12.5%;width:75.4%;top:76.05%;height:6.55%;
-  margin:0;padding:0;border:0;border-radius:999px;background:transparent;
-  box-shadow:none;cursor:pointer;touch-action:manipulation
+.nc-login-logo{
+  display:block;flex:0 0 auto;box-sizing:border-box;
+  width:76%;max-width:340px;height:auto;aspect-ratio:3/2;object-fit:contain;
+  border:0;background:#fff;box-shadow:none;border-radius:0;image-rendering:auto;
 }
-.nc-login-scene .nc-login-main-button:focus-visible{outline:3px solid #155e48;outline-offset:2px}
-.nc-login-scene .nc-login-main-button:disabled{cursor:wait}
+.nc-login-heading h2{
+  margin:13px 0 0;padding:0;color:#176149;
+  font-family:'Prompt','Kanit','Noto Sans Thai',system-ui,sans-serif;
+  font-size:clamp(17px,4.1vw,23px);font-weight:750;letter-spacing:-.5px;
+  line-height:1.42;text-wrap:balance;
+}
+.nc-login-tagline{display:none!important}
+.nc-login-form{
+  position:relative;display:flex;flex-direction:column;box-sizing:border-box;
+  padding:0 20px 22px;background:#fff;
+}
+.nc-login-label{
+  display:block;color:#235d4b;font-size:clamp(14px,3.65vw,16px);
+  font-weight:700;line-height:1.4;margin:0 0 8px;
+}
+.nc-login-hint{font-size:12px;font-weight:400;color:#648e7b}
+.nc-login-input-row{
+  box-sizing:border-box;display:flex;align-items:center;gap:11px;
+  min-width:0;width:100%;height:53px;margin:0 0 17px;
+  border:1.5px solid #d7dfdc;border-radius:23px;background:white;
+  box-shadow:0 1px 3px rgba(48,91,74,.035);
+  transition:border-color .15s,box-shadow .15s;
+}
+.nc-login-input-row:focus-within{border-color:#65bea0;box-shadow:0 0 0 3px rgba(127,206,168,.18)}
+.nc-login-input-row>svg{
+  flex:0 0 auto;display:block;width:23px;height:23px;margin-left:17px;color:#39aa88;
+}
+.nc-login-input-row input{
+  box-sizing:border-box;display:block;flex:1;min-width:0;width:0;height:100%;
+  border:0;border-radius:22px;padding:0 6px 0 0;outline:none;appearance:none;
+  -webkit-appearance:none;background:transparent;color:#245b4a;
+  font-family:'Prompt','Kanit',system-ui,sans-serif;font-size:16px;line-height:1.3;
+}
+.nc-login-input-row input::placeholder{color:#a9acae;opacity:1}
+.nc-login-input-row input:focus-visible{outline:none}
+.nc-login-input-row.nc-login-password{margin-bottom:20px}
 .nc-login-scene .nc-password-visibility{
-  position:absolute;top:68.15%;left:78.5%;width:8.2%;height:5.2%;
-  border:0;padding:0;border-radius:999px;background:transparent;
+  box-sizing:border-box;flex:0 0 auto;display:grid;place-items:center;
+  width:44px;height:44px;margin:0 4px 0 0;padding:0;border:0;
+  border-radius:50%;background:transparent;color:#92999b;cursor:pointer;
 }
-.nc-login-scene .nc-password-visibility:focus-visible{outline:2px solid #429e83;outline-offset:0}
+.nc-login-scene .nc-password-visibility svg{width:22px;height:22px;pointer-events:none}
+.nc-login-scene .nc-password-visibility:focus-visible{outline:2px solid #62ad91;outline-offset:-3px}
+.nc-login-scene .nc-login-main-button{
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  width:100%;min-height:54px;margin:0 0 11px;padding:11px 14px;
+  border:0;border-radius:24px;cursor:pointer;touch-action:manipulation;
+  background:linear-gradient(95deg,#68b99a 0%,#3c9e81 47%,#72c7a0 100%);
+  box-shadow:0 7px 18px rgba(43,136,97,.17);color:white;
+  font-family:'Prompt','Kanit','Noto Sans Thai',system-ui,sans-serif;
+  font-size:clamp(19px,4.85vw,23px);font-weight:700;line-height:1.4;
+}
+.nc-login-scene .nc-login-main-button:focus-visible{outline:3px solid #236b52;outline-offset:2px}
+.nc-login-scene .nc-login-main-button:disabled{opacity:.65;cursor:wait}
 .nc-login-scene .nc-login-options{
-  position:absolute;left:12.5%;width:75.4%;top:83.0%;height:2.7%;
-  display:flex;justify-content:center;align-items:center;gap:10px;
-  font-size:clamp(11px,2.8vw,14px);font-weight:500;color:#348a71;
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;column-gap:12px;row-gap:5px;min-height:39px;
+  width:100%;padding:0 8px;margin:0 0 6px;color:#7eb8a0;font-size:13px;font-weight:550;
 }
 .nc-login-scene .nc-login-option{
-  margin:0;padding:0 5px;border:0;background:transparent;color:#25775d;
-  cursor:pointer;font:inherit;white-space:nowrap;text-decoration:underline;text-underline-offset:3px
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:38px;padding:7px 9px;margin:0;border:0;border-radius:10px;
+  background:transparent;color:#32866b;white-space:nowrap;cursor:pointer;
+  font:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#b9ddcb;
 }
+.nc-login-scene .nc-login-option:focus-visible{outline:2px solid #6fbb9b}
 .nc-login-scene .nc-login-option:disabled{opacity:.45}
+.nc-login-scene .nc-login-option-dot{flex:0 0 auto}
 .nc-login-scene .nc-login-status{
-  position:absolute;top:86.5%;left:7%;width:86%;max-height:11%;overflow:auto;
-  display:none;margin:0;padding:10px 12px;box-sizing:border-box;
-  border:1px solid #a8dcc1;border-radius:12px;
-  background:rgba(250,255,252,.96);box-shadow:0 5px 16px #215a4420;
-  color:#2b5e4c;font-size:clamp(11px,2.7vw,13px);line-height:1.5;text-align:center;
+  box-sizing:border-box;display:none;position:relative;overflow:auto;max-height:165px;
+  margin:12px 0 0;padding:11px 12px;border:1px solid #addfc4;border-radius:12px;
+  background:#f4fcf7;color:#2b694f;font-size:13px;line-height:1.55;text-align:center;
 }
 .nc-login-scene .nc-login-status.nc-visible{display:block}
 .nc-login-scene .nc-recovery-panel{
-  position:absolute;left:9%;top:43%;width:82%;box-sizing:border-box;z-index:3;
-  padding:18px;border-radius:20px;border:1px solid #b7ddc6;
-  background:#fffffff5;box-shadow:0 10px 30px #214d3a38;
+  position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;
+  box-sizing:border-box;padding:18px;border-radius:32px;
+  background:rgba(234,248,245,.95);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
 }
 .nc-login-scene .nc-recovery-panel[hidden]{display:none!important}
-.nc-login-scene .nc-recovery-panel label{margin:0 0 7px;color:#206246;font-size:16px;font-weight:600}
-.nc-login-scene .nc-recovery-panel input{
-  display:block;width:100%;margin:7px 0 12px;padding:12px;border:1px solid #b9dac7;
-  border-radius:12px;background:white;font-size:16px;
+.nc-recovery-card{width:100%;padding:22px 17px;border:1px solid #bbe1cc;border-radius:22px;box-shadow:0 12px 28px rgba(33,93,69,.18);background:#fff}
+.nc-login-scene .nc-recovery-panel label{display:block;margin:0 0 12px;color:#25694a;font-size:16px;font-weight:600}
+.nc-login-scene .nc-recovery-panel input{display:block;width:100%;margin:0 0 14px;padding:12px;border:1px solid #b9dac7;border-radius:12px;background:white;font-size:16px;min-height:49px}
+.nc-login-scene .nc-recovery-panel .btn{min-height:49px;width:100%;background:#3a9575;border:0;color:white;border-radius:14px}
+@media(max-width:375px){
+  .nc-login-scene.email-dialog{width:85%}
+  .nc-login-heading{padding:19px 10px 18px}
+  .nc-login-form{padding:0 17px 17px}
+  .nc-login-input-row{height:49px;margin-bottom:14px}
+  .nc-login-input-row.nc-login-password{margin-bottom:16px}
+  .nc-login-scene .nc-login-main-button{min-height:51px;margin-bottom:9px}
+  .nc-login-scene .nc-login-options{column-gap:8px;padding:0 3px}
+  .nc-login-scene .nc-login-option{padding:7px 7px}
 }
-.nc-login-scene .nc-recovery-panel .btn{background:#3a9575;border:0;color:white;padding:11px 15px;width:100%}
-@media (min-width:541px){.nc-login-scene.email-dialog{box-shadow:0 0 50px #4c8d7040}}
-@media (max-height:520px) and (orientation:landscape){.nc-login-scene.email-dialog{height:800px;width:min(100vw,450px)}}
+@media(max-height:740px){
+  .nc-login-overlay.email-overlay{padding-top:clamp(114px,18svh,138px);padding-bottom:clamp(65px,11svh,90px)}
+  .nc-login-heading{padding-top:13px;padding-bottom:15px}
+  .nc-login-logo{width:71%}
+  .nc-login-heading h2{margin-top:7px}
+  .nc-login-input-row{height:47px;margin-bottom:12px}
+  .nc-login-input-row.nc-login-password{margin-bottom:13px}
+  .nc-login-scene .nc-login-main-button{min-height:49px}
+}
+@media(max-height:520px) and (orientation:landscape){
+  .nc-login-overlay.email-overlay{padding-top:28px;padding-bottom:35px}
+  .nc-login-scene.email-dialog{width:min(90vw,390px)}
+  .nc-login-logo{width:42%;max-width:170px}
+  .nc-login-heading{padding:10px 12px 8px}
+  .nc-login-form{padding:0 16px 16px}
+}
