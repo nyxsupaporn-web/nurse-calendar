@@ -555,6 +555,33 @@ html,body{touch-action:manipulation}
 /* Reference graphic includes its own subtitle; avoid adding a second overlapping label. */
 .restored-new-tagline{display:none!important}
 </style>
+
+<style id="v9-targeted-fixes">
+/* V9 only: hide ellipsis hint; calendar long-press still shows the existing context menu */
+.cell-menu-dot{display:none!important}
+.day-cell{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+/* Approved artwork restored, blend its base into the page; title is intrinsic to the image. */
+.restored-header{height:clamp(126px,34vw,176px)!important;background:linear-gradient(180deg,#e0f8ed 0%,#e6f9ef 92%,#e4f8ee 100%)!important;border-radius:0!important;border-bottom:0!important}
+.restored-header-art{left:0!important;top:0!important;width:120%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:left top!important;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 87%,transparent 100%)}
+.restored-new-tagline{display:none!important}/* banner already contains its own slogan; no overlapping duplicate */
+/* Actual touch drag reorder. Ghost is positioned above other UI elements. */
+.shift-card,.v9-manage-row{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.shift-card.v9-drag-origin,.v9-manage-row.v9-drag-origin{opacity:.4!important}
+.shift-card.v9-drop-over,.v9-manage-row.v9-drop-over{outline:3px solid #42a985!important;outline-offset:-3px}
+.v9-drag-ghost{position:fixed;z-index:1000;pointer-events:none;padding:12px 18px;max-width:185px;border-radius:14px;background:#e2f8ed;border:2px solid #56b08b;box-shadow:0 10px 32px #22554245;font-size:13px;font-weight:800;color:#2a5948;transform:translate(-50%,-50%);white-space:nowrap}
+.v9-manage-row{touch-action:none;cursor:grab}
+.v9-handle{flex:none;display:flex;align-items:center;justify-content:center;color:#75ad97;font-size:23px;letter-spacing:-4px;width:25px;min-height:32px;touch-action:none}
+.v9-manage-row .v6-line-icon{flex:1;min-width:0}
+.v9-manage-row .v6-line-icon span:last-child{min-width:0;white-space:normal!important;overflow-wrap:anywhere}
+.v9-manage-row .v6-line-btn{flex:none}
+.v9-drag-note{font-size:11px;color:#65887a;line-height:1.6;margin:0 0 7px}
+.shift-card{touch-action:none}
+/* All icons are their original 512 px PNG files; no sprite cropping. */
+.v6-iconbtn{overflow:hidden;display:grid;place-items:center}
+.v6-iconbtn img{width:100%!important;height:100%!important;max-height:76px;object-fit:contain!important;object-position:center!important}
+.v6-symbol-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+@media(max-width:390px){.v6-symbol-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+</style>
 </head>
 <body>
   <div class="app-shell" id="appShell">
@@ -594,7 +621,7 @@ html,body{touch-action:manipulation}
           <div class="heading-line"><span class="section-icon icon-clipboard" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16" rx="2"/><rect x="9" y="2" width="6" height="5" rx="1"/><path d="M9 11h6M9 15h6"/></svg></span><h2 id="shiftHeading">การ์ดเวร</h2><span class="muted inline-desc">แตะเพื่อคัดลอกลงปฏิทิน</span></div>
           <button type="button" class="text-action" id="manageShiftsBtn">จัดการการ์ดเวร <span aria-hidden="true">›</span></button>
         </div>
-        <div class="shift-scroller" id="shiftCards" aria-label="เลือกการ์ดเวร"></div>
+        <div class="shift-scroller" id="shiftCards" aria-label="เลือกการ์ดเวร กดค้างแล้วลากเพื่อเปลี่ยนลำดับ"></div>
       </section>
 
       <section class="surface events-surface" aria-labelledby="eventsHeading">
@@ -660,8 +687,195 @@ const V6_LABELS={
   "i025":"เดินทางต่างประเทศ","i026":"ท่องเที่ยวทั่วโลก","i027":"แผนที่","i028":"ตั้งแคมป์","i029":"ถ่ายภาพ","i030":"ฟังเพลง","i031":"วาดภาพ","i032":"ดูภาพยนตร์","i033":"ออกกำลังกาย","i034":"วิ่ง","i035":"ปั่นจักรยาน","i036":"แบดมินตัน","i037":"ฟุตบอล","i038":"บาสเกตบอล","i039":"วอลเลย์บอล","i040":"เทนนิส","i041":"ว่ายน้ำ","i042":"เล่นเกม","i043":"ใช้งานคอมพิวเตอร์","i044":"ปลูกต้นไม้","i045":"ทำอาหาร","i046":"ดื่มกาแฟ","i047":"อ่านหนังสือ","i048":"สัตว์เลี้ยง","i049":"ช้อปปิ้ง",
   "i000":"ไม่มีสัญลักษณ์"
 };
-const IMPORTANT_ICONS=["i001","i002","i003","i004","i005","i006","i007","i008","i009","i010","i011","i012","i013","i014","i015","i016","i017","i018","i019","i020","i021","i022","i023","i024"];
-const HOBBY_ICONS=["i025","i026","i027","i028","i029","i030","i031","i032","i033","i034","i035","i036","i037","i038","i039","i040","i041","i042","i043","i044","i045","i046","i047","i048","i049"];
+const IMPORTANT_ICONS=["t001","t002","t003","t004","t005","t006","t007","t008","t009","t010","t011","t012","t013","t014","t015","t016","t017","t018","t019","t020","t021","t022","t023","t024","t025","t026","t027","t028","t029","t030"];
+const HOBBY_ICONS=["h001","h002","h003","h004","h005","h006","h007","h008","h009","h010","h011","h012","h013","h014","h015","h016","h017","h018","h019","h020","h021","h022","h023","h024","h025","h026","h027","h028","h029","h030","s001","s002","s003","s004","s005","s006","s007","s008","s009","s010","s011","s012","s013","s014","s015","s016","s017","s018","s019","s020","s021","s022","s023","s024","s025","s026","s027","s028","s029","s030"];
+
+Object.assign(V6_ICONS,{
+  "t001":"icons/holiday/01_new_year.png",
+  "t002":"icons/holiday/02_childrens_day.png",
+  "t003":"icons/holiday/03_teachers_day.png",
+  "t004":"icons/holiday/04_makha_bucha.png",
+  "t005":"icons/holiday/05_valentines_day.png",
+  "t006":"icons/holiday/06_chakri_day.png",
+  "t007":"icons/holiday/07_songkran.png",
+  "t008":"icons/holiday/08_family_day.png",
+  "t009":"icons/holiday/09_earth_day.png",
+  "t010":"icons/holiday/10_labour_day.png",
+  "t011":"icons/holiday/11_coronation_day.png",
+  "t012":"icons/holiday/12_visakha_bucha.png",
+  "t013":"icons/holiday/13_royal_ploughing_ceremony.png",
+  "t014":"icons/holiday/14_national_science_day.png",
+  "t015":"icons/holiday/15_mothers_day.png",
+  "t016":"icons/holiday/16_asarnha_bucha.png",
+  "t017":"icons/holiday/17_khao_phansa.png",
+  "t018":"icons/holiday/18_thai_language_day.png",
+  "t019":"icons/holiday/19_queen_birthday.png",
+  "t020":"icons/holiday/20_thai_flag_day.png",
+  "t021":"icons/holiday/21_fathers_day.png",
+  "t022":"icons/holiday/22_memorial_day.png",
+  "t023":"icons/holiday/23_chulalongkorn_day.png",
+  "t024":"icons/holiday/24_loy_krathong.png",
+  "t025":"icons/holiday/25_king_memorial_day.png",
+  "t026":"icons/holiday/26_constitution_day.png",
+  "t027":"icons/holiday/27_celebration_day.png",
+  "t028":"icons/holiday/28_holiday_travel.png",
+  "t029":"icons/holiday/29_long_weekend_travel.png",
+  "t030":"icons/holiday/30_special_day.png",
+  "h001":"icons/travel/01_reading.png",
+  "h002":"icons/travel/02_music_headphones.png",
+  "h003":"icons/travel/03_guitar.png",
+  "h004":"icons/travel/04_painting.png",
+  "h005":"icons/travel/05_photography.png",
+  "h006":"icons/travel/06_knitting.png",
+  "h007":"icons/travel/07_sewing.png",
+  "h008":"icons/travel/08_cooking.png",
+  "h009":"icons/travel/09_gardening.png",
+  "h010":"icons/travel/10_video_games.png",
+  "h011":"icons/travel/11_cinema.png",
+  "h012":"icons/travel/12_fitness.png",
+  "h013":"icons/travel/13_bubble_tea.png",
+  "h014":"icons/travel/14_money.png",
+  "h015":"icons/travel/15_wallet.png",
+  "h016":"icons/travel/16_savings.png",
+  "h017":"icons/travel/17_calculator.png",
+  "h018":"icons/travel/18_investments.png",
+  "h019":"icons/travel/19_expenses.png",
+  "h020":"icons/travel/20_credit_card.png",
+  "h021":"icons/travel/21_airplane.png",
+  "h022":"icons/travel/22_passport.png",
+  "h023":"icons/travel/23_suitcase.png",
+  "h024":"icons/travel/24_map.png",
+  "h025":"icons/travel/25_taxi.png",
+  "h026":"icons/travel/26_beach.png",
+  "h027":"icons/travel/27_camping.png",
+  "h028":"icons/travel/28_hiking.png",
+  "h029":"icons/travel/29_train.png",
+  "h030":"icons/travel/30_hotel.png",
+  "s001":"icons/sports/01_dumbbells.png",
+  "s002":"icons/sports/02_barbell.png",
+  "s003":"icons/sports/03_kettlebell.png",
+  "s004":"icons/sports/04_yoga_mat.png",
+  "s005":"icons/sports/05_running_shoes.png",
+  "s006":"icons/sports/06_jump_rope.png",
+  "s007":"icons/sports/07_exercise_ball.png",
+  "s008":"icons/sports/08_water_bottle.png",
+  "s009":"icons/sports/09_fitness_watch.png",
+  "s010":"icons/sports/10_spin_bike.png",
+  "s011":"icons/sports/11_treadmill.png",
+  "s012":"icons/sports/12_elliptical_machine.png",
+  "s013":"icons/sports/13_swimming.png",
+  "s014":"icons/sports/14_bicycle.png",
+  "s015":"icons/sports/15_badminton.png",
+  "s016":"icons/sports/16_tennis.png",
+  "s017":"icons/sports/17_table_tennis.png",
+  "s018":"icons/sports/18_football.png",
+  "s019":"icons/sports/19_basketball.png",
+  "s020":"icons/sports/20_volleyball.png",
+  "s021":"icons/sports/21_running.png",
+  "s022":"icons/sports/22_yoga.png",
+  "s023":"icons/sports/23_pilates.png",
+  "s024":"icons/sports/24_boxing_gloves.png",
+  "s025":"icons/sports/25_punching_bag.png",
+  "s026":"icons/sports/26_golf.png",
+  "s027":"icons/sports/27_hiking_backpack.png",
+  "s028":"icons/sports/28_hiking_trail.png",
+  "s029":"icons/sports/29_snorkeling.png",
+  "s030":"icons/sports/30_roller_skating.png"
+});
+
+Object.assign(V6_LABELS,{
+ "t001":"New Year",
+ "t002":"Childrens Day",
+ "t003":"Teachers Day",
+ "t004":"Makha Bucha",
+ "t005":"Valentines Day",
+ "t006":"Chakri Day",
+ "t007":"Songkran",
+ "t008":"Family Day",
+ "t009":"Earth Day",
+ "t010":"Labour Day",
+ "t011":"Coronation Day",
+ "t012":"Visakha Bucha",
+ "t013":"Royal Ploughing Ceremony",
+ "t014":"National Science Day",
+ "t015":"Mothers Day",
+ "t016":"Asarnha Bucha",
+ "t017":"Khao Phansa",
+ "t018":"Thai Language Day",
+ "t019":"Queen Birthday",
+ "t020":"Thai Flag Day",
+ "t021":"Fathers Day",
+ "t022":"Memorial Day",
+ "t023":"Chulalongkorn Day",
+ "t024":"Loy Krathong",
+ "t025":"King Memorial Day",
+ "t026":"Constitution Day",
+ "t027":"Celebration Day",
+ "t028":"Holiday Travel",
+ "t029":"Long Weekend Travel",
+ "t030":"Special Day",
+ "h001":"Reading",
+ "h002":"Music Headphones",
+ "h003":"Guitar",
+ "h004":"Painting",
+ "h005":"Photography",
+ "h006":"Knitting",
+ "h007":"Sewing",
+ "h008":"Cooking",
+ "h009":"Gardening",
+ "h010":"Video Games",
+ "h011":"Cinema",
+ "h012":"Fitness",
+ "h013":"Bubble Tea",
+ "h014":"Money",
+ "h015":"Wallet",
+ "h016":"Savings",
+ "h017":"Calculator",
+ "h018":"Investments",
+ "h019":"Expenses",
+ "h020":"Credit Card",
+ "h021":"Airplane",
+ "h022":"Passport",
+ "h023":"Suitcase",
+ "h024":"Map",
+ "h025":"Taxi",
+ "h026":"Beach",
+ "h027":"Camping",
+ "h028":"Hiking",
+ "h029":"Train",
+ "h030":"Hotel",
+ "s001":"Dumbbells",
+ "s002":"Barbell",
+ "s003":"Kettlebell",
+ "s004":"Yoga Mat",
+ "s005":"Running Shoes",
+ "s006":"Jump Rope",
+ "s007":"Exercise Ball",
+ "s008":"Water Bottle",
+ "s009":"Fitness Watch",
+ "s010":"Spin Bike",
+ "s011":"Treadmill",
+ "s012":"Elliptical Machine",
+ "s013":"Swimming",
+ "s014":"Bicycle",
+ "s015":"Badminton",
+ "s016":"Tennis",
+ "s017":"Table Tennis",
+ "s018":"Football",
+ "s019":"Basketball",
+ "s020":"Volleyball",
+ "s021":"Running",
+ "s022":"Yoga",
+ "s023":"Pilates",
+ "s024":"Boxing Gloves",
+ "s025":"Punching Bag",
+ "s026":"Golf",
+ "s027":"Hiking Backpack",
+ "s028":"Hiking Trail",
+ "s029":"Snorkeling",
+ "s030":"Roller Skating"
+});
+
 function v6Id(v){
  if(v && V6_ICONS[v])return v;
  const m={
@@ -832,16 +1046,17 @@ function renderCalendar(){
    }
    const classes=['day-cell',!inMonth?'other':'',day===today?'today':'',events.length?'has-event':'',chosenDate===day?'selected':'',wd===0?'sunday':wd===6?'saturday':''].filter(Boolean).join(' ');
    const aria=`${dateLabel(day)}${shifts.length?` มี ${shifts.length} เวร`:''}${events.length?` มี ${events.length} วันสำคัญ`:''}`;
-   html+=`<button class="${classes}" type="button" data-day="${day}" role="gridcell" aria-label="${esc(aria)}"><span class="day-num">${d.getDate()}</span>${((dayEntry.shifts||[]).length||String(dayEntry.note||'').trim())?`<span class="cell-menu-dot" data-context-day="${day}" aria-hidden="true">⋯</span>`:''}<span class="day-badges">${badges}</span></button>`;
+   html+=`<button class="${classes}" type="button" data-day="${day}" role="gridcell" aria-label="${esc(aria)}"><span class="day-num">${d.getDate()}</span><span class="day-badges">${badges}</span></button>`;
  }
  $('calendarGrid').innerHTML=html;
  $('calendarGrid').querySelectorAll('[data-day]').forEach(el=>{
    el.addEventListener('click',ev=>{
-     if(ev.target.closest('[data-context-day]')){ev.stopPropagation();openCellContextMenu(el.dataset.day,el);return;}
-     if(preventNextDateClick===el.dataset.day){preventNextDateClick=null;return;}
+     if(preventNextDateClick===el.dataset.day){preventNextDateClick=null;ev.stopPropagation();return;}
      onDateClick(el.dataset.day);
    });
-   el.addEventListener('contextmenu',ev=>{ev.preventDefault();openCellContextMenu(el.dataset.day,el);});
+   el.addEventListener('contextmenu',ev=>{ev.preventDefault();preventNextDateClick=el.dataset.day;openCellContextMenu(el.dataset.day,el);});
+   let mouseHold;el.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;clearTimeout(mouseHold);mouseHold=setTimeout(()=>{preventNextDateClick=el.dataset.day;openCellContextMenu(el.dataset.day,el);},600);});
+   ['pointerup','pointercancel','pointerleave'].forEach(t=>el.addEventListener(t,()=>clearTimeout(mouseHold)));
    el.addEventListener('touchstart',()=>{
      clearTimeout(contextPressTimer);
      contextPressTimer=setTimeout(()=>{preventNextDateClick=el.dataset.day;openCellContextMenu(el.dataset.day,el);},560);
@@ -860,14 +1075,75 @@ function displayedShiftCards(){
  const ids=Array.isArray(state.shiftCardOrder)?[...state.shiftCardOrder.filter(id=>initial.includes(id)),...initial.filter(id=>!state.shiftCardOrder.includes(id))]:initial;
  return ids.map(getShift).filter(s=>s&&!s.archived);
 }
+
+// V9: use the same persisted order for both the front strip and the management popup.
+let v9DidReorder=false;
+function v9Reorder(source,target){
+ if(!source||!target||source===target)return false;
+ const ids=displayedShiftCards().map(x=>x.id);
+ const from=ids.indexOf(source),to=ids.indexOf(target);
+ if(from<0||to<0)return false;
+ ids.splice(from,1);ids.splice(to,0,source);
+ state.shiftCardOrder=ids;save();renderShifts();
+ return true;
+}
+function v9TouchDrag(els,onFinish){
+ let gesture=null,ghost=null;
+ const clean=()=>{if(gesture){clearTimeout(gesture.timer);gesture.el.classList.remove('v9-drag-origin');}document.querySelectorAll('.v9-drop-over').forEach(x=>x.classList.remove('v9-drop-over'));if(ghost)ghost.remove();ghost=null;gesture=null;};
+ const moveGhost=(x,y)=>{if(ghost){ghost.style.left=x+'px';ghost.style.top=y+'px';}};
+ els.forEach(el=>{
+  // Long press from a card; moving without holding first behaves like regular scrolling.
+  el.addEventListener('touchstart',e=>{
+   if(e.touches.length!==1||e.target.closest('[data-edit-shift]'))return;const t=e.touches[0];
+   gesture={el,id:el.dataset.shift,touchId:t.identifier,x:t.clientX,y:t.clientY,firstX:t.clientX,firstY:t.clientY,active:false,scrolling:false,target:null,timer:null,scroller:el.classList.contains('v9-manage-row')?document.getElementById('sheetBody'):el.closest('.shift-scroller'),startScroll:el.classList.contains('v9-manage-row')?document.getElementById('sheetBody')?.scrollTop:el.closest('.shift-scroller')?.scrollLeft};
+   gesture.timer=setTimeout(()=>{
+    if(!gesture)return;gesture.active=true;v9DidReorder=true;
+    el.classList.add('v9-drag-origin');
+    ghost=document.createElement('div');ghost.className='v9-drag-ghost';ghost.textContent=el.dataset.shiftName||el.textContent.trim();document.body.appendChild(ghost);
+    moveGhost(gesture.x,gesture.y);try{navigator.vibrate?.(15)}catch(_){}
+   },390);
+  },{passive:true});
+  el.addEventListener('touchmove',e=>{
+   if(!gesture||gesture.el!==el)return;
+   const t=[...e.changedTouches].find(t=>t.identifier===gesture.touchId);if(!t)return;
+   if(!gesture.active){
+     if(gesture.scrolling||Math.hypot(t.clientX-gesture.firstX,t.clientY-gesture.firstY)>11){
+       if(!gesture.scrolling){gesture.scrolling=true;clearTimeout(gesture.timer);v9DidReorder=true;}
+       e.preventDefault();const val=gesture.startScroll+(el.classList.contains('v9-manage-row')?gesture.firstY-t.clientY:gesture.firstX-t.clientX);
+       if(gesture.scroller){if(el.classList.contains('v9-manage-row'))gesture.scroller.scrollTop=val;else gesture.scroller.scrollLeft=val;}
+     }return;
+   }
+   e.preventDefault();gesture.x=t.clientX;gesture.y=t.clientY;moveGhost(t.clientX,t.clientY);
+   document.querySelectorAll('.v9-drop-over').forEach(x=>x.classList.remove('v9-drop-over'));
+   const under=document.elementFromPoint(t.clientX,t.clientY)?.closest('[data-shift]');
+   gesture.target=under&&under!==el&&els.includes(under)?under.dataset.shift:null;
+   if(gesture.target)under.classList.add('v9-drop-over');
+   // For the horizontal front strip, dragging near either edge reveals further cards.
+   if(el.classList.contains('shift-card')){const s=el.closest('.shift-scroller'),r=s?.getBoundingClientRect();if(r){if(t.clientX>r.right-45)s.scrollLeft+=15;else if(t.clientX<r.left+45)s.scrollLeft-=15;}}
+   // for long vertical manager list autoscroll near top/bottom
+   if(el.classList.contains('v9-manage-row')){
+    const panel=document.getElementById('sheetBody'),b=panel?.getBoundingClientRect();
+    if(b&&t.clientY>b.top&&t.clientY<b.bottom){if(t.clientY>b.bottom-65)panel.scrollTop+=15;else if(t.clientY<b.top+65)panel.scrollTop-=15;}
+   }
+  },{passive:false});
+  el.addEventListener('touchend',e=>{if(!gesture||gesture.el!==el)return;const active=gesture.active,source=gesture.id,target=gesture.target;clean();if(active){v9DidReorder=true;if(target&&v9Reorder(source,target))onFinish?.();}setTimeout(()=>v9DidReorder=false,350);}, {passive:true});
+  el.addEventListener('touchcancel',clean,{passive:true});
+  // Desktop mouse: native HTML drag also preserves drag-to-date functionality.
+  el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',el.dataset.shift);e.dataTransfer.effectAllowed='move';});
+  el.addEventListener('dragover',e=>{e.preventDefault();e.stopPropagation();el.classList.add('v9-drop-over');});
+  el.addEventListener('dragleave',()=>el.classList.remove('v9-drop-over'));
+  el.addEventListener('drop',e=>{e.preventDefault();e.stopPropagation();el.classList.remove('v9-drop-over');const id=e.dataTransfer.getData('text/plain');if(v9Reorder(id,el.dataset.shift)){v9DidReorder=true;onFinish?.();setTimeout(()=>v9DidReorder=false,350);}});
+ });
+}
+
 function renderShifts(){
  const ordered=displayedShiftCards();
  const cards = ordered.map(s=>`<button class="shift-card ${selectedShift===s.id?'selected':''}" type="button" data-shift="${esc(s.id)}" draggable="true" aria-pressed="${selectedShift===s.id}" style="--shift-bg:${esc(pastel(s.color))}"><span class="shift-name">${esc(s.short||s.name)}</span></button>`).join('');
  $('shiftCards').innerHTML=cards+`<button class="add-shift-tile" id="addShiftTile" type="button"><span class="tile-plus">+</span><span>เพิ่มการ์ด</span></button>`;
  $('shiftCards').querySelectorAll('[data-shift]').forEach(el=>{
-  el.addEventListener('click',()=>{selectedShift=selectedShift===el.dataset.shift?null:el.dataset.shift;renderSelection();renderShifts();if(selectedShift)$('monthCard').scrollIntoView({behavior:'smooth',block:'start'});});
-  el.addEventListener('dragstart',ev=>ev.dataTransfer.setData('text/plain',el.dataset.shift));
+  el.addEventListener('click',()=>{if(v9DidReorder)return;selectedShift=selectedShift===el.dataset.shift?null:el.dataset.shift;renderSelection();renderShifts();if(selectedShift)$('monthCard').scrollIntoView({behavior:'smooth',block:'start'});});
  });
+ v9TouchDrag([...$('shiftCards').querySelectorAll('[data-shift]')]);
  $('addShiftTile').onclick=openShiftCreator;
 }
 
@@ -954,7 +1230,7 @@ $('cellContextMenu').addEventListener('click',ev=>{
  selectedShift=null;pendingDayTransfer={source:day,mode:action};renderSelection();renderShifts();notify('แตะวันที่ปลายทางในปฏิทิน');
 });
 document.addEventListener('click',ev=>{
- if(!$('cellContextMenu').hidden&&!ev.target.closest('.cell-context-menu')&&!ev.target.closest('[data-context-day]'))closeCellContextMenu();
+ if(!$('cellContextMenu').hidden&&!ev.target.closest('.cell-context-menu')&&!ev.target.closest('.day-cell'))closeCellContextMenu();
 });
 window.addEventListener('scroll',closeCellContextMenu,{passive:true});
 window.addEventListener('resize',closeCellContextMenu);
@@ -981,7 +1257,7 @@ function openDayEditor(day){
   const focusedShift=focusOt&&picked.includes(focusOt)?getShift(focusOt):null;
   const otBlock=focusedShift?`<div class="v6-ot"><span>ชั่วโมง ${esc(focusedShift.name)}</span><button type="button" data-ot="down">−</button><input id="v6othours" inputmode="decimal" type="number" min="0" step="0.5" value="${esc(otHours[focusOt]??1)}"><button type="button" data-ot="up">+1</button></div>`:'';
   const dutyContent=`<div class="v6-frame"><div class="v6-caption">เลือกเวร (ได้มากกว่า 1) · แตะ ❌ ด้านล่างเพื่อขาย/ส่งต่อ</div><div class="v6-two">${nameIds.map(badge).join('')}</div>${otBlock}</div>`;
-  const noteContent=`<div class="v6-frame"><div class="v6-caption">สัญลักษณ์ประจำวัน</div><div class="v6-symbol-grid"><button class="v6-iconbtn ${!icon?'chosen':''}" data-symbol="__none__" type="button"><span style="font-size:10px;color:#6f9080">ไม่มี</span></button></div>${iconSection('วันสำคัญ', IMPORTANT_ICONS)}${iconSection('งานอดิเรก / กิจกรรม', HOBBY_ICONS)}<label class="v6-caption" for="v6note">บันทึกเพิ่มเติม</label><textarea class="v6-note" id="v6note" placeholder="เช่น แลกเวรกับ... / เตรียมอุปกรณ์...">${esc(note)}</textarea><div class="v6-row"><button class="v6-btn" style="flex:1" id="v6copy">คัดลอกข้อมูลช่องนี้</button><button class="v6-btn" style="flex:1" id="v6paste">วางข้อมูลช่องนี้</button></div><button class="v6-btn" id="v6special">＋ เพิ่มวันสำคัญในวันนี้</button><button class="v6-btn pink" id="v6clear">ลบรายการวันนี้</button></div>`;
+  const noteContent=`<div class="v6-frame"><div class="v6-caption">สัญลักษณ์ประจำวัน</div><div class="v6-symbol-grid"><button class="v6-iconbtn ${!icon?'chosen':''}" data-symbol="__none__" type="button"><span style="font-size:10px;color:#6f9080">ไม่มี</span></button></div>${iconSection('วันสำคัญ (30 ไอคอน)', IMPORTANT_ICONS)}${iconSection('งานอดิเรก / ท่องเที่ยว / กีฬา (60 ไอคอน)', HOBBY_ICONS)}<label class="v6-caption" for="v6note">บันทึกเพิ่มเติม</label><textarea class="v6-note" id="v6note" placeholder="เช่น แลกเวรกับ... / เตรียมอุปกรณ์...">${esc(note)}</textarea><div class="v6-row"><button class="v6-btn" style="flex:1" id="v6copy">คัดลอกข้อมูลช่องนี้</button><button class="v6-btn" style="flex:1" id="v6paste">วางข้อมูลช่องนี้</button></div><button class="v6-btn" id="v6special">＋ เพิ่มวันสำคัญในวันนี้</button><button class="v6-btn pink" id="v6clear">ลบรายการวันนี้</button></div>`;
   showSheet(`<div class="v6-modal"><h2 class="v6-title" id="sheetHeading">บันทึกเวร</h2><p class="v6-sub">${new Intl.DateTimeFormat('th-TH-u-ca-buddhist',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(parseDate(day))}</p><div class="v6-safe">● ข้อมูลบันทึกในเครื่อง · ไม่กระทบระบบหลัก</div><div class="v6-day-content">${dutyContent}${noteContent}</div><div class="v6-footer"><button class="v6-btn" id="v6close">ปิด</button><button class="v6-btn primary" id="v6save">บันทึก</button></div></div>`);
   $('sheetBody').scrollTop=prevScroll;
   $('sheetBody').querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{capture();tab=b.dataset.tab;paint();});
@@ -1011,7 +1287,7 @@ function openEventEditor(id=null,presetDate=null){
   const prevScroll=$('overlay').hidden?0:$('sheetBody').scrollTop;
  const icons=V6_EVENT_ALL;
  const tones={pink:'#ffe5ed',green:'#dff7e8',blue:'#e7f5ff',purple:'#efe9ff'};
- showSheet(`<div class="v6-modal"><h2 class="v6-title" id="sheetHeading">${isEdit?'แก้ไขวันสำคัญ':'เพิ่มวันสำคัญ'}</h2><p class="v6-sub">เลือกไอคอนหมวดวันสำคัญจากชุด PNG ใหม่ที่คุณแนบมา</p><div class="v6-data"><div class="v6-row v8-event-fields"><label>วันที่<input id="v6eventDate" type="date" value="${esc(data.date)}"></label><label>ชื่อวันสำคัญ<input id="v6eventTitle" placeholder="ชื่อวันสำคัญ" maxlength="80" value="${esc(data.title)}"></label></div><div class="v6-caption">เลือกไอคอนวันสำคัญ (${V6_EVENT_ALL.length} ภาพ) · ${esc(V6_LABELS[v6Id(data.emoji)])}</div><div class="v6-icon-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))">${icons.map(key=>`<button class="v6-iconbtn ${key===v6Id(data.emoji)?'chosen':''}" data-event-icon="${key}" title="${esc(V6_LABELS[key])}">${v6Icon(key)}</button>`).join('')}</div><div class="v6-caption">สีการ์ด</div><div class="v6-tone">${toneOptions.map(t=>`<button data-tone="${t}" style="background:${tones[t]}" class="${data.tone===t?'chosen':''}">${{pink:'ชมพู',green:'เขียว',blue:'ฟ้า',purple:'ม่วง'}[t]}</button>`).join('')}</div></div><div class="v6-footer">${isEdit?'<button class="v6-btn pink" id="v6deleteEvent">ลบวันสำคัญ</button>':'<button class="v6-btn" id="v6cancelEvent">ยกเลิก</button>'}<button class="v6-btn primary" id="v6saveEvent">บันทึกวันสำคัญ</button></div></div>`);
+ showSheet(`<div class="v6-modal"><h2 class="v6-title" id="sheetHeading">${isEdit?'แก้ไขวันสำคัญ':'เพิ่มวันสำคัญ'}</h2><p class="v6-sub">ไอคอนวันสำคัญ 30 ภาพ ตามไฟล์ที่แนบ</p><div class="v6-data"><div class="v6-row v8-event-fields"><label>วันที่<input id="v6eventDate" type="date" value="${esc(data.date)}"></label><label>ชื่อวันสำคัญ<input id="v6eventTitle" placeholder="ชื่อวันสำคัญ" maxlength="80" value="${esc(data.title)}"></label></div><div class="v6-caption">เลือกไอคอนวันสำคัญ (${V6_EVENT_ALL.length} ภาพ) · ${esc(V6_LABELS[v6Id(data.emoji)])}</div><div class="v6-icon-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr))">${icons.map(key=>`<button class="v6-iconbtn ${key===v6Id(data.emoji)?'chosen':''}" data-event-icon="${key}" title="${esc(V6_LABELS[key])}">${v6Icon(key)}</button>`).join('')}</div><div class="v6-caption">สีการ์ด</div><div class="v6-tone">${toneOptions.map(t=>`<button data-tone="${t}" style="background:${tones[t]}" class="${data.tone===t?'chosen':''}">${{pink:'ชมพู',green:'เขียว',blue:'ฟ้า',purple:'ม่วง'}[t]}</button>`).join('')}</div></div><div class="v6-footer">${isEdit?'<button class="v6-btn pink" id="v6deleteEvent">ลบวันสำคัญ</button>':'<button class="v6-btn" id="v6cancelEvent">ยกเลิก</button>'}<button class="v6-btn primary" id="v6saveEvent">บันทึกวันสำคัญ</button></div></div>`);
  $('sheetBody').scrollTop=prevScroll;
  $('sheetBody').querySelectorAll('[data-event-icon]').forEach(b=>b.onclick=()=>{capture();data.emoji=b.dataset.eventIcon;paint();});
  $('sheetBody').querySelectorAll('[data-pager]').forEach(b=>b.onclick=()=>{capture();page=Math.max(0,Math.min(Math.ceil(V6_EVENT_ALL.length/limit)-1,page+(b.dataset.pager==='next'?1:-1)));paint();});
@@ -1039,16 +1315,9 @@ function openShiftManager(){
  function paint(){
   const previousScroll=$('overlay').hidden?0:$('sheetBody').scrollTop;
   const available=displayedShiftCards();
-  showSheet(`<div class="v6-modal"><h2 class="v6-title" id="sheetHeading">จัดการการ์ดเวร</h2><p class="v6-sub v8-order-note">กด ↑ หรือ ↓ เพื่อจัดลำดับการ์ดเวรด้านหน้า–ด้านหลัง บันทึกอัตโนมัติและไม่เปลี่ยนข้อมูลเวรในปฏิทิน</p><div class="v6-list">${available.map((s,i)=>`<div class="v6-line v8-manage-row"><span class="v6-line-icon"><span style="width:18px;height:18px;flex:none;border-radius:7px;background:${esc(pastel(s.color))}"></span><span>${esc(s.name)}</span></span><div class="v8-sort-toolbar"><button type="button" data-shift-up="${esc(s.id)}" aria-label="เลื่อน ${esc(s.name)} ขึ้น" ${i===0?'disabled':''}>↑</button><button type="button" data-shift-down="${esc(s.id)}" aria-label="เลื่อน ${esc(s.name)} ลง" ${i===available.length-1?'disabled':''}>↓</button><button class="v6-line-btn" type="button" data-edit-shift="${esc(s.id)}">แก้ไข</button></div></div>`).join('')}</div><div class="v6-footer"><button class="v6-btn" id="v6closeShifts">ปิด</button><button class="v6-btn primary" id="v6addShift">+ เพิ่มการ์ด</button></div></div>`);
+  showSheet(`<div class="v6-modal"><h2 class="v6-title" id="sheetHeading">จัดการการ์ดเวร</h2><p class="v6-sub v8-order-note">กดค้างที่การ์ดแล้วลากเพื่อจัดลำดับ บันทึกอัตโนมัติ ไม่เปลี่ยนข้อมูลเวรในปฏิทิน</p><div class="v6-list" id="v9ManagerList">${available.map((s,i)=>`<div class="v6-line v8-manage-row v9-manage-row" data-shift="${esc(s.id)}" data-shift-name="${esc(s.name)}" draggable="true"><span class="v9-handle" aria-hidden="true">⠿</span><span class="v6-line-icon"><span style="width:18px;height:18px;flex:none;border-radius:7px;background:${esc(pastel(s.color))}"></span><span>${esc(s.name)}</span></span><button class="v6-line-btn" type="button" data-edit-shift="${esc(s.id)}">แก้ไข</button></div>`).join('')}</div><div class="v6-footer"><button class="v6-btn" id="v6closeShifts">ปิด</button><button class="v6-btn primary" id="v6addShift">+ เพิ่มการ์ด</button></div></div>`);
   $('sheetBody').scrollTop=previousScroll;
-  const change=(id,direction)=>{
-   const order=displayedShiftCards().map(s=>s.id),index=order.indexOf(id),next=index+direction;
-   if(index<0||next<0||next>=order.length)return;
-   [order[index],order[next]]=[order[next],order[index]];
-   state.shiftCardOrder=order;save();renderShifts();paint();
-  };
-  $('sheetBody').querySelectorAll('[data-shift-up]').forEach(b=>b.onclick=()=>change(b.dataset.shiftUp,-1));
-  $('sheetBody').querySelectorAll('[data-shift-down]').forEach(b=>b.onclick=()=>change(b.dataset.shiftDown,1));
+  v9TouchDrag([...$('v9ManagerList').querySelectorAll('[data-shift]')],paint);
   $('sheetBody').querySelectorAll('[data-edit-shift]').forEach(b=>b.onclick=()=>openShiftCreator(b.dataset.editShift));
   $('v6closeShifts').onclick=closeSheet;
   $('v6addShift').onclick=()=>openShiftCreator();
