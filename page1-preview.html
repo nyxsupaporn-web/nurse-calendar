@@ -7,6 +7,9 @@
   <link rel="icon" type="image/png" href="assets/app-icon-square.png" />
   <link rel="apple-touch-icon" href="assets/app-icon-square.png" />
   <meta name="description" content="Nurse Calendar — ต้นแบบหน้าปฏิทินบันทึกเวร โทนเขียวพาสเทล" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&display=swap" rel="stylesheet">
   <title>ปฏิทินบันทึกเวร — Nurse Calendar (หน้า 1 ตรงภาพต้นแบบ)</title>
   <style>
 :root {
@@ -269,6 +272,23 @@ body{background:#dff6ea;color:#1c4a3b}
 @media(max-width:375px){.restored-header{height:clamp(116px,34vw,130px)!important}.restored-new-tagline{font-size:clamp(6.5px,2.3vw,9px)}}
 </style>
   
+
+<style>
+/* V5 latest surgical UI patch: keep system logic, update only requested visuals */
+:root{--mali:"Mali","Noto Sans Thai","Thonburi","Tahoma",system-ui,sans-serif;}
+.restored-new-tagline{left:34.5%!important;right:2.4%!important;top:63.5%!important;min-height:30px!important;height:auto!important;padding:5px 14px!important;font-family:var(--mali)!important;font-size:clamp(10px,2.95vw,15px)!important;line-height:1.18!important;letter-spacing:-.15px!important;text-align:center!important}
+.restored-new-tagline span{font-size:1em!important}
+@media(max-width:420px){.restored-new-tagline{left:34.8%!important;right:2.6%!important;top:63.5%!important;padding:4px 10px!important;font-size:clamp(9px,2.9vw,13px)!important}}
+@media(max-width:375px){.restored-new-tagline{left:35.2%!important;right:2.6%!important;top:63%!important;font-size:clamp(8.5px,2.8vw,11px)!important}}
+.shift-card{justify-content:center!important}.shift-name{max-width:none!important;font-size:11px!important;line-height:1.25!important;text-align:center!important}.shift-graphic{display:none!important}
+.overlay{padding:10px!important}.sheet{width:min(760px,100%)!important;height:min(88dvh,860px)!important;max-height:min(88dvh,860px)!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;border-radius:28px!important}#sheetBody{flex:1 1 auto;overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}.sheet-top{flex:none}.sheet-heading{font-size:17px!important;margin:8px 0 2px!important}.sheet-sub{font-size:11px!important;margin:0 0 10px!important;line-height:1.45}.field-label{margin:10px 0 5px!important;font-size:11.5px!important}.sheet-input,.sheet-select,.sheet-textarea{min-height:40px!important;font-size:13px!important;border-radius:12px!important;padding:9px 12px!important}.sheet-textarea{min-height:68px!important}.sheet-actions{margin-top:12px!important;gap:8px!important}.primary-btn,.ghost-btn,.danger-btn{min-height:40px!important;font-size:13px!important;border-radius:12px!important}
+.day-editor{height:100%;display:flex;flex-direction:column;gap:6px;padding:0 0 2px;overflow:hidden}.day-editor-head h2{font-size:18px!important;line-height:1.2!important}.day-editor-head .editor-date{font-size:12px!important;margin:3px 0 8px!important}.soft-note{font-size:11px!important;margin:0 0 6px!important}.editor-section-title{font-size:12.5px!important;margin:6px 0 5px!important}.day-editor-scroll{display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden}.shift-option-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px!important;align-content:start}.shift-option-wrap{display:flex;flex-direction:column;gap:6px;min-width:0}.shift-option{min-height:50px!important;border-radius:15px!important;padding:7px 9px!important;gap:7px!important;align-items:center!important}.shift-left{align-items:center!important;gap:7px!important}.check-round{width:25px!important;height:25px!important;border-radius:9px!important}.shift-option.selected .check-round svg{width:17px!important;height:17px!important}.color-dot{width:12px!important;height:12px!important;margin-top:0!important}.shift-label{min-width:0}.shift-label strong{font-size:11.5px!important;line-height:1.25!important;margin-bottom:0!important}.shift-label small{display:none!important}.shift-badge{display:flex;align-items:center;justify-content:center;gap:6px;align-self:stretch;min-width:0!important;font-size:10px!important;line-height:1.3!important;padding:7px 8px!important;border-radius:12px!important}.shift-badge .cross{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#fff;border:1px solid #f0c7d2;color:#d65a6d;font-weight:900;font-size:12px;flex:none}.ot-box{margin:0!important;padding:10px!important;border-radius:16px!important}.ot-box label{font-size:12px!important;margin-bottom:7px!important}.ot-row{grid-template-columns:58px 1fr 76px!important;gap:8px!important}.ot-row button,.ot-row input{min-height:40px!important;border-radius:13px!important;font-size:15px!important}.ot-hint{font-size:10px!important;margin-top:7px!important;line-height:1.35!important}.editor-textarea{min-height:46px!important;border-radius:15px!important;padding:10px 12px!important;font-size:13px!important}.icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:7px!important}.icon-tile{min-height:36px!important;border-radius:12px!important}.icon-tile svg{width:20px!important;height:20px!important}.icon-none{font-size:11px!important}.dual-actions,.main-actions{gap:10px!important;margin-top:8px!important}.copy-btn,.paste-btn,.secondary-btn,.close-editor,.primary-save,.delete-day,.wide-add-special{min-height:38px!important;font-size:12.5px!important;border-radius:14px!important}.delete-day{margin-top:8px!important}.wide-add-special{margin-top:8px!important;gap:7px!important}.wide-add-special svg{width:18px!important;height:18px!important}
+@media(max-width:390px){.sheet{height:min(89dvh,860px)!important;max-height:min(89dvh,860px)!important}.shift-option-grid{gap:7px!important}.shift-option{min-height:50px!important;padding:7px 9px!important}.shift-label strong{font-size:10.9px!important}.shift-badge{font-size:9.5px!important;padding:6px 7px!important}.ot-row{grid-template-columns:54px 1fr 70px!important;gap:7px!important}.icon-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:6px!important}.icon-tile{min-height:40px!important}.copy-btn,.paste-btn,.secondary-btn,.close-editor,.primary-save,.delete-day,.wide-add-special{font-size:12.5px!important}}
+.event-icon-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:4px}.event-icon-btn{border:1.6px solid #d8e8df;background:#fff;border-radius:15px;min-height:78px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#315b4d}.event-icon-btn.active{border-color:#4bad86;background:#f2fbf6;box-shadow:0 0 0 2px rgba(75,173,134,.12)}.event-icon-chip{width:40px;height:40px;border-radius:14px;display:grid;place-items:center}.event-icon-chip svg{width:24px;height:24px}.event-icon-label{font-size:10px;font-weight:800;line-height:1.2;text-align:center}.tone-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.tone-btn{border:1.6px solid #d8e8df;background:#fff;border-radius:13px;min-height:40px;font-size:11px;font-weight:800;color:#355e4f}.tone-btn.active{border-color:#4bad86;background:#f2fbf6}.tone-btn[data-tone="pink"]{background:#fff0f5}.tone-btn[data-tone="green"]{background:#eff9f1}.tone-btn[data-tone="blue"]{background:#edf7ff}.tone-btn[data-tone="purple"]{background:#f5efff}
+.shift-manage-list{display:flex;flex-direction:column;gap:8px}.shift-manage-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e4eee8;background:#fbfdfa;border-radius:13px;padding:10px}.shift-manage-meta{display:flex;align-items:center;gap:10px;min-width:0}.shift-manage-meta strong{font-size:13px}.shift-swatch{width:18px;height:18px;border-radius:7px;flex:none;border:1px solid rgba(0,0,0,.05)}.shift-manage-actions{display:flex;gap:6px;flex:none}.small-btn{border:0;border-radius:10px;padding:8px 10px;font-size:11px;font-weight:800}.small-btn.edit{background:#edf7ff;color:#3f7094}.small-btn.delete{background:#fff1f2;color:#c45f70}
+.event-row .event-desc svg{width:20px;height:20px}.event-row .event-desc .event-mini-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;flex:none}
+</style>
+
 </head>
 <body>
   <div class="app-shell" id="appShell">
@@ -421,9 +441,12 @@ function shiftIconKey(shift){
   if(n.includes('เวร2')) return 'calendar';
   return 'plus';
 }
+
 function eventIconKey(val){
-  return ({'🚩':'flag','🎁':'gift','🪷':'lotus','🩺':'stethoscope','🌷':'flower','💚':'heart','⭐':'star','🎂':'cake','📌':'pin'}[val]||'flag');
+  return ({'🚩':'flag','🎁':'gift','🪷':'lotus','🩺':'stethoscope','🌷':'flower','💚':'heart','⭐':'star','🎂':'cake','📌':'pin',
+           'flag':'flag','gift':'gift','lotus':'lotus','stethoscope':'stethoscope','flower':'flower','heart':'heart','star':'star','cake':'cake','pin':'pin'}[val]||'flag');
 }
+
 function iconSVG(name, cls=''){
   const c = cls ? ` class="${cls}"` : '';
   const m = {
@@ -438,6 +461,7 @@ function iconSVG(name, cls=''){
     lotus:'<svg'+c+' viewBox="0 0 24 24"><path d="M12 20c3-2.4 5-5.6 5-8.8-2.8.5-4.4 2-5 4-0.6-2-2.2-3.5-5-4 0 3.2 2 6.4 5 8.8Z"/><path d="M12 20V9.5M8 20h8"/></svg>',
     flower:'<svg'+c+' viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M12 3.5c2 0 3.5 1.6 3.5 3.5S14 10.5 12 10.5 8.5 8.9 8.5 7 10 3.5 12 3.5Zm0 10c2 0 3.5 1.6 3.5 3.5S14 20.5 12 20.5 8.5 18.9 8.5 17 10 13.5 12 13.5Zm8.5-1.5c0 2-1.6 3.5-3.5 3.5S13.5 14 13.5 12s1.6-3.5 3.5-3.5 3.5 1.5 3.5 3.5Zm-10 0c0 2-1.6 3.5-3.5 3.5S3.5 14 3.5 12 5 8.5 7 8.5s3.5 1.5 3.5 3.5Z"/></svg>',
     pin:'<svg'+c+' viewBox="0 0 24 24"><path d="m8 3 8 8M10 7l7-2-2 7m-4 0-5 9 9-5"/></svg>',
+    cake:'<svg'+c+' viewBox="0 0 24 24"><path d="M5 10h14v8H5z"/><path d="M7 10V8M12 10V7M17 10V8"/><path d="M6 14h12"/><path d="M7 6c0-1 1-2 1-3 1 1 1 2 1 3M11.5 5c0-1 1-2 1-3 1 1 1 2 1 3M16 6c0-1 1-2 1-3 1 1 1 2 1 3"/></svg>',
     heart:'<svg'+c+' viewBox="0 0 24 24"><path d="M12 20S4 14.5 4 9a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 9c0 5.5-8 11-8 11Z"/></svg>',
     medicine:'<svg'+c+' viewBox="0 0 24 24"><path d="m8 8 8 8"/><rect x="4" y="9" width="8" height="6" rx="3" transform="rotate(-45 8 12)"/><rect x="12" y="9" width="8" height="6" rx="3" transform="rotate(-45 16 12)"/></svg>',
     bandage:'<svg'+c+' viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="6" rx="3" transform="rotate(-45 12 12)"/><path d="M9 9h.01M12 12h.01M15 15h.01"/></svg>',
@@ -514,28 +538,35 @@ function renderCalendar(){
    el.addEventListener('drop',(ev)=>{ev.preventDefault();el.classList.remove('drop-target');const id=ev.dataTransfer.getData('text/plain');if(getShift(id))addShiftToDay(id,el.dataset.day);});
  });
 }
+
 function renderShifts(){
  const featured=['n1','ot1','sdmcn','extra1'];
  const ordered=[...featured.map(getShift).filter(Boolean),...state.shifts.filter(s=>!featured.includes(s.id))];
- const cards = ordered.map((s)=>`<button class="shift-card ${selectedShift===s.id?'selected':''}" type="button" data-shift="${esc(s.id)}" draggable="true" aria-pressed="${selectedShift===s.id}" aria-label="คัดลอก ${esc(s.name)} ไปวันที่ต้องการ" style="--shift-bg:${esc(pastel(s.color))}"><span class="shift-graphic">${iconSVG(shiftIconKey(s),'svg-icon')}</span><span class="shift-name">${esc(s.short||s.name)}</span></button>`).join('');
+ const cards = ordered.map((s)=>`<button class="shift-card ${selectedShift===s.id?'selected':''}" type="button" data-shift="${esc(s.id)}" draggable="true" aria-pressed="${selectedShift===s.id}" aria-label="คัดลอก ${esc(s.name)} ไปวันที่ต้องการ" style="--shift-bg:${esc(pastel(s.color))}"><span class="shift-name">${esc(s.short||s.name)}</span></button>`).join('');
  const addBtn = `<button class="add-shift-tile" type="button" id="addShiftTile" aria-label="เพิ่มประเภทเวร"><span class="tile-plus">+</span><span>เพิ่มการ์ด</span></button>`;
  $('shiftCards').innerHTML=cards + addBtn;
  $('shiftCards').querySelectorAll('[data-shift]').forEach(el=>{
    el.addEventListener('click',()=>{selectedShift=selectedShift===el.dataset.shift?null:el.dataset.shift;renderSelection();renderShifts();if(selectedShift){$('monthCard').scrollIntoView({behavior:'smooth',block:'start'});}});
    el.addEventListener('dragstart',ev=>ev.dataTransfer.setData('text/plain',el.dataset.shift));
  });
- $('addShiftTile').onclick=openShiftCreator;
+ $('addShiftTile').onclick=()=>openShiftCreator();
 }
+
+
 function renderEvents(){
  const list=state.events.filter(e=>parseDate(e.date).getFullYear()===viewDate.getFullYear() && parseDate(e.date).getMonth()===viewDate.getMonth()).sort((a,b)=>a.date.localeCompare(b.date));
  const priority=['e1','e2','e4'];
  const ordered=[...priority.map(id=>list.find(e=>e.id===id)).filter(Boolean),...list.filter(e=>!priority.includes(e.id))];
- const renderEvent=e=>`<button type="button" class="event-card ${esc(e.tone)}" data-event="${esc(e.id)}" aria-label="แก้ไข ${esc(e.title)}"><div class="event-label"><span class="emoji">${iconSVG(eventIconKey(e.emoji),'svg-icon')}</span><span>${esc(e.title)}</span></div><div class="event-date">${parseDate(e.date).getDate()} ${thMonths[parseDate(e.date).getMonth()].slice(0,2)}. ${parseDate(e.date).getFullYear()+543}</div><span class="event-edit-ico">⋮</span></button>`;
+ const renderEvent=e=>{
+   const key=eventIconKey(e.emoji);
+   return `<button type="button" class="event-card ${esc(e.tone)}" data-event="${esc(e.id)}" aria-label="แก้ไข ${esc(e.title)}"><div class="event-label"><span class="emoji">${iconSVG(key,'svg-icon')}</span><span>${esc(e.title)}</span></div><div class="event-date">${parseDate(e.date).getDate()} ${thMonths[parseDate(e.date).getMonth()].slice(0,2)}. ${parseDate(e.date).getFullYear()+543}</div><span class="event-edit-ico">⋮</span></button>`;
+ };
  const addButton=`<button class="add-event-tile" id="addEventBtn" type="button"><span class="tile-plus">+</span><span>เพิ่มวันสำคัญ</span></button>`;
  $('eventCards').innerHTML=(ordered.map(renderEvent).join('')) + addButton;
  $('eventCards').querySelectorAll('[data-event]').forEach(el=>el.addEventListener('click',()=>openEventEditor(el.dataset.event)));
  $('addEventBtn').onclick=()=>openEventEditor();
 }
+
 function renderSelection(){const banner=$('selectionBanner');banner.hidden=!selectedShift;const s=getShift(selectedShift);$('selectionText').textContent=s?`เลือกวันที่เพื่อวาง ${s.name}`:'';}
 function render(){renderCalendar();renderShifts();renderEvents();renderSelection();}
 function addShiftToDay(id,day){
@@ -553,30 +584,26 @@ function onDateClick(day){
 }
 function showSheet(body){$('sheetBody').innerHTML=body;$('overlay').hidden=false;document.body.style.overflow='hidden';}
 function closeSheet(){ $('overlay').hidden=true;document.body.style.overflow='';$('sheetBody').innerHTML=''; }
+
 function openDayEditor(day){
- const entry=state.days[day] || {shifts:[],note:'',icon:'',otHours:{}};
+ const entry=state.days[day] || {shifts:[],note:'',icon:'',otHours:{},excluded:{}};
  let tempShifts=(entry.shifts||[]).slice();
  let tempNote=entry.note||'';
  let tempIcon=entry.icon||'';
  let tempOtHours={...(entry.otHours||{})};
+ const tempExcluded={...(entry.excluded||{})};
  const clipboardKey='nc_page1_day_clipboard';
  const shiftOrder=state.shifts.slice();
- const symbolOptions=['none','stethoscope','medicine','bandage','pulse','document','syringe','ambulance','lungs','tooth','temperature','camera','sprout','yarn','pencil','music','bicycle','leaf','ball','tennis','dumbbell','medal','coin','card','pig','bank','bed','cup','star','cloud','people','clock','briefcase','sparkle','wallet','compass','vacation','map','car','walk'];
- function cardNote(s){
-   if(s.name.includes('OT')) return 'เวรโอที';
-   if(s.name.includes('EXTRA')) return 'เวรเสริม';
-   if(s.name.includes('SDMC')) return 'เวร SDMC';
-   return 'เลือกบันทึกลงวันนี้';
- }
- function renderShiftCards(){
-   return shiftOrder.map(s=>{const selected=tempShifts.includes(s.id); const isOT=s.name.includes('OT');
-     return `<div><button type="button" class="shift-option ${selected?'selected':''}" data-toggle-shift="${esc(s.id)}"><div class="shift-left"><span class="check-round">${iconSVG('check')}</span><span class="color-dot" style="background:${esc(pastel(s.color))}"></span><span class="shift-label"><strong>${esc(s.name)}</strong><small>${cardNote(s)}</small></span></div>${entry.excluded?.[s.id]?'<span class="shift-badge">ขาย/ส่งต่อ · ไม่มีบัง</span>':''}</button>${isOT && selected?`<div class="ot-box"><label>จำนวนชั่วโมง OT</label><div class="ot-row"><button type="button" data-ot-minus="${esc(s.id)}">−</button><input type="number" min="0" step="0.5" data-ot-input="${esc(s.id)}" value="${esc(tempOtHours[s.id]||1)}" /><button type="button" data-ot-plus="${esc(s.id)}">+1 ชม.</button></div><div class="ot-hint">พิมพ์จำนวนชั่วโมงได้ เช่น 2, 4 หรือ 2.5</div></div>`:''}</div>`;}).join('');
- }
- function renderSymbolGrid(){
-   return symbolOptions.map(name=>`<button type="button" class="icon-tile ${tempIcon===name || (!tempIcon && name==='none')?'active':''}" data-symbol="${name}">${name==='none'?'<span class="icon-none">ไม่มี</span>':iconSVG(name,'svg-icon')}</button>`).join('');
+ const symbolOptions=['none','stethoscope','medicine','pulse','document','syringe','ambulance','camera','sprout','briefcase','clock','star'];
+ function optionMarkup(s){
+   const checked=tempShifts.includes(s.id);
+   const badge=tempExcluded[s.id]?`<div class="shift-badge"><span class="cross">✕</span><span>ขาย/ส่งต่อ · ไม่นับเงิน</span></div>`:'';
+   const ot=checked && /^ot/i.test(s.id) ? `<div class="ot-box"><label>จำนวนชั่วโมง OT</label><div class="ot-row"><button type="button" data-ot-minus="${esc(s.id)}">−</button><input data-ot-input="${esc(s.id)}" inputmode="decimal" value="${esc(tempOtHours[s.id]??1)}"/><button type="button" data-ot-plus="${esc(s.id)}">+1 ชม.</button></div><div class="ot-hint">พิมพ์จำนวนชั่วโมงได้ เช่น 2, 4 หรือ 2.5</div></div>`:'';
+   return `<div class="shift-option-wrap"><button type="button" class="shift-option ${checked?'selected':''}" data-toggle-shift="${esc(s.id)}"><span class="shift-left"><span class="check-round">${checked?iconSVG('check','svg-icon'):''}</span><span class="color-dot" style="background:${esc(pastel(s.color))}"></span><span class="shift-label"><strong>${esc(s.name)}</strong></span></span>${badge}</button>${ot}</div>`;
  }
  function paint(){
-   showSheet(`<div class="day-editor"><div class="day-editor-head"><h2 id="sheetHeading">บันทึกเวร</h2><div class="editor-date">${dateLabel(day)}</div><div class="soft-note">บันทึกอัตโนมัติในเครื่องนี้</div></div><div class="editor-section-title">เลือกเวร (เลือกได้มากกว่า 1)</div><div class="shift-option-grid" id="dayShiftOptions">${renderShiftCards()}</div><div class="editor-section-title">สัญลักษณ์ประจำวัน</div><div class="icon-grid" id="symbolGrid">${renderSymbolGrid()}</div><div class="editor-section-title">บันทึกเพิ่มเติม</div><textarea class="editor-textarea" id="dayNote" placeholder="เช่น แลกเวรกับ... / เตรียมอุปกรณ์...">${esc(tempNote)}</textarea><div class="dual-actions"><button type="button" class="copy-btn" id="copyDayBtn">คัดลอกข้อมูลช่องนี้</button><button type="button" class="paste-btn" id="pasteDayBtn">วางข้อมูลช่องนี้</button></div><button type="button" class="delete-day" id="clearDayBtn">ลบรายการวันนี้</button><div class="main-actions"><button type="button" class="close-editor" id="cancelDay">ปิด</button><button type="button" class="primary-save" id="saveDay">บันทึก</button></div><button type="button" class="wide-add-special" id="addSpecialToday">${iconSVG('calendar','svg-icon')} เพิ่มวันสำคัญในวันนี้</button></div>`);
+   showSheet(`<div class="day-editor"><div class="day-editor-head"><h2 id="sheetHeading">บันทึกเวร</h2><div class="editor-date">${new Intl.DateTimeFormat('th-TH-u-ca-buddhist',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(parseDate(day))}</div><p class="soft-note">บันทึกอัตโนมัติแล้ว · ${new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}</p></div><div class="day-editor-scroll"><div><div class="editor-section-title">เลือกเวร (เลือกได้มากกว่า 1)</div><div class="shift-option-grid" id="dayShiftOptions">${shiftOrder.map(optionMarkup).join('')}</div></div><div><div class="editor-section-title">บันทึกเพิ่มเติม</div><textarea class="editor-textarea" id="dayNote" placeholder="เช่น แลกเวรกับ... / เตรียมอุปกรณ์...">${esc(tempNote)}</textarea></div><div><div class="editor-section-title">สัญลักษณ์</div><div class="icon-grid" id="symbolGrid">${symbolOptions.map(name=>`<button type="button" class="icon-tile ${((name==='none'&&!tempIcon)||(tempIcon&&tempIcon===name))?'active':''}" data-symbol="${esc(name)}">${name==='none'?'<span class="icon-none">ไม่มี</span>':iconSVG(name,'svg-icon')}</button>`).join('')}</div></div><div class="dual-actions"><button type="button" class="copy-btn" id="copyDayBtn">คัดลอกข้อมูลช่องนี้</button><button type="button" class="paste-btn" id="pasteDayBtn">วางข้อมูลช่องนี้</button></div><button type="button" class="delete-day" id="clearDayBtn">ลบรายการวันนี้</button><div class="main-actions"><button type="button" class="close-editor" id="cancelDay">ปิด</button><button type="button" class="primary-save" id="saveDay">บันทึก</button></div><button type="button" class="wide-add-special" id="addSpecialToday">${iconSVG('calendar','svg-icon')} เพิ่มวันสำคัญในวันนี้</button></div></div>`);
+   $('dayNote').value=tempNote;
    $('dayShiftOptions').addEventListener('click',e=>{
       const btn=e.target.closest('[data-toggle-shift]'); if(btn){const id=btn.dataset.toggleShift; if(tempShifts.includes(id)) tempShifts=tempShifts.filter(x=>x!==id); else tempShifts.push(id); paint(); return;}
       const plus=e.target.closest('[data-ot-plus]'); if(plus){const id=plus.dataset.otPlus; tempOtHours[id]=Number(tempOtHours[id]||1)+1; paint(); return;}
@@ -589,40 +616,60 @@ function openDayEditor(day){
    $('clearDayBtn').onclick=()=>{tempShifts=[]; tempNote=''; tempIcon=''; tempOtHours={}; paint();};
    $('cancelDay').onclick=closeSheet;
    $('addSpecialToday').onclick=()=>{closeSheet(); openEventEditor(null, day);};
-   $('saveDay').onclick=()=>{const noteVal=$('dayNote').value; state.days[day]={...entry,shifts:[...tempShifts],note:noteVal,icon:tempIcon||'',otHours:{...tempOtHours}}; if(!tempShifts.length && !noteVal.trim() && !tempIcon) delete state.days[day]; save(); closeSheet(); render(); notify('บันทึกข้อมูลวันที่เรียบร้อย ✓');};
+   $('saveDay').onclick=()=>{const noteVal=$('dayNote').value; state.days[day]={...entry,shifts:[...tempShifts],note:noteVal,icon:tempIcon||'',otHours:{...tempOtHours},excluded:{...tempExcluded}}; if(!tempShifts.length && !noteVal.trim() && !tempIcon) delete state.days[day]; save(); closeSheet(); render(); notify('บันทึกข้อมูลวันที่เรียบร้อย ✓');};
  }
  paint();
 }
+
+
 const toneOptions=['pink','green','blue','purple'];
-const emojiOptions=['🚩','🎁','🌷','🏥','💚','⭐','🎂','📌'];
+const emojiOptions=['flag','gift','lotus','stethoscope','heart','star','flower','pin'];
+const eventIconMeta={
+  flag:{label:'วันทางการ',tone:'#ffe9f1'}, gift:{label:'วันหยุด',tone:'#eaf8ee'}, lotus:{label:'วันบุญ',tone:'#eaf3ff'}, stethoscope:{label:'โรงพยาบาล',tone:'#e7f8ff'},
+  heart:{label:'วันพิเศษ',tone:'#fff0f0'}, star:{label:'สำคัญ',tone:'#fff7dd'}, flower:{label:'ส่วนตัว',tone:'#f7edf8'}, pin:{label:'นัดหมาย',tone:'#eef5ff'}
+};
+function eventIconButton(key, active){
+ const meta=eventIconMeta[key];
+ return `<button type="button" class="event-icon-btn ${active?'active':''}" data-event-icon="${key}"><span class="event-icon-chip" style="background:${meta.tone}">${iconSVG(key,'svg-icon')}</span><span class="event-icon-label">${meta.label}</span></button>`;
+}
 function openEventEditor(id=null, presetDate=null){
  const current=state.events.find(e=>e.id===id), isEdit=!!current;
- const initial={date:presetDate||iso(new Date(viewDate.getFullYear(),viewDate.getMonth(),13)),title:'',emoji:'🚩',tone:'green',...current};
- showSheet(`<h2 class="sheet-heading" id="sheetHeading">${isEdit?'แก้ไขวันสำคัญ':'เพิ่มวันสำคัญ'} 🌷</h2><p class="sheet-sub">เพิ่มวันหยุด การนัดหมาย หรือวันพิเศษส่วนตัว</p>
- <label class="field-label" for="eventDate">เลือกวันที่</label><input class="sheet-input" id="eventDate" type="date" value="${esc(initial.date)}" />
- <label class="field-label" for="eventTitle">ชื่อวันสำคัญ</label><input class="sheet-input" id="eventTitle" maxlength="80" placeholder="เช่น วันประชุม / วันหยุดพิเศษ" value="${esc(initial.title)}" />
- <label class="field-label" for="eventEmoji">สัญลักษณ์</label><select class="sheet-select" id="eventEmoji">${emojiOptions.map(x=>`<option value="${x}" ${x===initial.emoji?'selected':''}>${x}</option>`).join('')}</select>
- <label class="field-label" for="eventTone">สีการ์ด</label><select class="sheet-select" id="eventTone"><option value="pink" ${initial.tone==='pink'?'selected':''}>ชมพูพาสเทล</option><option value="green" ${initial.tone==='green'?'selected':''}>เขียวพาสเทล</option><option value="blue" ${initial.tone==='blue'?'selected':''}>ฟ้าพาสเทล</option><option value="purple" ${initial.tone==='purple'?'selected':''}>ม่วงพาสเทล</option></select>
- <div class="sheet-actions">${isEdit?'<button type="button" class="danger-btn" id="deleteEvent">ลบ</button>':'<button type="button" class="ghost-btn" id="cancelEvent">ยกเลิก</button>'}<button type="button" class="primary-btn" id="saveEvent">บันทึกวันสำคัญ</button></div>`);
- if(isEdit){$('deleteEvent').onclick=()=>{if(!confirm('ต้องการลบวันสำคัญนี้ใช่หรือไม่?'))return;state.events=state.events.filter(e=>e.id!==id);save();closeSheet();render();notify('ลบวันสำคัญแล้ว');};}
- else $('cancelEvent').onclick=closeSheet;
- $('saveEvent').onclick=()=>{const date=$('eventDate').value,title=$('eventTitle').value.trim();if(!date||!title){notify('กรุณากรอกวันที่และชื่อวันสำคัญ');return;}const item={id:id||`ev-${Date.now()}`,date,title,emoji:$('eventEmoji').value,tone:$('eventTone').value};if(isEdit){const i=state.events.findIndex(e=>e.id===id);state.events[i]=item;}else state.events.push(item);const d=parseDate(date);viewDate=new Date(d.getFullYear(),d.getMonth(),1);save();closeSheet();render();notify('บันทึกวันสำคัญแล้ว ✓');};
+ const normalizedIcon=eventIconKey((current&&current.emoji)||'flag');
+ const initial={date:presetDate||iso(new Date(viewDate.getFullYear(),viewDate.getMonth(),13)),title:'',emoji:normalizedIcon,tone:'green',...current};
+ let selectedIcon=eventIconKey(initial.emoji);
+ let selectedTone=initial.tone||'green';
+ function paint(){
+   showSheet(`<h2 class="sheet-heading" id="sheetHeading">${isEdit?'แก้ไขวันสำคัญ':'เพิ่มวันสำคัญ'}</h2><p class="sheet-sub">โทนเขียวขาวพาสเทล พร้อมไอคอนแบบน่ารัก</p><label class="field-label" for="eventDate">เลือกวันที่</label><input class="sheet-input" id="eventDate" type="date" value="${esc(initial.date)}" /><label class="field-label" for="eventTitle">ชื่อวันสำคัญ</label><input class="sheet-input" id="eventTitle" maxlength="80" placeholder="เช่น วันประชุม / วันหยุดพิเศษ" value="${esc(initial.title)}" /><label class="field-label">ไอคอนวันสำคัญ</label><div class="event-icon-grid" id="eventIconGrid">${emojiOptions.map(x=>eventIconButton(x, x===selectedIcon)).join('')}</div><label class="field-label">สีการ์ด</label><div class="tone-grid" id="toneGrid">${toneOptions.map(t=>`<button type="button" class="tone-btn ${selectedTone===t?'active':''}" data-tone="${t}">${t==='pink'?'ชมพู':t==='green'?'เขียว':t==='blue'?'ฟ้า':'ม่วง'}</button>`).join('')}</div><div class="sheet-actions">${isEdit?'<button type="button" class="danger-btn" id="deleteEvent">ลบ</button>':'<button type="button" class="ghost-btn" id="cancelEvent">ยกเลิก</button>'}<button type="button" class="primary-btn" id="saveEvent">บันทึกวันสำคัญ</button></div>`);
+   $('eventIconGrid').onclick=(e)=>{const btn=e.target.closest('[data-event-icon]'); if(!btn) return; selectedIcon=btn.dataset.eventIcon; paint();};
+   $('toneGrid').onclick=(e)=>{const btn=e.target.closest('[data-tone]'); if(!btn) return; selectedTone=btn.dataset.tone; paint();};
+   $('eventDate').value=initial.date; $('eventTitle').value=initial.title;
+   if(isEdit){$('deleteEvent').onclick=()=>{if(!confirm('ต้องการลบวันสำคัญนี้ใช่หรือไม่?'))return;state.events=state.events.filter(e=>e.id!==id);save();closeSheet();render();notify('ลบวันสำคัญแล้ว');};}
+   else $('cancelEvent').onclick=closeSheet;
+   $('saveEvent').onclick=()=>{const date=$('eventDate').value,title=$('eventTitle').value.trim();if(!date||!title){notify('กรุณากรอกวันที่และชื่อวันสำคัญ');return;}const item={id:id||`ev-${Date.now()}`,date,title,emoji:selectedIcon,tone:selectedTone};if(isEdit){const i=state.events.findIndex(e=>e.id===id);state.events[i]=item;}else state.events.push(item);const d=parseDate(date);viewDate=new Date(d.getFullYear(),d.getMonth(),1);save();closeSheet();render();notify('บันทึกวันสำคัญแล้ว ✓');};
+ }
+ paint();
 }
 function openAllEvents(){
  const events=state.events.slice().sort((a,b)=>a.date.localeCompare(b.date));
- showSheet(`<h2 class="sheet-heading" id="sheetHeading">วันสำคัญทั้งหมด 🚩</h2><p class="sheet-sub">แตะ “แก้ไข” เพื่อเปลี่ยนวัน ชื่อ และสี</p><div class="event-list-modal">${events.map(e=>`<div class="event-row"><div class="event-desc"><span style="font-size:21px">${esc(e.emoji)}</span><div><strong>${esc(e.title)}</strong><br><small>${dateLabel(e.date)}</small></div></div><button type="button" data-edit-event="${esc(e.id)}">แก้ไข</button></div>`).join('')||'<p>ยังไม่มีวันสำคัญ</p>'}</div><div class="sheet-actions"><button type="button" class="primary-btn" id="addFromList">+ เพิ่มวันสำคัญ</button></div>`);
+ showSheet(`<h2 class="sheet-heading" id="sheetHeading">วันสำคัญทั้งหมด</h2><p class="sheet-sub">แตะ “แก้ไข” เพื่อเปลี่ยนวัน ชื่อ และไอคอน</p><div class="event-list-modal">${events.map(e=>`<div class="event-row"><div class="event-desc"><span class="event-mini-icon" style="background:${eventIconMeta[eventIconKey(e.emoji)]?.tone||'#eef5ff'}">${iconSVG(eventIconKey(e.emoji),'svg-icon')}</span><div><strong>${esc(e.title)}</strong><br><small>${dateLabel(e.date)}</small></div></div><button type="button" data-edit-event="${esc(e.id)}">แก้ไข</button></div>`).join('')||'<p>ยังไม่มีวันสำคัญ</p>'}</div><div class="sheet-actions"><button type="button" class="primary-btn" id="addFromList">+ เพิ่มวันสำคัญ</button></div>`);
  $('sheetBody').querySelectorAll('[data-edit-event]').forEach(btn=>btn.onclick=()=>openEventEditor(btn.dataset.editEvent));
  $('addFromList').onclick=()=>openEventEditor();
 }
-function openShiftCreator(){
- showSheet(`<h2 class="sheet-heading" id="sheetHeading">+ เพิ่มการ์ดเวร</h2><p class="sheet-sub">สร้างประเภทเวรสำหรับทดลองหน้า 1</p><label class="field-label" for="newShiftName">ชื่อเวร</label><input id="newShiftName" class="sheet-input" maxlength="35" placeholder="เช่น เวรพิเศษ"/><label class="field-label" for="newShiftColor">สีการ์ดเวร</label><input id="newShiftColor" type="color" class="sheet-input" value="#a4e7d3"/><div class="sheet-actions"><button class="ghost-btn" id="cancelShift" type="button">ยกเลิก</button><button class="primary-btn" id="saveShift" type="button">เพิ่มการ์ดเวร</button></div>`);
- $('cancelShift').onclick=closeSheet;
- $('saveShift').onclick=()=>{const name=$('newShiftName').value.trim();if(!name){notify('กรุณากรอกชื่อเวร');return;}const id='custom-'+Date.now();state.shifts.push({id,name,short:name,color:$('newShiftColor').value,icon:'🩺'});save();closeSheet();renderShifts();notify('เพิ่มการ์ดเวรสำเร็จ');};
+function openShiftCreator(editId=null){
+ const current=state.shifts.find(s=>s.id===editId);
+ const isEdit=!!current;
+ showSheet(`<h2 class="sheet-heading" id="sheetHeading">${isEdit?'แก้ไขการ์ดเวร':'เพิ่มการ์ดเวร'}</h2><p class="sheet-sub">แก้ชื่อ สี และลบการ์ดได้ โดยไม่แตะระบบอื่น</p><label class="field-label" for="newShiftName">ชื่อเวร</label><input id="newShiftName" class="sheet-input" maxlength="35" placeholder="เช่น เวรพิเศษ" value="${esc(current?.name||'')}"/><label class="field-label" for="newShiftColor">สีการ์ดเวร</label><input id="newShiftColor" type="color" class="sheet-input" value="${esc(current?.color||'#a4e7d3')}"/><div class="sheet-actions">${isEdit?'<button class="danger-btn" id="deleteShift" type="button">ลบการ์ด</button>':'<button class="ghost-btn" id="cancelShift" type="button">ยกเลิก</button>'}<button class="primary-btn" id="saveShift" type="button">${isEdit?'บันทึกการแก้ไข':'เพิ่มการ์ดเวร'}</button></div>`);
+ if(isEdit){$('deleteShift').onclick=()=>{if(!confirm('ต้องการลบการ์ดเวรนี้ใช่หรือไม่?'))return; state.shifts=state.shifts.filter(s=>s.id!==editId); Object.keys(state.days).forEach(day=>{const d=state.days[day]; d.shifts=(d.shifts||[]).filter(id=>id!==editId); if(d.excluded) delete d.excluded[editId]; if(d.otHours) delete d.otHours[editId]; if(!(d.shifts||[]).length && !String(d.note||'').trim() && !d.icon) delete state.days[day];}); save(); closeSheet(); render(); notify('ลบการ์ดเวรแล้ว');};}
+ else $('cancelShift').onclick=closeSheet;
+ $('saveShift').onclick=()=>{const name=$('newShiftName').value.trim();if(!name){notify('กรุณากรอกชื่อเวร');return;} if(isEdit){current.name=name; current.short=name; current.color=$('newShiftColor').value;} else {const newid='custom-'+Date.now();state.shifts.push({id:newid,name,short:name,color:$('newShiftColor').value,icon:''});} save(); closeSheet(); renderShifts(); notify(isEdit?'บันทึกการ์ดเวรแล้ว':'เพิ่มการ์ดเวรสำเร็จ');};
 }
 function openShiftManager(){
- showSheet(`<h2 class="sheet-heading" id="sheetHeading">จัดการการ์ดเวร</h2><p class="sheet-sub">การ์ดเวรทั้งหมดในหน้าตัวอย่างนี้</p><div class="event-list-modal">${state.shifts.map(s=>`<div class="event-row"><span style="display:flex;align-items:center;gap:9px"><span style="background:${esc(pastel(s.color))};width:16px;height:16px;border-radius:6px"></span>${esc(s.name)}</span><span class="muted">${esc(s.icon||'🩺')}</span></div>`).join('')}</div><div class="sheet-actions"><button class="primary-btn" id="addManagedShift" type="button">+ เพิ่มการ์ดใหม่</button></div>`);
- $('addManagedShift').onclick=openShiftCreator;
+ showSheet(`<h2 class="sheet-heading" id="sheetHeading">จัดการการ์ดเวร</h2><p class="sheet-sub">แก้ไขสี ลบการ์ด หรือเพิ่มการ์ดใหม่</p><div class="shift-manage-list">${state.shifts.map(s=>`<div class="shift-manage-row"><div class="shift-manage-meta"><span class="shift-swatch" style="background:${esc(pastel(s.color))}"></span><strong>${esc(s.name)}</strong></div><div class="shift-manage-actions"><button class="small-btn edit" type="button" data-edit-shift="${esc(s.id)}">แก้ไข</button><button class="small-btn delete" type="button" data-delete-shift="${esc(s.id)}">ลบ</button></div></div>`).join('')}</div><div class="sheet-actions"><button class="primary-btn" id="addManagedShift" type="button">+ เพิ่มการ์ดใหม่</button></div>`);
+ $('sheetBody').querySelectorAll('[data-edit-shift]').forEach(btn=>btn.onclick=()=>openShiftCreator(btn.dataset.editShift));
+ $('sheetBody').querySelectorAll('[data-delete-shift]').forEach(btn=>btn.onclick=()=>{const id=btn.dataset.deleteShift; openShiftCreator(id); const del=$('deleteShift'); if(del) del.focus();});
+ $('addManagedShift').onclick=()=>openShiftCreator();
 }
+
 function openInfo(){
  showSheet(`<h2 class="sheet-heading" id="sheetHeading">🩺 ต้นแบบหน้าปฏิทิน</h2>
  <p class="sheet-sub">หน้า 1 จากทั้งหมด 6 หน้า · ออกแบบเพื่อทดสอบบน iPhone และ Android</p>
@@ -644,8 +691,16 @@ $('closeSheetBtn').addEventListener('click',closeSheet);
 $('overlay').addEventListener('click',(ev)=>{if(ev.target===$('overlay'))closeSheet();});
 document.addEventListener('keydown',(ev)=>{if(ev.key==='Escape')closeSheet();});
 document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.tab!=='calendar')notify('หน้านี้จะพัฒนาต่อในขั้นถัดไป 🌱');else window.scrollTo({top:0,behavior:'smooth'});}));
+
 render();
+const previewParams=new URLSearchParams(location.search);
+const previewMode=previewParams.get('preview');
+const previewDay=previewParams.get('day')||'2026-10-21';
+if(previewMode==='day') setTimeout(()=>openDayEditor(previewDay),80);
+if(previewMode==='event') setTimeout(()=>openEventEditor('e2'),80);
+if(previewMode==='shifts') setTimeout(()=>openShiftManager(),80);
 })();
+
 
 </script>
 </body>
