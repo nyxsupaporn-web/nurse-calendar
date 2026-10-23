@@ -169,6 +169,16 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .nc2-mini-button.nc2-palette-trigger{border-color:#eadcf5;background:linear-gradient(150deg,#fcf6ff,#f2e7fe)}
 .nc2-mini-button svg{stroke-width:1.7}
 @media(min-width:600px){.nc2-page{padding-left:18px!important;padding-right:18px!important}}
+
+/* V31: scoped visual fixes only */
+.add-event-tile>span:last-child{font-size:10px!important;font-weight:600!important;letter-spacing:-.35px!important;white-space:nowrap!important}
+#nc3SummaryPage .nc29-cycle-dates{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 2px 2px;box-sizing:border-box}
+#nc3SummaryPage .nc29-cycle-dates label{min-width:0;overflow:visible;box-sizing:border-box}
+#nc3SummaryPage .nc29-cycle-dates input{appearance:none;-webkit-appearance:none;box-sizing:border-box;display:block;width:100%;max-width:100%;min-width:0;border:1px solid #d7e7df!important;border-radius:12px!important;background:#fff!important;padding:10px 4px!important;font-size:11px!important;line-height:1.5;overflow:hidden}
+#nc3SummaryPage .nc31-cycle-saved{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;margin-top:10px;padding:9px 10px;border:1px solid #d7e7df;border-radius:12px;background:#fff;color:#315a4c;font-size:11px}
+#nc3SummaryPage .nc31-cycle-saved[hidden]{display:none}
+#nc3SummaryPage .nc31-cycle-saved span{min-width:0;overflow-wrap:anywhere}
+#nc3SummaryPage .nc31-cycle-saved button{flex:none;border:1px solid #a6d6c7;background:#e7f7ef;color:#287b64;border-radius:9px;padding:7px 9px;font:inherit;font-weight:600}
 </style>
   <style>
 /* Nurse Calendar — Page 1 reference-match design.
@@ -1352,7 +1362,7 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
   <div class="nc3-panel">
     <div class="nc3-switch" role="group" aria-label="เลือกการสรุป"><button type="button" id="nc3MonthlyBtn" aria-pressed="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M8 17h3"/></svg>รายเดือน</button><button type="button" id="nc3YearlyBtn" aria-pressed="false"><svg viewBox="0 0 24 24"><rect x="4" y="12" width="3" height="8" rx="1"/><rect x="10" y="6" width="3" height="14" rx="1"/><rect x="16" y="3" width="3" height="17" rx="1"/></svg>รายปี</button></div>
     <div class="nc3-period"><button type="button" id="nc3Previous" aria-label="ก่อนหน้า"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><select id="nc3PeriodSelect" aria-label="เลือกเดือนหรือปี"></select><button type="button" id="nc3Next" aria-label="ถัดไป"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button></div>
-    <div class="nc29-cycle" id="nc29Cycle"><label class="nc29-cycle-toggle"><input type="checkbox" id="nc29CycleEnabled"> คำนวณตามรอบรับเงิน</label><div class="nc29-cycle-dates" id="nc29CycleDates" hidden><label>ตั้งแต่วันที่<input type="date" id="nc29CycleStart"></label><label>ถึงวันที่<input type="date" id="nc29CycleEnd"></label></div><small id="nc29CycleHint">เลือกช่วงวันที่เอง เช่น 16 ต.ค. – 15 พ.ย.</small></div>
+    <div class="nc29-cycle" id="nc29Cycle"><label class="nc29-cycle-toggle"><input type="checkbox" id="nc29CycleEnabled"> คำนวณตามรอบรับเงิน</label><div class="nc29-cycle-dates" id="nc29CycleDates" hidden><label>ตั้งแต่วันที่<input type="date" id="nc29CycleStart"></label><label>ถึงวันที่<input type="date" id="nc29CycleEnd"></label></div><div class="nc31-cycle-saved" id="nc31CycleSaved" hidden><span id="nc31CycleSavedText"></span><button type="button" id="nc31CycleEdit">เปลี่ยนรอบ</button></div><small id="nc29CycleHint">เลือกช่วงวันที่เอง เช่น 16 ต.ค. – 15 พ.ย.</small></div>
     <section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 10h8M8 14h8M8 18h5"/></svg><span id="nc3OverviewTitle">ภาพรวมเดือนตุลาคม 2569<small>สรุปจากเวรที่บันทึกไว้ในปฏิทิน</small></span></div><div class="nc3-metrics" id="nc3Metrics"></div></section>
     <section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h8"/></svg><span>สรุปจำนวนเวรและรายได้ แยกตามประเภท<small>รายการขาย/ส่งต่อไม่นับรวมในรายได้</small></span></div><table class="nc3-report-table"><thead><tr><th>ประเภทเวร</th><th>ครั้ง</th><th>รายได้ (บาท)</th><th>สัดส่วน</th></tr></thead><tbody id="nc3TableBody"></tbody></table><p class="nc3-note" id="nc3RateNote"></p></section>
     <div class="nc3-chart-grid"><section class="nc3-section"><div class="nc3-chart-head"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="4" height="9" rx="2" fill="#76dfc0" stroke="#28b08d" stroke-width="1.5"/><rect x="10" y="6" width="4" height="14" rx="2" fill="#68d8bb" stroke="#28b08d" stroke-width="1.5"/><rect x="16" y="3" width="4" height="17" rx="2" fill="#b5e9aa" stroke="#53bb7e" stroke-width="1.5"/></svg><span id="nc3BarsTitle">รายได้รายสัปดาห์<small>สรุปจากรายได้ที่กำหนดค่าเวรแล้ว</small></span></div><button type="button" class="nc3-more-link" aria-label="ดูเพิ่มเติม">ดูเพิ่มเติม ›</button></div><div class="nc3-barplot" id="nc3Barplot"></div><div class="nc3-barlabels" id="nc3Barlabels"></div></section><section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M13 3a8 8 0 0 1 8 8h-8z"/></svg><span>สัดส่วนรายได้<small>ตามประเภทเวร</small></span></div><div class="nc29-donut-layout"><div class="nc3-legend" id="nc3Legend"></div><div class="nc3-donut" id="nc3Donut"><div class="nc3-donut-core"><strong id="nc3DonutTotal">—</strong><span>รายได้ที่คำนวณได้</span></div></div></div></section></div>
@@ -2287,6 +2297,7 @@ function nc3TypeIcon(s){const key=nc3TypeKey(s);if(key==='sdmc')return nc3Icons.
 function nc3MoneyBaht(n){return '฿'+Number(n).toLocaleString('en-US');}
 let nc3Visible=false,nc3Mode='month',nc3Date=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
 let nc29CycleEnabled=false,nc29CycleStart='',nc29CycleEnd='';
+let nc31CycleEditing=false;
 const nc30CycleKey='nurse_calendar_pay_cycle_days_v30';
 let nc30CycleDays=null;
 try {const saved=JSON.parse(localStorage.getItem(nc30CycleKey)||'null');if(saved&&Number.isInteger(saved.start)&&Number.isInteger(saved.end)&&saved.start>=1&&saved.start<=31&&saved.end>=1&&saved.end<=31)nc30CycleDays=saved;}catch(_e){}
@@ -2335,7 +2346,7 @@ function nc3Render(){
  $('nc3MonthlyBtn').setAttribute('aria-pressed',String(!whole));$('nc3YearlyBtn').setAttribute('aria-pressed',String(whole));
  nc3SelectUpdate();
  const range=(!whole&&nc29CycleEnabled&&nc30CycleDays)?nc30Range(year,month):null;
- $('nc29Cycle').hidden=whole; $('nc29CycleDates').hidden=!nc29CycleEnabled; if(range){$('nc29CycleStart').value=range.start;$('nc29CycleEnd').value=range.end;}
+ $('nc29Cycle').hidden=whole; $('nc29CycleDates').hidden=!nc29CycleEnabled||!!nc30CycleDays&&!nc31CycleEditing; $('nc31CycleSaved').hidden=!nc29CycleEnabled||!nc30CycleDays||nc31CycleEditing; if(range){$('nc31CycleSavedText').textContent=`รอบวันที่ ${range.start.slice(8)} ${thMonths[new Date(range.start+'T12:00:00').getMonth()]} ${Number(range.start.slice(0,4))+543} – ${range.end.slice(8)} ${thMonths[new Date(range.end+'T12:00:00').getMonth()]} ${Number(range.end.slice(0,4))+543}`;} if(range){$('nc29CycleStart').value=range.start;$('nc29CycleEnd').value=range.end;}
  const report=nc3Summarize(year,whole?null:month,range);
  const period=whole?`ปี ${year+543}`:range?`รอบ ${range.start.split('-').reverse().join('/')} – ${range.end.split('-').reverse().join('/')}`:`เดือน${thMonths[month]} ${year+543}`;
  $('nc3OverviewTitle').innerHTML=`ภาพรวม${period}<small>สรุปจำนวนเวรและรายได้จากข้อมูลที่บันทึกไว้จริง</small>`;
@@ -2371,8 +2382,9 @@ function nc3Render(){
  $('nc3YearGrid').querySelectorAll('[data-nc3-month]').forEach(btn=>btn.addEventListener('click',()=>{nc3Date=new Date(year,Number(btn.dataset.nc3Month),1);nc3Mode='month';nc3Render();window.scrollTo({top:0,behavior:'instant'});}));
 }
 if(nc30CycleDays){nc29CycleEnabled=true;$('nc29CycleEnabled').checked=true;$('nc29CycleHint').textContent=`ใช้รอบวันที่ ${nc30CycleDays.start} – ${nc30CycleDays.end} อัตโนมัติทุกเดือน`;}
-$('nc29CycleEnabled').addEventListener('change',e=>{nc29CycleEnabled=e.target.checked;if(nc29CycleEnabled&&!nc30CycleDays){const y=nc3Date.getFullYear(),m=nc3Date.getMonth();nc29CycleStart=nc30Date(y,m-1,16);nc29CycleEnd=nc30Date(y,m,15);$('nc29CycleStart').value=nc29CycleStart;$('nc29CycleEnd').value=nc29CycleEnd;nc30SaveDays();}nc3Render()});
-for(const id of ['nc29CycleStart','nc29CycleEnd'])$(id).addEventListener('change',e=>{if(id==='nc29CycleStart')nc29CycleStart=e.target.value;else nc29CycleEnd=e.target.value;nc30SaveDays();nc3Render()});
+$('nc29CycleEnabled').addEventListener('change',e=>{nc29CycleEnabled=e.target.checked;if(nc29CycleEnabled&&!nc30CycleDays){const y=nc3Date.getFullYear(),m=nc3Date.getMonth();nc29CycleStart=nc30Date(y,m-1,16);nc29CycleEnd=nc30Date(y,m,15);$('nc29CycleStart').value=nc29CycleStart;$('nc29CycleEnd').value=nc29CycleEnd;nc30SaveDays();}nc31CycleEditing=false;nc3Render()});
+for(const id of ['nc29CycleStart','nc29CycleEnd'])$(id).addEventListener('change',e=>{if(id==='nc29CycleStart')nc29CycleStart=e.target.value;else nc29CycleEnd=e.target.value;nc30SaveDays();nc31CycleEditing=false;nc3Render()});
+$('nc31CycleEdit').addEventListener('click',()=>{nc31CycleEditing=true;nc3Render()});
 $('nc3MonthlyBtn').addEventListener('click',()=>{nc3Mode='month';nc3Render()});
 $('nc3YearlyBtn').addEventListener('click',()=>{nc3Mode='year';nc3Render()});
 $('nc3Previous').addEventListener('click',()=>nc3DateShift(-1));
