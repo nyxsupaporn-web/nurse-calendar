@@ -1188,6 +1188,38 @@ html,body{background-color:#e5f8ec!important}
 #nc3SummaryPage .nc3-note strong{color:#29795e}
 #nc3SummaryPage .nc3-empty{color:#a0aaa6;text-align:center;padding:14px 4px;font-size:11px}
 @media(max-width:360px){#nc3SummaryPage .nc3-panel{padding:10px 9px}#nc3SummaryPage .nc3-metrics{gap:4px}#nc3SummaryPage .nc3-metric{min-height:95px}#nc3SummaryPage .nc3-metric strong{font-size:16px}#nc3SummaryPage .nc3-chart-grid{gap:6px}#nc3SummaryPage .nc3-section{padding:9px 7px}#nc3SummaryPage .nc3-report-table th,#nc3SummaryPage .nc3-report-table td{padding-left:2px;padding-right:2px}#nc3SummaryPage .nc3-bars-card{grid-template-columns:38px 1fr}#nc3SummaryPage .nc3-yaxis{font-size:7px}#nc3SummaryPage .nc3-week-label{font-size:8px}#nc3SummaryPage .nc3-week-dates{font-size:7px}}
+
+/* V28: presentation-only refinements. Shared header and duty state are unchanged. */
+#nc3SummaryPage.nc3-page{width:100%!important;max-width:600px!important;margin:0 auto!important;padding:0 10px 112px!important;box-sizing:border-box!important;min-width:0!important}
+#nc3SummaryPage .nc3-panel{width:100%;max-width:100%;padding:10px 9px 14px;margin:0 0 12px;box-sizing:border-box}
+#nc3SummaryPage .nc3-section{min-width:0;max-width:100%}
+#nc3SummaryPage .nc3-chart-grid{display:grid;grid-template-columns:1fr;gap:10px}
+#nc3SummaryPage .nc3-chart-grid .nc3-section{width:100%;padding:12px 10px}
+#nc3SummaryPage .nc3-metrics{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+#nc3SummaryPage .nc3-metric{min-height:116px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;padding:9px 3px 8px;overflow:hidden}
+#nc3SummaryPage .nc3-metric svg{width:22px;height:22px;flex:none}
+#nc3SummaryPage .nc3-metric .nc3-metric-label{font-size:9px;line-height:1.35;min-height:25px;white-space:normal;font-weight:600;display:flex;align-items:center;justify-content:center}
+#nc3SummaryPage .nc3-metric strong{font-size:clamp(12px,3.5vw,16px)!important;font-weight:700;max-width:100%;letter-spacing:-.045em;line-height:1.35;white-space:nowrap;font-variant-numeric:tabular-nums}
+#nc3SummaryPage .nc3-metric small{margin-top:auto;font-size:8px;line-height:1.25;max-width:100%;font-weight:400}
+#nc3SummaryPage .nc3-report-table td,#nc3SummaryPage .nc3-report-table th{font-weight:400}
+#nc3SummaryPage .nc3-tag,.nc3-month-card small,.nc3-note,.nc3-legend,.nc3-week-dates{font-weight:400!important}
+#nc3SummaryPage .nc3-title,#nc3SummaryPage .nc3-title>span,#nc3SummaryPage .nc3-month-card strong{font-weight:700!important}
+#nc3SummaryPage .nc3-title small,#nc3SummaryPage .nc3-metric small,#nc3SummaryPage .nc3-report-table td,#nc3SummaryPage .nc3-report-table th,#nc3SummaryPage .nc3-period select{font-weight:400!important}
+#nc3SummaryPage .nc3-bars-card{display:block}
+#nc3SummaryPage .nc3-yaxis,#nc3SummaryPage .nc3-plot-area{display:none}
+#nc3SummaryPage .nc3-horizontal-chart{display:flex;flex-direction:column;gap:10px;width:100%;min-width:0}
+#nc3SummaryPage .nc3-horizontal-row{display:grid;grid-template-columns:minmax(66px,27%) minmax(0,1fr);align-items:center;gap:8px;min-width:0}
+#nc3SummaryPage .nc3-horizontal-caption{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+#nc3SummaryPage .nc3-horizontal-caption strong{font-size:10px;color:#355b50;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+#nc3SummaryPage .nc3-horizontal-caption small{font-size:9px;color:#93a29c;font-weight:400;line-height:1.25}
+#nc3SummaryPage .nc3-horizontal-track{height:29px;position:relative;overflow:hidden;background:#f0f5f2;border-radius:0 13px 13px 0;min-width:0}
+#nc3SummaryPage .nc3-horizontal-fill{height:100%;display:block;min-width:3px;border-radius:0 13px 13px 0;background:linear-gradient(90deg,#80ddc0,#56cbb0)}
+#nc3SummaryPage .nc3-horizontal-row:nth-child(4n) .nc3-horizontal-fill{background:linear-gradient(90deg,#afe4aa,#9ddc9d)}
+#nc3SummaryPage .nc3-horizontal-value{text-align:right;font-size:11px;color:#278b72;font-weight:500;margin-top:4px;line-height:1.25}
+#nc3SummaryPage .nc3-year-grid{min-width:0}
+@media(max-width:360px){#nc3SummaryPage .nc3-panel{padding:10px 7px}#nc3SummaryPage .nc3-metric{min-height:115px}#nc3SummaryPage .nc3-metric strong{font-size:12px!important}#nc3SummaryPage .nc3-horizontal-row{grid-template-columns:minmax(60px,29%) minmax(0,1fr)}}
+/* Normal-weight secondary text throughout the existing app; headings remain bold. */
+body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta,.event-date,.helper-text,.shift-select-hint,.nc3-week-dates){font-weight:400!important}
 </style>
 </head>
 <body>
@@ -2270,11 +2302,8 @@ function nc3Render(){
  if(whole){for(let m=0;m<12;m++){const data=nc3Summarize(year,m);bars.push({label:thMonthsShort[m],sub:`${m+1} / ${year+543}`,value:data.sum})}}
  else{const n=new Date(year,month+1,0).getDate();let weekNo=1;for(let start=1;start<=n;start+=7){const end=Math.min(start+6,n);let amount=0;for(const x of report.known){const d=Number(x.day.slice(8,10));if(d>=start&&d<=end)amount+=x.pay;}bars.push({label:`สัปดาห์ ${weekNo++}`,sub:`${start} - ${end} ${thMonthsShort[month]}`,value:amount})}}
  $('nc3BarsTitle').innerHTML=`${whole?'รายได้รายเดือน':'รายได้รายสัปดาห์'}<small>${whole?'สรุปยอดรายเดือน':'('+thMonths[month]+' '+(year+543)+')'}</small>`;
- const chartTop=Math.max(15000,Math.ceil(Math.max(1,...bars.map(b=>b.value))/5000)*5000);
- const ticks=[chartTop,chartTop*2/3,chartTop/3,0].map(v=>Math.round(v/1000)*1000);
- const weeksHtml=bars.map((b,i)=>`<div class="nc3-week"><div class="nc3-week-label">${esc(b.label)}</div><small class="nc3-week-dates">${esc(b.sub||'')}</small></div>`).join('');
- const barsHtml=bars.map((b,i)=>`<div class="nc3-barcol"><span class="nc3-barval">${b.value?nc3MoneyBaht(b.value):'฿0'}</span><div class="nc3-bar" style="height:${b.value?Math.max(3,Math.round(b.value/chartTop*125)):3}px"></div></div>`).join('');
- $('nc3Barplot').innerHTML=`<div class="nc3-bars-card"><div class="nc3-yaxis"><span>${ticks[0].toLocaleString('en-US')}</span><span>${ticks[1].toLocaleString('en-US')}</span><span>${ticks[2].toLocaleString('en-US')}</span><span>${ticks[3].toLocaleString('en-US')}</span></div><div class="nc3-plot-area"><span class="nc3-gridline g1"></span><span class="nc3-gridline g2"></span><span class="nc3-gridline g3"></span><div class="nc3-bars">${barsHtml}</div><div class="nc3-weeks">${weeksHtml}</div></div></div>`;
+ const chartTop=Math.max(1,...bars.map(b=>b.value));
+ $('nc3Barplot').innerHTML=`<div class="nc3-horizontal-chart">${bars.map(b=>`<div class="nc3-horizontal-row"><div class="nc3-horizontal-caption"><strong>${esc(b.label)}</strong><small>${esc(b.sub||'')}</small></div><div><div class="nc3-horizontal-track"><span class="nc3-horizontal-fill" style="width:${b.value?Math.max(1,(b.value/chartTop*100)):0}%"></span></div><div class="nc3-horizontal-value">${nc3MoneyBaht(b.value)}</div></div></div>`).join('')}</div>`;
  $('nc3Barlabels').innerHTML='';
  const slices=groups.filter(g=>g.sum>0),total=slices.reduce((t,g)=>t+g.sum,0);let at=0;
  const gradient=slices.map(g=>{const start=at;at+=g.sum/total*100;return `${esc(pastel(g.s.color))} ${start.toFixed(2)}% ${at.toFixed(2)}%`}).join(',');
