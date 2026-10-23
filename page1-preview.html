@@ -14,7 +14,7 @@
   --mint:#e9f8ef; --mint-soft:#f0fbf5; --mint-border:#d8eae0; --stroke:#dfece4;
   --white:#fff; --pink:#f8dbeb; --purple:#eadcf9; --sky:#d9f1ff;
   --shade:0 11px 30px rgba(62,125,96,.09), 0 2px 7px rgba(46,117,82,.03);
-  --font:"Noto Sans Thai","Noto Looped Thai", "Thonburi", "Tahoma", system-ui, sans-serif;
+  --font:"Mali","Noto Sans Thai","Noto Looped Thai", "Thonburi", "Tahoma", system-ui, sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -1101,78 +1101,93 @@ html,body{background-color:#e5f8ec!important}
 </style>
 
 <style id="nc3-summary-styles">
-/* V26 — PAGE 3 ONLY: all selectors strictly scoped to #nc3SummaryPage. The existing header, page 1 and page 2 are unchanged. */
-#nc3SummaryPage{max-width:600px;margin:0 auto;min-height:calc(100svh - 220px);margin-top:-9px;padding:0 13px 30px}
+#nc3SummaryPage{font-family:"Mali","Noto Sans Thai","Thonburi",Tahoma,sans-serif}
 #nc3SummaryPage .nc3-panel{background:rgba(255,255,255,.97);border:1px solid #e5f0e9;border-radius:23px;padding:12px 11px 17px;box-shadow:var(--shade);margin-bottom:12px;overflow:hidden}
 #nc3SummaryPage .nc3-switch{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;border-radius:40px;background:#fff;border:1px solid #e2eee7;box-shadow:0 3px 11px #2c78550b;margin-bottom:9px}
-#nc3SummaryPage .nc3-switch button{min-height:43px;border:0;border-radius:34px;background:transparent;font-size:14px;font-weight:800;color:#85968f;display:flex;gap:8px;align-items:center;justify-content:center}
-#nc3SummaryPage .nc3-switch button svg{width:19px;height:19px}
+#nc3SummaryPage .nc3-switch button{min-height:43px;border:0;border-radius:34px;background:transparent;font-size:15px;font-weight:700;color:#85968f;display:flex;gap:8px;align-items:center;justify-content:center}
+#nc3SummaryPage .nc3-switch button svg{width:20px;height:20px}
 #nc3SummaryPage .nc3-switch button[aria-pressed="true"]{color:white;background:linear-gradient(110deg,#1ea084,#51c3a6);box-shadow:0 5px 13px #1d967c33}
-#nc3SummaryPage .nc3-period{display:flex;gap:9px;justify-content:center;align-items:center;margin:0 0 3px}
-#nc3SummaryPage .nc3-period button{flex:none;border-radius:50%;width:35px;height:35px;display:grid;place-items:center;border:1px solid #e0ece5;background:white;color:#2f6f60;box-shadow:0 2px 5px #3e806516}
-#nc3SummaryPage .nc3-period select{height:38px;max-width:220px;min-width:0;text-align:center;text-align-last:center;background:white;color:#224e47;border:1px solid #e0eee5;border-radius:22px;padding:0 29px 0 15px;font-size:14px;font-weight:850;box-shadow:0 3px 9px #235e4410}
+#nc3SummaryPage .nc3-period{display:flex;gap:12px;justify-content:center;align-items:center;margin:0 0 4px}
+#nc3SummaryPage .nc3-period button{flex:none;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;border:1px solid #e0ece5;background:white;color:#2f6f60;box-shadow:0 2px 5px #3e806516}
+#nc3SummaryPage .nc3-period select{height:40px;max-width:220px;min-width:0;text-align:center;text-align-last:center;background:white;color:#224e47;border:1px solid #e0eee5;border-radius:22px;padding:0 34px 0 16px;font-size:14px;font-weight:700;box-shadow:0 3px 9px #235e4410}
 #nc3SummaryPage .nc3-period button svg{width:18px;height:18px}
-#nc3SummaryPage .nc3-section{background:white;border:1px solid #e8f0e9;border-radius:17px;padding:12px 10px 11px;box-shadow:0 4px 12px #36785709;margin-top:10px;overflow:hidden}
-#nc3SummaryPage .nc3-title{display:flex;gap:8px;align-items:center;font-size:14px;line-height:1.35;font-weight:900;color:#284d46;margin-bottom:10px}
-#nc3SummaryPage .nc3-title small{display:block;font-size:10px;line-height:1.35;color:#94a39e;font-weight:600;margin-top:2px}
-#nc3SummaryPage .nc3-title svg{width:23px;height:23px;color:#279b80;flex:none}
+#nc3SummaryPage .nc3-section{background:white;border:1px solid #e8f0e9;border-radius:18px;padding:12px 10px 11px;box-shadow:0 4px 12px #36785709;margin-top:10px;overflow:hidden}
+#nc3SummaryPage .nc3-title{display:flex;gap:8px;align-items:center;font-size:14px;line-height:1.35;font-weight:700;color:#284d46;margin-bottom:10px}
+#nc3SummaryPage .nc3-title small{display:block;font-size:10px;line-height:1.35;color:#94a39e;font-weight:500;margin-top:2px}
+#nc3SummaryPage .nc3-title svg{width:24px;height:24px;flex:none}
 #nc3SummaryPage .nc3-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-#nc3SummaryPage .nc3-metric{border-radius:13px;min-width:0;min-height:101px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 2px;gap:2px}
-#nc3SummaryPage .nc3-metric svg{width:23px;height:23px;stroke-width:2.2}
-#nc3SummaryPage .nc3-metric .nc3-metric-label{font-size:9.5px;font-weight:800;white-space:nowrap}
-#nc3SummaryPage .nc3-metric strong{font-size:21px;color:#294b44;line-height:1.3;font-weight:900;white-space:nowrap}
-#nc3SummaryPage .nc3-metric small{font-size:9px;color:#80958b}
+#nc3SummaryPage .nc3-metric{border-radius:13px;min-width:0;min-height:101px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 4px;gap:2px}
+#nc3SummaryPage .nc3-metric svg{width:23px;height:23px}
+#nc3SummaryPage .nc3-metric .nc3-metric-label{font-size:10px;font-weight:700;white-space:nowrap}
+#nc3SummaryPage .nc3-metric strong{font-size:clamp(16px,5vw,20px);color:#294b44;line-height:1.15;font-weight:700;white-space:nowrap;letter-spacing:-.02em}
+#nc3SummaryPage .nc3-metric small{font-size:9px;color:#80958b;line-height:1.25}
 #nc3SummaryPage .nc3-metric.mint{background:linear-gradient(135deg,#e1faf3,#f2fffb);color:#199d81}
 #nc3SummaryPage .nc3-metric.pink{background:linear-gradient(135deg,#fff0f5,#ffe7ee);color:#d64c7e}
 #nc3SummaryPage .nc3-metric.purple{background:linear-gradient(135deg,#f0e8ff,#f9f6ff);color:#9562d4}
 #nc3SummaryPage .nc3-metric.yellow{background:linear-gradient(135deg,#fff4cf,#fffbea);color:#efa931}
-#nc3SummaryPage .nc3-report-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #e8eeeb;border-radius:10px;overflow:hidden;font-size:10px}
-#nc3SummaryPage .nc3-report-table th{background:#edf8f2;color:#60796e;font-size:9.5px;font-weight:800;padding:7px 3px;border-bottom:1px solid #dfebe4}
+#nc3SummaryPage .nc3-report-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border:1px solid #e8eeeb;border-radius:12px;overflow:hidden;font-size:10px}
+#nc3SummaryPage .nc3-report-table th{background:#edf8f2;color:#60796e;font-size:10px;font-weight:700;padding:8px 4px;border-bottom:1px solid #dfebe4}
 #nc3SummaryPage .nc3-report-table th:first-child{width:36%}
 #nc3SummaryPage .nc3-report-table th:nth-child(2){width:14%}
-#nc3SummaryPage .nc3-report-table th:nth-child(3){width:27%}
-#nc3SummaryPage .nc3-report-table th:nth-child(4){width:23%}
-#nc3SummaryPage .nc3-report-table td{padding:5px 3px;text-align:center;border-bottom:1px solid #ecf2ee;color:#36534a;height:32px;font-variant-numeric:tabular-nums}
+#nc3SummaryPage .nc3-report-table th:nth-child(3){width:25%}
+#nc3SummaryPage .nc3-report-table th:nth-child(4){width:25%}
+#nc3SummaryPage .nc3-report-table td{padding:6px 4px;text-align:center;border-bottom:1px solid #ecf2ee;color:#36534a;height:34px;font-variant-numeric:tabular-nums;vertical-align:middle}
 #nc3SummaryPage .nc3-report-table tr:last-child td{border-bottom:0}
-#nc3SummaryPage .nc3-tag{display:flex;align-items:center;gap:4px;border-radius:7px;min-width:0;max-width:100%;padding:5px 4px;white-space:nowrap;overflow:hidden;font-size:9.5px;font-weight:800}
-#nc3SummaryPage .nc3-tag span{overflow:hidden;text-overflow:ellipsis}
-#nc3SummaryPage .nc3-tag svg{width:13px;height:13px;flex:none}
+#nc3SummaryPage .nc3-tag{position:relative;display:flex;align-items:center;justify-content:center;border-radius:999px;min-width:0;max-width:100%;padding:8px 10px 8px 30px;white-space:nowrap;overflow:hidden;font-size:9.8px;font-weight:700;line-height:1.1;color:#274d43}
+#nc3SummaryPage .nc3-tag-text{overflow:hidden;text-overflow:ellipsis;text-align:center;width:100%}
+#nc3SummaryPage .nc3-tag-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:16px;height:16px;display:grid;place-items:center}
+#nc3SummaryPage .nc3-tag-icon svg{width:15px;height:15px}
 #nc3SummaryPage .nc3-progress{height:9px;flex:1;background:#edf0f0;border-radius:15px;overflow:hidden}
 #nc3SummaryPage .nc3-progress>i{display:block;height:100%;border-radius:10px;min-width:0}
 #nc3SummaryPage .nc3-proprow{display:flex;gap:4px;align-items:center;justify-content:flex-end}
-#nc3SummaryPage .nc3-proprow em{min-width:23px;font-style:normal;color:#758a84;font-size:9px}
-#nc3SummaryPage .nc3-chart-grid{display:grid;grid-template-columns:1.08fr 1fr;gap:9px;margin-top:10px;align-items:stretch}
+#nc3SummaryPage .nc3-proprow em{min-width:24px;font-style:normal;color:#758a84;font-size:9px}
+#nc3SummaryPage .nc3-chart-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:9px;margin-top:10px;align-items:stretch}
 #nc3SummaryPage .nc3-chart-grid .nc3-section{margin-top:0;min-width:0}
-#nc3SummaryPage .nc3-chart-grid .nc3-title{font-size:11px;gap:4px;align-items:flex-start}
-#nc3SummaryPage .nc3-chart-grid .nc3-title svg{width:18px;height:18px}
-#nc3SummaryPage .nc3-barplot{display:flex;justify-content:space-between;align-items:flex-end;height:132px;gap:3px;border-bottom:1px solid #cadbd1;padding:8px 1px 0;position:relative}
-#nc3SummaryPage .nc3-barplot:before{content:"";position:absolute;inset:42% 0 auto;height:1px;background:#eff5f1}
-#nc3SummaryPage .nc3-barcol{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0;position:relative}
-#nc3SummaryPage .nc3-barval{font-size:8px;color:#2c9477;font-weight:850;text-align:center;white-space:nowrap;margin-bottom:3px}
-#nc3SummaryPage .nc3-bar{border-radius:7px 7px 0 0;width:min(90%,30px);min-height:2px;background:linear-gradient(#6ed3b4,#c3efcf)}
-#nc3SummaryPage .nc3-barcol:nth-child(2n) .nc3-bar{background:linear-gradient(#61cbb0,#92dbc2)}
-#nc3SummaryPage .nc3-barlabels{display:flex;gap:3px;justify-content:space-between;margin-top:5px}
-#nc3SummaryPage .nc3-barlabels small{flex:1;min-width:0;text-align:center;color:#6e867b;font-size:8px;line-height:1.25}
+#nc3SummaryPage .nc3-chart-grid .nc3-title{font-size:11px;gap:6px;align-items:flex-start;margin-bottom:8px}
+#nc3SummaryPage .nc3-chart-grid .nc3-title svg{width:20px;height:20px}
+#nc3SummaryPage .nc3-chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+#nc3SummaryPage .nc3-more-link{border:0;background:none;color:#46b491;font-size:10px;font-weight:700;padding:0;white-space:nowrap}
+#nc3SummaryPage .nc3-barplot{display:block;position:relative;padding:6px 0 0}
+#nc3SummaryPage .nc3-bars-card{display:grid;grid-template-columns:46px 1fr;gap:8px;align-items:stretch}
+#nc3SummaryPage .nc3-yaxis{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;color:#93a4a0;font-size:8px;padding-top:10px;padding-bottom:32px}
+#nc3SummaryPage .nc3-yaxis span{line-height:1}
+#nc3SummaryPage .nc3-plot-area{position:relative;border-left:1px solid #d7e3dc;border-bottom:1px solid #d7e3dc;min-height:178px;padding:10px 4px 0}
+#nc3SummaryPage .nc3-gridline{position:absolute;left:0;right:0;height:1px;background:#edf4f0}
+#nc3SummaryPage .nc3-gridline.g1{top:25%}
+#nc3SummaryPage .nc3-gridline.g2{top:50%}
+#nc3SummaryPage .nc3-gridline.g3{top:75%}
+#nc3SummaryPage .nc3-bars{position:relative;height:150px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+#nc3SummaryPage .nc3-barcol{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+#nc3SummaryPage .nc3-barval{font-size:8px;color:#159577;font-weight:700;text-align:center;white-space:nowrap;margin-bottom:8px}
+#nc3SummaryPage .nc3-bar{border-radius:16px 16px 0 0;width:min(86%,72px);min-height:3px;background:linear-gradient(180deg,#71dfc0 0%,#8ae1cb 45%,#7bdcc1 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+#nc3SummaryPage .nc3-barcol:nth-child(2) .nc3-bar{background:linear-gradient(180deg,#58d3ba 0%,#72dfc8 50%,#5fd3c1 100%)}
+#nc3SummaryPage .nc3-barcol:nth-child(4) .nc3-bar{background:linear-gradient(180deg,#a7e3a1 0%,#baeab3 50%,#a8e2a4 100%)}
+#nc3SummaryPage .nc3-weeks{display:flex;justify-content:space-between;gap:10px;padding-top:10px}
+#nc3SummaryPage .nc3-week{flex:1;min-width:0;text-align:center;color:#456257}
+#nc3SummaryPage .nc3-week-label{font-size:9px;font-weight:700;line-height:1.2}
+#nc3SummaryPage .nc3-week-dates{display:block;font-size:8px;color:#6f8479;line-height:1.25;margin-top:3px;white-space:pre-line}
+#nc3SummaryPage .nc3-barlabels{display:none}
 #nc3SummaryPage .nc3-donut{width:118px;height:118px;max-width:95%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;margin:3px auto 6px;background:conic-gradient(#eaf0ec 0 100%)}
 #nc3SummaryPage .nc3-donut-core{background:white;border-radius:50%;width:64%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:5px;box-shadow:inset 0 0 0 1px #f1f5f2}
-#nc3SummaryPage .nc3-donut-core strong{font-size:13px;font-weight:900;white-space:nowrap}
+#nc3SummaryPage .nc3-donut-core strong{font-size:13px;font-weight:700;white-space:nowrap}
 #nc3SummaryPage .nc3-donut-core span{font-size:8px;color:#889b92}
-#nc3SummaryPage .nc3-legend{display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:8px;color:#49645a}
+#nc3SummaryPage .nc3-legend{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:8px;color:#49645a}
 #nc3SummaryPage .nc3-legend>div{display:flex;align-items:center;gap:4px;min-width:0}
-#nc3SummaryPage .nc3-legend i{width:7px;height:7px;border-radius:2px;flex:none}
+#nc3SummaryPage .nc3-legend i{width:8px;height:8px;border-radius:2px;flex:none}
 #nc3SummaryPage .nc3-legend span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
 #nc3SummaryPage .nc3-legend b{color:#627b6c}
-#nc3SummaryPage .nc3-year-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-#nc3SummaryPage .nc3-month-card{border:1px solid #dcefe5;border-radius:10px;background:linear-gradient(135deg,#f0fcf7,#ecfaf5);padding:9px 5px;text-align:center;min-width:0;color:#2f5d4e;display:flex;flex-direction:column;gap:2px;align-items:center}
-#nc3SummaryPage .nc3-month-card svg{width:15px;height:15px;color:#43b998}
-#nc3SummaryPage .nc3-month-card strong{font-size:11px}
-#nc3SummaryPage .nc3-month-card small{font-size:9px}
-#nc3SummaryPage .nc3-month-card b{font-size:10px;color:#2a9676;white-space:nowrap}
+#nc3SummaryPage .nc3-year-grid{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 5*6px)/6);gap:6px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x proximity;scrollbar-width:none}
+#nc3SummaryPage .nc3-year-grid::-webkit-scrollbar{display:none}
+#nc3SummaryPage .nc3-month-card{scroll-snap-align:start;border:1px solid #dcefe5;border-radius:10px;background:linear-gradient(135deg,#f0fcf7,#ecfaf5);padding:9px 5px;text-align:center;min-width:0;color:#2f5d4e;display:flex;flex-direction:column;gap:1px;align-items:center;justify-content:center;min-height:78px}
+#nc3SummaryPage .nc3-month-card svg{width:15px;height:15px}
+#nc3SummaryPage .nc3-month-card strong{font-size:11px;font-weight:700}
+#nc3SummaryPage .nc3-month-card small{font-size:9px;line-height:1.2}
+#nc3SummaryPage .nc3-month-card b{font-size:9px;color:#2a9676;white-space:nowrap;font-weight:700}
 #nc3SummaryPage .nc3-month-card[aria-current="true"]{border-color:#56b697;box-shadow:0 0 0 1px #56b697 inset}
 #nc3SummaryPage .nc3-note{background:#f5fbf8;border-radius:10px;padding:8px 9px;color:#73887e;font-size:10px;line-height:1.6;margin:10px 0 0}
 #nc3SummaryPage .nc3-note strong{color:#29795e}
 #nc3SummaryPage .nc3-empty{color:#a0aaa6;text-align:center;padding:14px 4px;font-size:11px}
-@media(max-width:360px){#nc3SummaryPage .nc3-panel{padding:10px 9px}#nc3SummaryPage .nc3-metrics{gap:4px}#nc3SummaryPage .nc3-metric{min-height:95px}#nc3SummaryPage .nc3-metric-label{font-size:8px}#nc3SummaryPage .nc3-metric strong{font-size:18px}#nc3SummaryPage .nc3-chart-grid{gap:6px}#nc3SummaryPage .nc3-section{padding:9px 7px}#nc3SummaryPage .nc3-report-table th,#nc3SummaryPage .nc3-report-table td{padding-left:2px;padding-right:2px}}
+@media(max-width:360px){#nc3SummaryPage .nc3-panel{padding:10px 9px}#nc3SummaryPage .nc3-metrics{gap:4px}#nc3SummaryPage .nc3-metric{min-height:95px}#nc3SummaryPage .nc3-metric strong{font-size:16px}#nc3SummaryPage .nc3-chart-grid{gap:6px}#nc3SummaryPage .nc3-section{padding:9px 7px}#nc3SummaryPage .nc3-report-table th,#nc3SummaryPage .nc3-report-table td{padding-left:2px;padding-right:2px}#nc3SummaryPage .nc3-bars-card{grid-template-columns:38px 1fr}#nc3SummaryPage .nc3-yaxis{font-size:7px}#nc3SummaryPage .nc3-week-label{font-size:8px}#nc3SummaryPage .nc3-week-dates{font-size:7px}}
 </style>
 </head>
 <body>
@@ -1262,7 +1277,7 @@ html,body{background-color:#e5f8ec!important}
     <div class="nc3-period"><button type="button" id="nc3Previous" aria-label="ก่อนหน้า"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><select id="nc3PeriodSelect" aria-label="เลือกเดือนหรือปี"></select><button type="button" id="nc3Next" aria-label="ถัดไป"><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button></div>
     <section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 10h8M8 14h8M8 18h5"/></svg><span id="nc3OverviewTitle">ภาพรวมเดือนตุลาคม 2569<small>สรุปจากเวรที่บันทึกไว้ในปฏิทิน</small></span></div><div class="nc3-metrics" id="nc3Metrics"></div></section>
     <section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h8"/></svg><span>สรุปจำนวนเวรและรายได้ แยกตามประเภท<small>รายการขาย/ส่งต่อไม่นับรวมในรายได้</small></span></div><table class="nc3-report-table"><thead><tr><th>ประเภทเวร</th><th>ครั้ง</th><th>รายได้ (บาท)</th><th>สัดส่วน</th></tr></thead><tbody id="nc3TableBody"></tbody></table><p class="nc3-note" id="nc3RateNote"></p></section>
-    <div class="nc3-chart-grid"><section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="5" y="12" width="3" height="9" rx="1"/><rect x="11" y="7" width="3" height="14" rx="1"/><rect x="17" y="3" width="3" height="18" rx="1"/></svg><span id="nc3BarsTitle">รายได้รายสัปดาห์<small>สรุปจากรายได้ที่กำหนดค่าเวรแล้ว</small></span></div><div class="nc3-barplot" id="nc3Barplot"></div><div class="nc3-barlabels" id="nc3Barlabels"></div></section><section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M13 3a8 8 0 0 1 8 8h-8z"/></svg><span>สัดส่วนรายได้<small>ตามประเภทเวร</small></span></div><div class="nc3-donut" id="nc3Donut"><div class="nc3-donut-core"><strong id="nc3DonutTotal">—</strong><span>รายได้ที่คำนวณได้</span></div></div><div class="nc3-legend" id="nc3Legend"></div></section></div>
+    <div class="nc3-chart-grid"><section class="nc3-section"><div class="nc3-chart-head"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="4" height="9" rx="2" fill="#76dfc0" stroke="#28b08d" stroke-width="1.5"/><rect x="10" y="6" width="4" height="14" rx="2" fill="#68d8bb" stroke="#28b08d" stroke-width="1.5"/><rect x="16" y="3" width="4" height="17" rx="2" fill="#b5e9aa" stroke="#53bb7e" stroke-width="1.5"/></svg><span id="nc3BarsTitle">รายได้รายสัปดาห์<small>สรุปจากรายได้ที่กำหนดค่าเวรแล้ว</small></span></div><button type="button" class="nc3-more-link" aria-label="ดูเพิ่มเติม">ดูเพิ่มเติม ›</button></div><div class="nc3-barplot" id="nc3Barplot"></div><div class="nc3-barlabels" id="nc3Barlabels"></div></section><section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M13 3a8 8 0 0 1 8 8h-8z"/></svg><span>สัดส่วนรายได้<small>ตามประเภทเวร</small></span></div><div class="nc3-donut" id="nc3Donut"><div class="nc3-donut-core"><strong id="nc3DonutTotal">—</strong><span>รายได้ที่คำนวณได้</span></div></div><div class="nc3-legend" id="nc3Legend"></div></section></div>
     <section class="nc3-section"><div class="nc3-title"><svg viewBox="0 0 24 24"><rect x="5" y="12" width="3" height="9" rx="1"/><rect x="11" y="7" width="3" height="14" rx="1"/><rect x="17" y="3" width="3" height="18" rx="1"/></svg><span id="nc3YearTitle">ภาพรวมรายปี 2569<small>สรุปรายเดือนที่มีข้อมูลบันทึกจริง</small></span></div><div class="nc3-year-grid" id="nc3YearGrid"></div></section>
     <p class="nc3-note">หน้านี้อ่านข้อมูลจากปฏิทินและประเภทเวรเดิมโดยตรง ไม่แก้ข้อมูลต้นฉบับ · หากยังไม่ได้กำหนดค่าเวรหรือชั่วโมง ระบบจะแจ้งยอดที่ยังคำนวณไม่ได้ ไม่ใส่ตัวเลขสมมติ</p>
   </div>
@@ -2177,14 +2192,21 @@ $('nc2Filters').querySelectorAll('[data-nc2-filter]').forEach(b=>b.addEventListe
 
 
 /* V26: read-only summary page; app state and existing save/shift logic remain unchanged. */
+
+const thMonthsShort=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
 const nc3Icons={
- duty:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3"/></svg>',
- money:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h8"/></svg>',
- moon:'<svg viewBox="0 0 24 24"><path d="M19 14.5A8.5 8.5 0 0 1 9.5 5 8.5 8.5 0 1 0 19 14.5Z"/></svg>',
- holiday:'<svg viewBox="0 0 24 24"><path d="m12 2.5 2.8 6 6.5.8-4.7 4.5 1 6.5-5.6-3-5.6 3 1-6.5L2.7 9.3l6.5-.8z"/></svg>',
- bar:'<svg viewBox="0 0 24 24"><path d="M5 20v-6M10 20V9M15 20V4M20 20v-9"/></svg>'
+ duty:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="4" fill="#efe4ff" stroke="#9c6ce0" stroke-width="1.8"/><path d="M8 3v4M16 3v4M7 10h10M8 14h5" stroke="#8e5add" stroke-width="1.8" stroke-linecap="round"/></svg>',
+ money:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="4" fill="#ffe8f1" stroke="#de5e8d" stroke-width="1.8"/><path d="M9 9h6M9 13h6M9 17h4" stroke="#d54880" stroke-width="1.8" stroke-linecap="round"/></svg>',
+ moon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.8 4.9a7.8 7.8 0 1 0 3.3 11 7 7 0 1 1-3.3-11Z" fill="#f8d7ea" stroke="#d75a96" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+ holiday:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.2 2.6 5.3 5.8.8-4.2 4 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4 5.8-.8z" fill="#ffe8a8" stroke="#f1a029" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+ bar:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="4" height="9" rx="2" fill="#76dfc0" stroke="#28b08d" stroke-width="1.5"/><rect x="10" y="6" width="4" height="14" rx="2" fill="#68d8bb" stroke="#28b08d" stroke-width="1.5"/><rect x="16" y="3" width="4" height="17" rx="2" fill="#b5e9aa" stroke="#53bb7e" stroke-width="1.5"/></svg>',
+ sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="#ffe59a" stroke="#f0a626" stroke-width="1.8"/><path d="M12 3.2v2.3M12 18.5v2.3M4.6 12h2.3M17.1 12h2.3M6.9 6.9l1.6 1.6M15.5 15.5l1.6 1.6M17.1 6.9l-1.6 1.6M8.5 15.5l-1.6 1.6" stroke="#f0a626" stroke-width="1.8" stroke-linecap="round"/></svg>',
+ steth:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v4a4 4 0 1 0 8 0V4" fill="#dff1ff" stroke="#4d98e8" stroke-width="1.8"/><path d="M11 12v2.5a4 4 0 0 0 8 0v-1.5a2 2 0 1 0-2 2" stroke="#3d8fe3" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>'
 };
 const nc3ShortMoney=n=>Number(n).toLocaleString('th-TH',{minimumFractionDigits:0,maximumFractionDigits:2});
+function nc3TypeKey(s){const t=((s?.name||'')+' '+(s?.id||'')).toLowerCase();if(/sdmc/.test(t))return 'sdmc';if(/extra/.test(t))return 'extra';if(/ot/.test(t))return 'ot';if(/เวร2|\(บ\)|บ่าย/.test(t))return 'day';return 'duty';}
+function nc3TypeIcon(s){const key=nc3TypeKey(s);if(key==='sdmc')return nc3Icons.steth;if(key==='extra')return nc3Icons.holiday;if(key==='ot')return nc3Icons.moon;if(key==='day')return nc3Icons.sun;return nc3Icons.duty;}
+function nc3MoneyBaht(n){return '฿'+Number(n).toLocaleString('en-US');}
 let nc3Visible=false,nc3Mode='month',nc3Date=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
 function nc3IsOT(s){return /ot/i.test(s.name||'')||/^ot/i.test(s.id||'');}
 function nc3Summarize(year,month=null){
@@ -2240,24 +2262,27 @@ function nc3Render(){
  $('nc3TableBody').innerHTML=groups.length?groups.map(g=>{
  const proportion=(g.count/count*100);
  const price=g.missing?`฿${nc3ShortMoney(g.sum)}+`:`฿${nc3ShortMoney(g.sum)}`;
- return `<tr><td><div class="nc3-tag" style="background:${esc(pastel(g.s.color))};color:#32574f">${nc3Icons[nc3IsOT(g.s)?'moon':'duty']}<span>${esc(g.s.name)}</span></div></td><td>${g.count}</td><td title="${g.missing?'ยังมีรายการที่ไม่กำหนดอัตรา':''}">${price}</td><td><div class="nc3-proprow"><span class="nc3-progress"><i style="width:${proportion.toFixed(1)}%;background:${esc(pastel(g.s.color))}"></i></span><em>${Math.round(proportion)}%</em></div></td></tr>`;
+ return `<tr><td><div class="nc3-tag" style="background:${esc(pastel(g.s.color))};color:#32574f"><span class="nc3-tag-icon">${nc3TypeIcon(g.s)}</span><span class="nc3-tag-text">${esc(g.s.name)}</span></div></td><td>${g.count}</td><td title="${g.missing?'ยังมีรายการที่ไม่กำหนดอัตรา':''}">${price}</td><td><div class="nc3-proprow"><span class="nc3-progress"><i style="width:${proportion.toFixed(1)}%;background:${esc(pastel(g.s.color))}"></i></span><em>${Math.round(proportion)}%</em></div></td></tr>`;
  }).join(''):'<tr><td colspan="4" class="nc3-empty">ยังไม่มีการบันทึกเวรในช่วงนี้</td></tr>';
  $('nc3RateNote').innerHTML=report.missing.length?`<strong>รายได้ยังไม่ครบ:</strong> มี ${report.missing.length} รายการที่ยังไม่กำหนดค่าเวรหรือชั่วโมง กำหนดได้ที่หน้า “ประเภทเวร”`:'คำนวณเฉพาะรายการที่กำหนดอัตราจ่ายแล้ว โดยเวรขาย/ส่งต่อไม่นับเงิน';
  // Monthly weekly chart, annual monthly chart.
  const bars=[];
- if(whole){for(let m=0;m<12;m++){const data=nc3Summarize(year,m);bars.push({label:thMonths[m].slice(0,3)+'.',value:data.sum})}}
- else{const n=new Date(year,month+1,0).getDate();for(let start=1;start<=n;start+=7){const end=Math.min(start+6,n);let amount=0;for(const x of report.known){const d=Number(x.day.slice(8,10));if(d>=start&&d<=end)amount+=x.pay;}bars.push({label:`${start}–${end}`,value:amount})}}
- $('nc3BarsTitle').innerHTML=`${whole?'รายได้รายเดือน':'รายได้รายสัปดาห์'}<small>${whole?'สรุปยอดรายเดือน':'สัปดาห์ของ'+thMonths[month]} (ยอดที่คำนวณได้)</small>`;
- const max=Math.max(1,...bars.map(b=>b.value));
- $('nc3Barplot').innerHTML=bars.map(b=>`<div class="nc3-barcol"><span class="nc3-barval">${b.value?nc3ShortMoney(b.value):'–'}</span><div class="nc3-bar" style="height:${b.value?Math.max(3,Math.round(b.value/max*96)):2}px"></div></div>`).join('');
- $('nc3Barlabels').innerHTML=bars.map(b=>`<small>${esc(b.label)}</small>`).join('');
+ if(whole){for(let m=0;m<12;m++){const data=nc3Summarize(year,m);bars.push({label:thMonthsShort[m],sub:`${m+1} / ${year+543}`,value:data.sum})}}
+ else{const n=new Date(year,month+1,0).getDate();let weekNo=1;for(let start=1;start<=n;start+=7){const end=Math.min(start+6,n);let amount=0;for(const x of report.known){const d=Number(x.day.slice(8,10));if(d>=start&&d<=end)amount+=x.pay;}bars.push({label:`สัปดาห์ ${weekNo++}`,sub:`${start} - ${end} ${thMonthsShort[month]}`,value:amount})}}
+ $('nc3BarsTitle').innerHTML=`${whole?'รายได้รายเดือน':'รายได้รายสัปดาห์'}<small>${whole?'สรุปยอดรายเดือน':'('+thMonths[month]+' '+(year+543)+')'}</small>`;
+ const chartTop=Math.max(15000,Math.ceil(Math.max(1,...bars.map(b=>b.value))/5000)*5000);
+ const ticks=[chartTop,chartTop*2/3,chartTop/3,0].map(v=>Math.round(v/1000)*1000);
+ const weeksHtml=bars.map((b,i)=>`<div class="nc3-week"><div class="nc3-week-label">${esc(b.label)}</div><small class="nc3-week-dates">${esc(b.sub||'')}</small></div>`).join('');
+ const barsHtml=bars.map((b,i)=>`<div class="nc3-barcol"><span class="nc3-barval">${b.value?nc3MoneyBaht(b.value):'฿0'}</span><div class="nc3-bar" style="height:${b.value?Math.max(3,Math.round(b.value/chartTop*125)):3}px"></div></div>`).join('');
+ $('nc3Barplot').innerHTML=`<div class="nc3-bars-card"><div class="nc3-yaxis"><span>${ticks[0].toLocaleString('en-US')}</span><span>${ticks[1].toLocaleString('en-US')}</span><span>${ticks[2].toLocaleString('en-US')}</span><span>${ticks[3].toLocaleString('en-US')}</span></div><div class="nc3-plot-area"><span class="nc3-gridline g1"></span><span class="nc3-gridline g2"></span><span class="nc3-gridline g3"></span><div class="nc3-bars">${barsHtml}</div><div class="nc3-weeks">${weeksHtml}</div></div></div>`;
+ $('nc3Barlabels').innerHTML='';
  const slices=groups.filter(g=>g.sum>0),total=slices.reduce((t,g)=>t+g.sum,0);let at=0;
  const gradient=slices.map(g=>{const start=at;at+=g.sum/total*100;return `${esc(pastel(g.s.color))} ${start.toFixed(2)}% ${at.toFixed(2)}%`}).join(',');
  $('nc3Donut').style.background=total?`conic-gradient(${gradient})`:'conic-gradient(#eaf0ec 0 100%)';
  $('nc3DonutTotal').textContent=total?`฿${nc3ShortMoney(total)}`:'฿0';
  $('nc3Legend').innerHTML=slices.length?slices.slice(0,8).map(g=>`<div><i style="background:${esc(pastel(g.s.color))}"></i><span>${esc(g.s.name)}</span><b>${Math.round(g.sum/total*100)}%</b></div>`).join(''):'<div style="grid-column:1/-1;color:#91a29a">ยังไม่มีรายได้ที่คำนวณได้</div>';
  $('nc3YearTitle').innerHTML=`ภาพรวมรายปี ${year+543}<small>เลือกเดือนเพื่อดูสรุปรายเดือนอย่างละเอียด</small>`;
- $('nc3YearGrid').innerHTML=Array.from({length:12},(_,m)=>{const d=nc3Summarize(year,m);return `<button type="button" class="nc3-month-card" data-nc3-month="${m}" aria-current="${String(!whole&&m===month)}">${nc3Icons.bar}<strong>${thMonths[m].slice(0,3)}.</strong><small>${d.items.length} เวร</small><b>${d.missing.length?'฿'+nc3ShortMoney(d.sum)+'+':'฿'+nc3ShortMoney(d.sum)}</b></button>`}).join('');
+ $('nc3YearGrid').innerHTML=Array.from({length:12},(_,m)=>{const d=nc3Summarize(year,m);return `<button type="button" class="nc3-month-card" data-nc3-month="${m}" aria-current="${String(!whole&&m===month)}">${nc3Icons.bar}<strong>${thMonthsShort[m]}</strong><small>${d.items.length} เวร</small><b>${d.missing.length?'฿'+nc3ShortMoney(d.sum)+'+':'฿'+nc3ShortMoney(d.sum)}</b></button>`}).join('');
  $('nc3YearGrid').querySelectorAll('[data-nc3-month]').forEach(btn=>btn.addEventListener('click',()=>{nc3Date=new Date(year,Number(btn.dataset.nc3Month),1);nc3Mode='month';nc3Render();window.scrollTo({top:0,behavior:'instant'});}));
 }
 $('nc3MonthlyBtn').addEventListener('click',()=>{nc3Mode='month';nc3Render()});
