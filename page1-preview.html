@@ -1060,6 +1060,45 @@ html,body{background-color:#e5f8ec!important}
  .nc2-mini-button{width:23px;height:24px}
 }
 </style>
+
+<style id="nc-v25-types-layout-only">
+/* V25 — Page 2 presentation ONLY; calendar, editor, storage & handlers unchanged. */
+/* Bring the section title and Add button closer to the top edge of their card. */
+.nc2-panel{padding-top:7px}
+.nc2-heading-row{margin-bottom:13px;min-height:46px}
+.nc2-summary{margin-bottom:13px}
+.nc2-search-wrap{margin-bottom:9px}
+.nc2-filters{padding-bottom:5px}
+/* Every duty row has a consistent one-line, six-column rhythm. */
+.nc2-list{gap:7px}
+@media (max-width:539px){
+ .nc2-row{
+   grid-template-columns:30px minmax(0,1.03fr) minmax(0,.85fr) minmax(0,1.20fr) minmax(0,1.05fr) 55px;
+   column-gap:4px;
+   align-items:center;
+   min-height:56px;
+   padding:7px 6px;
+ }
+ .nc2-color-square{align-self:center}
+ .nc2-text,.nc2-chip,.nc2-meta,.nc2-actions-right{align-self:center}
+ .nc2-metadata{margin:0}
+ .nc2-actions-right{gap:3px}
+}
+@media (max-width:355px){
+ .nc2-panel{padding-top:7px}
+ .nc2-row{grid-template-columns:25px minmax(0,1.05fr) minmax(0,.84fr) minmax(0,1.22fr) minmax(0,1fr) 49px;column-gap:3px;min-height:54px;padding:7px 4px}
+}
+/* Four evenly sized pastel cards per row — same duty order and colors as before. */
+.nc2-previewline{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.nc2-previewchip{min-width:0;min-height:34px;padding:6px 3px;justify-content:center;gap:0;border-radius:9px}
+.nc2-previewchip i{display:none}
+.nc2-previewchip span{display:block;min-width:0;width:100%;text-align:center;font-size:9.5px;line-height:1.25}
+@media (max-width:355px){
+ .nc2-previewline{gap:4px}
+ .nc2-previewchip{padding:5px 2px}
+ .nc2-previewchip span{font-size:8px}
+}
+</style>
 </head>
 <body>
   <div class="app-shell" id="appShell">
