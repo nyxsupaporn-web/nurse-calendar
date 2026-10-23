@@ -158,6 +158,17 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .nc2-mini-button svg{stroke:#328b72;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .nc2-palette-trigger svg{stroke:#aa82cf}
 @media(max-width:380px){.overlay:has(.nc2-edit-container)>.sheet{padding-inline:12px}}
+
+/* V24 — PAGE 2 ONLY: align the outer card with Page 1 and polish SVG controls. */
+.nc2-page{max-width:680px!important;width:100%;padding-left:10px!important;padding-right:10px!important;box-sizing:border-box}
+.nc2-panel{box-sizing:border-box;width:100%;padding-left:9px!important;padding-right:9px!important;border-radius:24px;border-color:#e9f1ed;box-shadow:0 5px 17px #5c9f8520}
+.nc2-heading-icon svg,.nc2-search-wrap svg,.nc2-mini-button svg{stroke-linecap:round;stroke-linejoin:round}
+.nc2-heading-icon svg{stroke:#27886b;fill:#dcf4e9;stroke-width:1.65}
+.nc2-search-wrap svg{stroke:#719c8b;fill:none;stroke-width:1.8}
+.nc2-mini-button{border:1px solid #cfe9dc;background:linear-gradient(150deg,#f1fdf6,#dff5e8);box-shadow:0 1px 3px #70ac9124}
+.nc2-mini-button.nc2-palette-trigger{border-color:#eadcf5;background:linear-gradient(150deg,#fcf6ff,#f2e7fe)}
+.nc2-mini-button svg{stroke-width:1.7}
+@media(min-width:600px){.nc2-page{padding-left:18px!important;padding-right:18px!important}}
 </style>
   <style>
 /* Nurse Calendar — Page 1 reference-match design.
@@ -1924,8 +1935,8 @@ const nc2Palette=['#d7efc9','#ffe6b0','#e4d2fd','#f7d6e3','#bcebf7','#b4d5fc','#
 let nc2Visible=false, nc2Filter='all', nc2Query='';
 const nc2Clock='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
 const nc2Coins='<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v13c0 4 16 4 16 0V5M4 10c0 4 16 4 16 0M4 15c0 4 16 4 16 0"/></svg>';
-const nc2Pencil='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 20 4-.8L20 7.3 16.7 4 4.8 16Z"/><path d="m14.8 6 3.4 3.4"/></svg>';
-const nc2PaletteIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20h2a2 2 0 0 0 2-2c0-1.2-.9-1.7-.9-2.7 0-1.1 1.1-1.7 2.1-1.7h1.4C23 15.6 24 2 12 2Z"/><circle cx="7" cy="10" r="1"/><circle cx="11" cy="6" r="1"/><circle cx="16.5" cy="9" r="1"/></svg>';
+const nc2Pencil='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#267b67" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.3 15.7 5.1a2 2 0 0 1 2.8 0l1 1a2 2 0 0 1 0 2.8L8.3 20.1l-4.6.9z" fill="#a9e9cd"/><path d="m13.6 7.2 3.2 3.2"/><path d="m4 20 2.7-1.2" stroke="#f1aa9f"/></svg>';
+const nc2PaletteIcon='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#8064a4" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2.6a9.4 9.4 0 1 0 0 18.8h2.1a2.25 2.25 0 0 0 2.3-2.3c0-1.4-1.2-1.8-1.2-2.9 0-1.1 1-1.7 2.3-1.7h1.5C23.3 14.5 22.9 2.6 12 2.6Z" fill="#f0e2ff"/><circle cx="7.2" cy="10.6" r="1.6" fill="#f6a4c6" stroke="none"/><circle cx="10.8" cy="6.5" r="1.6" fill="#a2dceb" stroke="none"/><circle cx="16.4" cy="8.6" r="1.6" fill="#f6d17c" stroke="none"/><circle cx="8.6" cy="16.1" r="1.5" fill="#a6dcc5" stroke="none"/></svg>';
 function nc2Category(s){const n=(s.name||'').toUpperCase();return n.includes('SDMC')?'sdmc':n.includes('EXTRA')?'extra':n.includes('OT')?'ot':'shift';}
 function nc2GroupLabel(s){return ({sdmc:'เวร SDMC',extra:'เวรเสริม',ot:'เวร OT',shift:'เวรประจำ'})[nc2Category(s)];}
 function nc2DutiesCount(){return Object.values(state.days||{}).reduce((n,d)=>n+(Array.isArray(d?.shifts)?d.shifts.length:0),0);}
