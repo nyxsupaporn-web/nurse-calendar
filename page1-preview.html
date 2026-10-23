@@ -148,6 +148,16 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 @media(min-width:500px){.hero{height:192px;padding:26px 28px 32px}.brand-logo-wrap{width:119px;height:115px}.brand-logo{width:132px;height:112px}.month-surface{padding:18px}.day-cell{min-height:109px;padding:8px 5px}.day-pill{font-size:11px}.month-title-row h2{font-size:26px}.shift-card{flex-basis:96px}.main-content{padding:0 18px 30px}.surface{margin-bottom:16px}.tab{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
 
+
+/* V23: only the duty-type editor dialog matches the calendar modal width. */
+.overlay:has(.nc2-edit-container){padding-inline:8px}
+.overlay:has(.nc2-edit-container)>.sheet{width:min(760px,100%);max-width:100%;padding-inline:14px;box-sizing:border-box}
+.nc2-edit-container .nc2-input-grid{grid-template-columns:repeat(2,minmax(0,1fr));min-width:0}
+.nc2-edit-container .nc2-field input{font-variant-numeric:tabular-nums}
+/* V23: pastel treatment for existing SVG buttons; no changes to icon behavior. */
+.nc2-mini-button svg{stroke:#328b72;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.nc2-palette-trigger svg{stroke:#aa82cf}
+@media(max-width:380px){.overlay:has(.nc2-edit-container)>.sheet{padding-inline:12px}}
 </style>
   <style>
 /* Nurse Calendar — Page 1 reference-match design.
@@ -1953,7 +1963,8 @@ function nc2SetPage(page){
 }
 function nc2ParseClock(raw,end=false){
  const t=String(raw||'').trim();if(!t)return '';
- const m=/^(\d{1,2}):(\d{2})$/.exec(t);if(!m)return null;
+ const normalized=/^\d{3,4}$/.test(t)?t.padStart(4,'0').replace(/^(\d{2})(\d{2})$/, '$1:$2'):t;
+ const m=/^(\d{1,2}):(\d{2})$/.exec(normalized);if(!m)return null;
  const h=+m[1],minute=+m[2];if(h>24||minute>59||(h===24&&(!end||minute!==0)))return null;
  return `${pad(h)}:${pad(minute)}`;
 }
@@ -1968,7 +1979,7 @@ function nc2EditType(id=null,focusColor=false){
  <p class="nc2-modal-caption">ชื่อ สี เวลาและค่าตอบแทนจะอยู่ในประเภทเวรเดิมที่ใช้ร่วมกับหน้าปฏิทิน</p>
  <label class="nc2-field" for="nc2Name">ชื่อประเภทเวร<input id="nc2Name" type="text" maxlength="35" placeholder="เช่น เวรเช้า / OT พิเศษ" value="${esc(original?.name||'')}" autocomplete="off"></label>
  <div class="nc2-input-grid"><label class="nc2-field" for="nc2Start">เวลาเริ่ม<input id="nc2Start" type="text" inputmode="numeric" maxlength="5" placeholder="08:00" value="${esc(original?.startTime||'')}"></label>
- <label class="nc2-field" for="nc2End">เวลาสิ้นสุด<input id="nc2End" type="text" inputmode="numeric" maxlength="5" placeholder="16:00 หรือ 24:00" value="${esc(original?.endTime||'')}"></label></div>
+ <label class="nc2-field" for="nc2End">เวลาสิ้นสุด<input id="nc2End" type="text" inputmode="numeric" maxlength="5" placeholder="16:00" value="${esc(original?.endTime||'')}"></label></div>
  <p class="nc2-help-text">เวลาเป็นตัวเลือก เช่น 08:00–16:00, 16:00–24:00 หรือข้ามเที่ยงคืนได้</p>
  <div class="nc2-input-grid"><label class="nc2-field" for="nc2Comp">ค่าเวร (บาท)<input id="nc2Comp" type="number" inputmode="decimal" min="0" max="1000000" step="0.5" placeholder="ยังไม่กำหนด" value="${esc(original?.compensation??'')}"></label>
  <label class="nc2-field" for="nc2CompUnit">คิดค่าตอบแทน<select id="nc2CompUnit"><option value="shift" ${original?.compensationUnit!=='hour'?'selected':''}>ต่อเวร</option><option value="hour" ${original?.compensationUnit==='hour'?'selected':''}>ต่อชั่วโมง</option></select></label></div>
@@ -1977,6 +1988,25 @@ function nc2EditType(id=null,focusColor=false){
  <div class="nc2-live-preview"><small>ตัวอย่างการ์ดเวร</small><div id="nc2Live" class="nc2-live-card"></div></div>
  <div class="nc2-actions"><button type="button" id="nc2Cancel">ยกเลิก</button><button type="button" id="nc2Save" class="nc2-save">บันทึกประเภทเวร</button></div>
  ${edit?'<button class="nc2-delete" type="button" id="nc2Delete">ลบประเภทเวร</button>':''}</div>`);
+ // V23: iPhone numeric keyboards omit colon; insert it as the user types.
+ // Keep the original time fields and saving rules; normalize the two inputs only.
+ function nc2FormatTypedTime(raw){
+  const digits=String(raw||'').replace(/\D/g,'').slice(0,4);
+  if(digits.length<=2)return digits;
+  return digits.slice(0,2)+':'+digits.slice(2);
+ }
+ ['nc2Start','nc2End'].forEach(key=>{
+  const field=$(key);
+  field.addEventListener('input',()=>{
+   const before=field.value;
+   const after=nc2FormatTypedTime(before);
+   if(before!==after)field.value=after;
+  });
+  field.addEventListener('blur',()=>{
+   const normalized=nc2ParseClock(field.value,key==='nc2End');
+   if(normalized!==null)field.value=normalized;
+  });
+ });
  function updatePreview(){$('nc2Live').style.setProperty('--nc2-preview',color);$('nc2Live').textContent=$('nc2Name').value.trim()||'ตัวอย่างชื่อเวร';}
  draw();updatePreview();
  $('nc2Picker').addEventListener('input',e=>{color=e.target.value;draw();updatePreview();});
