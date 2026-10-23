@@ -645,6 +645,50 @@ html,body{touch-action:manipulation}
 .v11-notif-empty{padding:20px;text-align:center;background:#f4fbf6;color:#6f9182;border-radius:15px;font-size:13px;line-height:1.8}
 @media(max-width:375px){.v11-bell{right:2%;}.day-pill .v11-sold-prefix{font-size:9px}}
 </style>
+
+<style id="v12-header-manager-scroll-only">
+/* V12-1: Exact existing header artwork, its natural aspect ratio, rounded upper
+   corners as in the supplied reference, and a soft continuation into the page. */
+.hero.restored-header{
+  box-sizing:border-box!important;
+  width:calc(100% - 24px)!important;
+  margin:12px 12px 0!important;
+  height:auto!important;min-height:0!important;max-height:none!important;
+  aspect-ratio:1410 / 420!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:27px 27px 0 0!important;
+  background:#e5f8ec!important;
+}
+.hero.restored-header .restored-header-art{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;top:0!important;left:0!important;
+  width:100%!important;height:100%!important;max-width:none!important;
+  object-fit:fill!important;object-position:center!important;
+  mask-image:none!important;-webkit-mask-image:none!important;
+}
+.hero.restored-header::after{
+  content:''!important;display:block!important;
+  position:absolute!important;z-index:2!important;
+  pointer-events:none!important;left:0!important;right:0!important;bottom:0!important;
+  width:100%!important;height:15%!important;
+  background:linear-gradient(180deg,rgba(229,248,236,0),#e5f8ec)!important;
+  border:0!important;transform:none!important;
+}
+/* Existing reminder bell remains real and accessible, without layout changes. */
+/* V12-2: a manager row is scrollable by swipe; dragging still uses the existing
+   long-press gesture, with the grab handle as a reliable drag-only touch area. */
+#sheetBody:has(#v9ManagerList){
+  overflow-x:hidden!important;overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  overscroll-behavior-y:contain!important;
+}
+#v9ManagerList{touch-action:pan-y!important;min-height:max-content!important}
+#v9ManagerList .v9-manage-row{touch-action:pan-y!important}
+#v9ManagerList .v9-manage-row .v9-handle{touch-action:none!important}
+</style>
 </head>
 <body>
   <div class="app-shell" id="appShell">
