@@ -1251,6 +1251,20 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 #nc3SummaryPage .nc29-donut-layout .nc3-legend i{width:11px;height:11px}
 .add-event-tile{white-space:nowrap}
 .add-event-tile>span:last-child{white-space:nowrap;font-size:clamp(9px,2.5vw,12px)}
+
+/* V30 scoped visual fixes: summary donut, event button, payment-cycle date fields */
+#nc3SummaryPage .nc29-donut-layout{grid-template-columns:minmax(0,1fr) minmax(148px,46%);gap:10px;width:100%;align-items:center}
+#nc3SummaryPage .nc29-donut-layout .nc3-legend{min-width:0;width:100%;gap:8px}
+#nc3SummaryPage .nc29-donut-layout .nc3-legend>div{display:grid;grid-template-columns:11px minmax(0,1fr) 31px;gap:5px;align-items:center}
+#nc3SummaryPage .nc29-donut-layout .nc3-legend b{justify-self:start;text-align:left;font-weight:600}
+#nc3SummaryPage .nc29-donut-layout .nc3-donut{width:100%;max-width:185px;height:auto;aspect-ratio:1;justify-self:center}
+#nc3SummaryPage .nc29-donut-layout .nc3-donut-core strong{font-size:clamp(11px,3vw,15px)}
+#nc3SummaryPage .nc29-cycle-dates{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-right:2px}
+#nc3SummaryPage .nc29-cycle-dates label{display:flex;flex-direction:column;gap:5px;min-width:0;overflow:hidden}
+#nc3SummaryPage .nc29-cycle-dates input{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;font-size:clamp(10px,2.65vw,12px);padding:8px 3px;text-align:center;letter-spacing:-.25px}
+#nc3SummaryPage .nc29-cycle-dates input::-webkit-date-and-time-value{min-width:0;text-align:center}
+.add-event-tile>span:last-child{font-size:12px;font-weight:700;line-height:1.15;letter-spacing:-.2px}
+@media(max-width:380px){#nc3SummaryPage .nc29-donut-layout{grid-template-columns:minmax(0,1fr) minmax(132px,44%);gap:6px}#nc3SummaryPage .nc29-donut-layout .nc3-donut{max-width:160px}.add-event-tile>span:last-child{font-size:11px}}
 </style>
 </head>
 <body>
@@ -2273,6 +2287,13 @@ function nc3TypeIcon(s){const key=nc3TypeKey(s);if(key==='sdmc')return nc3Icons.
 function nc3MoneyBaht(n){return '฿'+Number(n).toLocaleString('en-US');}
 let nc3Visible=false,nc3Mode='month',nc3Date=new Date(viewDate.getFullYear(),viewDate.getMonth(),1);
 let nc29CycleEnabled=false,nc29CycleStart='',nc29CycleEnd='';
+const nc30CycleKey='nurse_calendar_pay_cycle_days_v30';
+let nc30CycleDays=null;
+try {const saved=JSON.parse(localStorage.getItem(nc30CycleKey)||'null');if(saved&&Number.isInteger(saved.start)&&Number.isInteger(saved.end)&&saved.start>=1&&saved.start<=31&&saved.end>=1&&saved.end<=31)nc30CycleDays=saved;}catch(_e){}
+function nc30Date(y,m,d){const first=new Date(y,m,1),yy=first.getFullYear(),mm=first.getMonth();const last=new Date(yy,mm+1,0).getDate();return `${yy}-${pad(mm+1)}-${pad(Math.min(d,last))}`;}
+function nc30Range(y,m){if(!nc30CycleDays)return null;const {start,end}=nc30CycleDays;return start>end?{start:nc30Date(y,m-1,start),end:nc30Date(y,m,end)}:{start:nc30Date(y,m,start),end:nc30Date(y,m,end)};}
+function nc30SaveDays(){if(!nc29CycleStart||!nc29CycleEnd)return;const start=new Date(nc29CycleStart+'T12:00:00'),end=new Date(nc29CycleEnd+'T12:00:00');if(end<start){$('nc29CycleHint').textContent='วันสิ้นสุดต้องไม่ก่อนวันเริ่มต้น';return;}nc30CycleDays={start:start.getDate(),end:end.getDate()};localStorage.setItem(nc30CycleKey,JSON.stringify(nc30CycleDays));$('nc29CycleHint').textContent=`ใช้รอบวันที่ ${nc30CycleDays.start} – ${nc30CycleDays.end} อัตโนมัติทุกเดือน`;}
+
 function nc3IsOT(s){return /ot/i.test(s.name||'')||/^ot/i.test(s.id||'');}
 function nc3Summarize(year,month=null,range=null){
  const items=[];const missing=[];
@@ -2313,8 +2334,8 @@ function nc3Render(){
  const year=nc3Date.getFullYear(),month=nc3Date.getMonth(),whole=nc3Mode==='year';
  $('nc3MonthlyBtn').setAttribute('aria-pressed',String(!whole));$('nc3YearlyBtn').setAttribute('aria-pressed',String(whole));
  nc3SelectUpdate();
- const range=(!whole&&nc29CycleEnabled&&nc29CycleStart&&nc29CycleEnd&&nc29CycleStart<=nc29CycleEnd)?{start:nc29CycleStart,end:nc29CycleEnd}:null;
- $('nc29Cycle').hidden=whole; $('nc29CycleDates').hidden=!nc29CycleEnabled;
+ const range=(!whole&&nc29CycleEnabled&&nc30CycleDays)?nc30Range(year,month):null;
+ $('nc29Cycle').hidden=whole; $('nc29CycleDates').hidden=!nc29CycleEnabled; if(range){$('nc29CycleStart').value=range.start;$('nc29CycleEnd').value=range.end;}
  const report=nc3Summarize(year,whole?null:month,range);
  const period=whole?`ปี ${year+543}`:range?`รอบ ${range.start.split('-').reverse().join('/')} – ${range.end.split('-').reverse().join('/')}`:`เดือน${thMonths[month]} ${year+543}`;
  $('nc3OverviewTitle').innerHTML=`ภาพรวม${period}<small>สรุปจำนวนเวรและรายได้จากข้อมูลที่บันทึกไว้จริง</small>`;
@@ -2349,8 +2370,9 @@ function nc3Render(){
  $('nc3YearGrid').innerHTML=Array.from({length:12},(_,m)=>{const d=nc3Summarize(year,m);return `<button type="button" class="nc3-month-card" data-nc3-month="${m}" aria-current="${String(!whole&&m===month)}">${nc3Icons.bar}<strong>${thMonthsShort[m]}</strong><small>${d.items.length} เวร</small><b>${d.missing.length?'฿'+nc3ShortMoney(d.sum)+'+':'฿'+nc3ShortMoney(d.sum)}</b></button>`}).join('');
  $('nc3YearGrid').querySelectorAll('[data-nc3-month]').forEach(btn=>btn.addEventListener('click',()=>{nc3Date=new Date(year,Number(btn.dataset.nc3Month),1);nc3Mode='month';nc3Render();window.scrollTo({top:0,behavior:'instant'});}));
 }
-$('nc29CycleEnabled').addEventListener('change',e=>{nc29CycleEnabled=e.target.checked;nc3Render()});
-for(const id of ['nc29CycleStart','nc29CycleEnd'])$(id).addEventListener('change',e=>{if(id==='nc29CycleStart')nc29CycleStart=e.target.value;else nc29CycleEnd=e.target.value;const valid=!nc29CycleStart||!nc29CycleEnd||nc29CycleStart<=nc29CycleEnd;$('nc29CycleHint').textContent=valid?'คำนวณตามวันที่เริ่มต้นและสิ้นสุดที่เลือก':'วันสิ้นสุดต้องไม่ก่อนวันเริ่มต้น';nc3Render()});
+if(nc30CycleDays){nc29CycleEnabled=true;$('nc29CycleEnabled').checked=true;$('nc29CycleHint').textContent=`ใช้รอบวันที่ ${nc30CycleDays.start} – ${nc30CycleDays.end} อัตโนมัติทุกเดือน`;}
+$('nc29CycleEnabled').addEventListener('change',e=>{nc29CycleEnabled=e.target.checked;if(nc29CycleEnabled&&!nc30CycleDays){const y=nc3Date.getFullYear(),m=nc3Date.getMonth();nc29CycleStart=nc30Date(y,m-1,16);nc29CycleEnd=nc30Date(y,m,15);$('nc29CycleStart').value=nc29CycleStart;$('nc29CycleEnd').value=nc29CycleEnd;nc30SaveDays();}nc3Render()});
+for(const id of ['nc29CycleStart','nc29CycleEnd'])$(id).addEventListener('change',e=>{if(id==='nc29CycleStart')nc29CycleStart=e.target.value;else nc29CycleEnd=e.target.value;nc30SaveDays();nc3Render()});
 $('nc3MonthlyBtn').addEventListener('click',()=>{nc3Mode='month';nc3Render()});
 $('nc3YearlyBtn').addEventListener('click',()=>{nc3Mode='year';nc3Render()});
 $('nc3Previous').addEventListener('click',()=>nc3DateShift(-1));
