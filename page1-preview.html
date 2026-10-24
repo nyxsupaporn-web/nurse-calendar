@@ -179,6 +179,13 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 #nc3SummaryPage .nc31-cycle-saved[hidden]{display:none}
 #nc3SummaryPage .nc31-cycle-saved span{min-width:0;overflow-wrap:anywhere}
 #nc3SummaryPage .nc31-cycle-saved button{flex:none;border:1px solid #a6d6c7;background:#e7f7ef;color:#287b64;border-radius:9px;padding:7px 9px;font:inherit;font-weight:600}
+
+/* V32: only income-proportion legend spacing and vertical donut alignment */
+#nc3SummaryPage .nc29-donut-layout{grid-template-columns:minmax(0,1fr) minmax(148px,46%);align-items:center}
+#nc3SummaryPage .nc29-donut-layout .nc3-legend>div{grid-template-columns:11px minmax(0,1fr) 27px;column-gap:4px}
+#nc3SummaryPage .nc29-donut-layout .nc3-legend b{justify-self:start;text-align:left}
+#nc3SummaryPage .nc29-donut-layout .nc3-donut{align-self:center;justify-self:center;margin-block:auto}
+@media(max-width:380px){#nc3SummaryPage .nc29-donut-layout{grid-template-columns:minmax(0,1fr) minmax(132px,44%)}}
 </style>
   <style>
 /* Nurse Calendar — Page 1 reference-match design.
