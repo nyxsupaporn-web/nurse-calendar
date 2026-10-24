@@ -1286,6 +1286,33 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 /* V33: summary donut alignment only (monthly and yearly); no data or calculation changes. */
 #nc3SummaryPage .nc29-donut-layout .nc3-donut{transform:translateX(-18px)}
 @media (max-width:380px){#nc3SummaryPage .nc29-donut-layout .nc3-donut{transform:translateX(-14px)}}
+
+/* V34: two presentation-only refinements in monthly AND yearly summaries.
+   No JS, accounting rules, layout of other pages, or data changes. */
+/* Keep the caption immediately below total income on one line. */
+#nc3SummaryPage .nc3-metric.pink small{
+  display:block;
+  width:max-content;
+  max-width:none;
+  margin-inline:auto;
+  white-space:nowrap;
+  font-size:clamp(6px,1.72vw,8px);
+  letter-spacing:-.18px;
+  line-height:1.2;
+  transform:scaleX(.82);
+  transform-origin:center center;
+}
+/* Recenter each percentage between its duty name and the donut chart. */
+#nc3SummaryPage .nc29-donut-layout .nc3-legend b{
+  position:relative;
+  left:-12px;
+  text-align:center;
+  white-space:nowrap;
+}
+@media (max-width:380px){
+  #nc3SummaryPage .nc29-donut-layout .nc3-legend b{left:-9px}
+}
+
 </style>
 </head>
 <body>
