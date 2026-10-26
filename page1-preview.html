@@ -1400,7 +1400,26 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 #nc33OriginalPage .nc37-month{margin:10px 0 12px}
 @media(max-width:380px){#nc33OriginalPage .nc33-card{padding:15px 10px}#nc33OriginalPage .nc33-import button{font-size:11px;height:122px}#nc33OriginalPage .nc39-import-label{font-size:11px}}
 </style>
-</head>
+<style id="nc40-original-and-nav-only">
+/* V40: only original roster import/export controls, title and globally requested nav appearance. */
+#nc33OriginalPage .nc33-actions button{color:#238f79;background:#fff;border:1.5px solid #8ccfbc;box-shadow:none;transition:background .13s,color .13s,border-color .13s}
+#nc33OriginalPage .nc33-actions button:first-child{color:#238f79;background:#fff}
+#nc33OriginalPage .nc33-actions button.nc40-mode-on,
+#nc33OriginalPage .nc33-actions button:first-child.nc40-mode-on{color:#fff;border-color:#1dad97;background:linear-gradient(115deg,#1daf97,#52cbb2);box-shadow:0 3px 10px #32b29528}
+#nc33OriginalPage .nc33-actions button.nc40-mode-on .nc36-action-icon{filter:brightness(0) invert(1)}
+#nc33OriginalPage #nc37Fullscreen{width:47px;height:44px;min-width:47px;display:inline-flex;align-items:center;justify-content:center;padding:0;flex-shrink:0}
+#nc33OriginalPage #nc37Fullscreen svg{width:24px;height:24px}
+.tabbar .tab{font-size:clamp(7px,2.05vw,9.5px);font-weight:600;letter-spacing:-.35px;gap:4px;white-space:nowrap}
+.tabbar .tab svg{width:27px;height:27px;padding:3px;box-sizing:border-box;border-radius:9px;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;transition:background .15s;flex-shrink:0}
+.tabbar .tab[data-tab="calendar"] svg{color:#2a9a7a;background:#e4f8e9}
+.tabbar .tab[data-tab="types"] svg{color:#a27bd1;background:#f0e8ff}
+.tabbar .tab[data-tab="summary"] svg{color:#e2a43f;background:#fff4d9}
+.tabbar .tab[data-tab="original"] svg{color:#359ece;background:#e4f5ff}
+.tabbar .tab[data-tab="department"] svg{color:#ed94ab;background:#ffedf3}
+.tabbar .tab[data-tab="mine"] svg{color:#729ec5;background:#e9f2fd}
+.tabbar .tab.active svg{filter:saturate(1.14)}
+@media(max-width:360px){.tabbar .tab{font-size:6.7px;letter-spacing:-.5px}.tabbar .tab svg{width:24px;height:24px}}
+</style></head>
 <body>
   <div class="app-shell" id="appShell">
     <header class="hero restored-header" aria-label="ปฏิทินบันทึกเวร">
@@ -1495,18 +1514,18 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
   </div>
 </main>
 
-    <main id="nc33OriginalPage" hidden aria-label="ตารางเวรต้นฉบับ"><section class="nc33-card nc36-unified"><div class="nc33-heading"><svg viewBox="0 0 48 48" fill="none"><rect x="9" y="7" width="30" height="36" rx="6" fill="#A3EBDD" stroke="#17A98F" stroke-width="3"/><path d="M17 18h14M17 25h14M17 32h10" stroke="#188D77" stroke-width="3" stroke-linecap="round"/><rect x="19" y="3" width="10" height="8" rx="2" fill="#3BC5A8"/></svg><div><h2>ตารางเวรต้นฉบับ</h2><p>นำเข้าและจัดการตารางเวร · อ่านอย่างเดียว</p></div></div><h3>นำเข้าตารางเวร</h3><div class="nc33-import"><button data-import="excel"><img class="nc36-icon" src="assets/nc36-icons/02_excel_xlsx.svg" alt=""><span class="nc39-import-label">นำเข้า Excel</span><small>xlsx, xls</small></button><button data-import="sheet"><img class="nc36-icon" src="assets/nc36-icons/03_google_sheets.svg" alt=""><span class="nc39-import-label">นำเข้า Sheet</span><small>csv, xlsx</small></button><button data-import="pdf"><img class="nc36-icon" src="assets/nc36-icons/01_pdf.svg" alt=""><span class="nc39-import-label">นำเข้า PDF</span><small>.pdf</small></button><button data-import="image"><img class="nc36-icon" src="assets/nc36-icons/07_png_image.svg" alt=""><span class="nc39-import-label">นำเข้า รูปภาพ</span><small>jpg, png</small></button></div><div class="nc33-actions"><button id="nc33Add"><img class="nc36-action-icon" src="assets/nc36-icons/21_import_file.svg" alt=""> เพิ่มข้อมูล</button><button id="nc33ExportToggle"><img class="nc36-action-icon" src="assets/nc36-icons/22_export_file.svg" alt=""> ส่งออกตาราง</button></div><div class="nc33-export" id="nc33ExportMenu" hidden><button data-export="image">รูปภาพ</button><button data-export="pdf">PDF</button><button data-export="excel">Excel</button><button data-export="sheet">Sheet</button></div><div class="nc33-status" id="nc33Status">✓ พร้อมใช้งาน · ตารางตัวอย่างจากไฟล์พฤศจิกายน 2569</div></section><section class="nc33-card"><div class="nc37-table-head"><h3>ตารางเวรประจำเดือน <span class="nc39-table-month-caption" id="nc33TableMonth">พฤศจิกายน 2569</span></h3><button type="button" id="nc37Fullscreen">⛶ เต็มหน้า</button></div><div class="nc33-month nc37-month"><button id="nc33Prev" aria-label="เดือนก่อนหน้า">‹</button><select id="nc37PeriodSelect" aria-label="เลือกเดือนและปี"></select><button id="nc33Next" aria-label="เดือนถัดไป">›</button></div><div class="nc37-history"><label>ประวัติตารางต้นฉบับ <select id="nc37HistorySelect" aria-label="เลือกฉบับย้อนหลัง"></select></label><button type="button" id="nc37Delete">ลบฉบับที่เลือก</button></div><div class="nc33-scroll" id="nc33Scroll"><table class="nc33-table" id="nc33Table"></table><div id="nc38Document" hidden></div></div><p class="nc33-note">เลื่อนตารางแนวนอนเพื่อดูคอลัมน์ทั้งหมด · ตรึงวันที่และหัวตาราง · ไม่อนุญาตให้แก้ไขช่องข้อมูล</p></section><input id="nc33File" type="file" hidden><div id="nc37Viewer" hidden role="dialog" aria-modal="true" aria-label="ตารางเวรเต็มหน้า"><div class="nc37-toolbar"><button id="nc37Close">✕ ปิด</button><span>ตารางเวรต้นฉบับ</span><button id="nc37ZoomOut">−</button><output id="nc37ZoomLabel">100%</output><button id="nc37ZoomIn">＋</button></div><div id="nc37Viewport"><div id="nc37ZoomContent"></div></div></div></main>
+    <main id="nc33OriginalPage" hidden aria-label="ตารางเวรต้นฉบับ"><section class="nc33-card nc36-unified"><div class="nc33-heading"><svg viewBox="0 0 48 48" fill="none"><rect x="9" y="7" width="30" height="36" rx="6" fill="#A3EBDD" stroke="#17A98F" stroke-width="3"/><path d="M17 18h14M17 25h14M17 32h10" stroke="#188D77" stroke-width="3" stroke-linecap="round"/><rect x="19" y="3" width="10" height="8" rx="2" fill="#3BC5A8"/></svg><div><h2>ตารางเวรต้นฉบับ</h2><p>นำเข้าและจัดการตารางเวร</p></div></div><h3>นำเข้าตารางเวร</h3><div class="nc33-import"><button data-import="excel"><img class="nc36-icon" src="assets/nc36-icons/02_excel_xlsx.svg" alt=""><span class="nc39-import-label">นำเข้า Excel</span><small>xlsx, xls</small></button><button data-import="sheet"><img class="nc36-icon" src="assets/nc36-icons/03_google_sheets.svg" alt=""><span class="nc39-import-label">นำเข้า Sheet</span><small>csv, xlsx</small></button><button data-import="pdf"><img class="nc36-icon" src="assets/nc36-icons/01_pdf.svg" alt=""><span class="nc39-import-label">นำเข้า PDF</span><small>.pdf</small></button><button data-import="image"><img class="nc36-icon" src="assets/nc36-icons/07_png_image.svg" alt=""><span class="nc39-import-label">นำเข้า รูปภาพ</span><small>jpg, png</small></button></div><div class="nc33-actions"><button id="nc33Add"><img class="nc36-action-icon" src="assets/nc36-icons/21_import_file.svg" alt=""> เพิ่มข้อมูล</button><button id="nc33ExportToggle"><img class="nc36-action-icon" src="assets/nc36-icons/22_export_file.svg" alt=""> ส่งออกตาราง</button></div><div class="nc33-export" id="nc33ExportMenu" hidden><button data-export="image">รูปภาพ</button><button data-export="pdf">PDF</button><button data-export="excel">Excel</button><button data-export="sheet">Sheet</button></div><div class="nc33-status" id="nc33Status">✓ พร้อมใช้งาน · ตารางตัวอย่างจากไฟล์พฤศจิกายน 2569</div></section><section class="nc33-card"><div class="nc37-table-head"><h3>ตารางเวรประจำเดือน <span class="nc39-table-month-caption" id="nc33TableMonth">พฤศจิกายน 2569</span></h3><button id="nc37Fullscreen" type="button" aria-label="ดูตารางเต็มหน้า" title="ดูตารางเต็มหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="nc33-month nc37-month"><button id="nc33Prev" aria-label="เดือนก่อนหน้า">‹</button><select id="nc37PeriodSelect" aria-label="เลือกเดือนและปี"></select><button id="nc33Next" aria-label="เดือนถัดไป">›</button></div><div class="nc37-history"><label>ประวัติตารางต้นฉบับ <select id="nc37HistorySelect" aria-label="เลือกฉบับย้อนหลัง"></select></label><button type="button" id="nc37Delete">ลบฉบับที่เลือก</button></div><div class="nc33-scroll" id="nc33Scroll"><table class="nc33-table" id="nc33Table"></table><div id="nc38Document" hidden></div></div><p class="nc33-note">เลื่อนตารางแนวนอนเพื่อดูคอลัมน์ทั้งหมด · ตรึงวันที่และหัวตาราง · ไม่อนุญาตให้แก้ไขช่องข้อมูล</p></section><input id="nc33File" type="file" hidden><div id="nc37Viewer" hidden role="dialog" aria-modal="true" aria-label="ตารางเวรเต็มหน้า"><div class="nc37-toolbar"><button id="nc37Close">✕ ปิด</button><span>ตารางเวรต้นฉบับ</span><button id="nc37ZoomOut">−</button><output id="nc37ZoomLabel">100%</output><button id="nc37ZoomIn">＋</button></div><div id="nc37Viewport"><div id="nc37ZoomContent"></div></div></div></main>
 <div class="selection-banner" id="selectionBanner" hidden role="status" aria-live="polite">
       <div class="banner-text"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16" rx="2"/><rect x="9" y="2" width="6" height="5" rx="1"/><path d="M9 11h6M9 15h6"/></svg></span><span id="selectionText">เลือกวันที่ในปฏิทินเพื่อวางเวร</span></div>
       <button type="button" class="banner-close" id="cancelSelectionBtn" aria-label="ยกเลิกเลือกเวร"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </div>
 
     <nav class="tabbar" aria-label="แถบนำทางหลัก">
-      <button type="button" class="tab active" data-tab="calendar" aria-current="page"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M8 17h3"/></svg><span>ปฏิทิน</span></button>
+      <button type="button" class="tab active" data-tab="calendar" aria-current="page"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M8 17h3"/></svg><span>ปฏิทินเวร</span></button>
       <button type="button" class="tab" data-tab="types"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h6"/></svg><span>ประเภทเวร</span></button>
-      <button type="button" class="tab" data-tab="summary"><svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V7M15 20V4M20 20v-9"/></svg><span>สรุป</span></button>
-      <button type="button" class="tab" data-tab="original"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7"/></svg><span>ต้นฉบับ</span></button>
-      <button type="button" class="tab" data-tab="department"><svg viewBox="0 0 24 24"><path d="m3 11 18-8-6 18-3.5-7L3 11ZM11.5 14 21 3"/></svg><span>ส่งภาควิชา</span></button>
+      <button type="button" class="tab" data-tab="summary"><svg viewBox="0 0 24 24"><path d="M5 20v-7M10 20V7M15 20V4M20 20v-9"/></svg><span>สรุปรายได้</span></button>
+      <button type="button" class="tab" data-tab="original"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM15 3v5h4M9 12h7M9 16h7"/></svg><span>เวรต้นฉบับ</span></button>
+      <button type="button" class="tab" data-tab="department"><svg viewBox="0 0 24 24"><path d="m3 11 18-8-6 18-3.5-7L3 11ZM11.5 14 21 3"/></svg><span>เวรแก้ไข</span></button>
       <button type="button" class="tab" data-tab="mine"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>ข้อมูลของฉัน</span></button>
     </nav>
   </div>
@@ -2662,7 +2681,7 @@ function nc39TableCanvas(record){
  const table=holder.querySelector('table'),rows=[...table.rows],heads=nc38HeaderRows(record);
  const count=Math.max(1,...rows.map(r=>[...r.cells].reduce((v,c)=>v+(c.colSpan||1),0)));
  const cols=Array.from({length:count},(_,i)=>i===0?100:165);
- const heights=rows.map((r,i)=>i<heads?48:38);
+ const heights=rows.map((r,i)=>i<heads?56:66);
  const width=cols.reduce((a,b)=>a+b,0),height=heights.reduce((a,b)=>a+b,0);
  if(width*height>65000000)throw Error('ตารางใหญ่เกินขนาดภาพที่เบราว์เซอร์รองรับ');
  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
@@ -2693,12 +2712,27 @@ function nc39TableCanvas(record){
 }
 function nc39CanvasBlob(canvas,type,quality){return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(Error('ไม่สามารถสร้างไฟล์ภาพ')),type,quality));}
 // Minimal browser-native JPEG-backed PDF: no print popup, and no page/app chrome.
+// V40: fixed-size A4 output with 10 mm white margins on every side.
+// One PDF A4 page per source table (landscape) or original PDF page.
+const NC40_A4={width:3508,height:2480,mm:10}; // A4 at 300 dpi, landscape
+function nc40A4Canvas(source,portrait=false){
+ const out=document.createElement('canvas');out.width=portrait?2480:3508;out.height=portrait?3508:2480;
+ const context=out.getContext('2d');if(!context)throw Error('ไม่สามารถสร้างภาพ A4');
+ context.fillStyle='#fff';context.fillRect(0,0,out.width,out.height);
+ const safeX=Math.round(out.width*10/(portrait?210:297));
+ const safeY=Math.round(out.height*10/(portrait?297:210));
+ const contentWidth=out.width-2*safeX,contentHeight=out.height-2*safeY;
+ const ratio=Math.min(contentWidth/source.width,contentHeight/source.height);
+ const w=source.width*ratio,h=source.height*ratio;
+ context.drawImage(source,(out.width-w)/2,(out.height-h)/2,w,h);
+ return out;
+}
 function nc39PdfFromJpeg(bytes,pixelWidth,pixelHeight){
  const encoder=new TextEncoder(),fragments=[],objects=[];let length=0;
  const put=v=>{const b=typeof v==='string'?encoder.encode(v):v;fragments.push(b);length+=b.length};
- const mark=(n)=>{objects[n]=length;put(n+' 0 obj\n')};
- // Use a landscape page fitted exactly to the whole selected table, with no trailing empty pages.
- const pageW=1190,pageH=Math.max(120,Math.min(14000,+(pageW*pixelHeight/pixelWidth).toFixed(2)));
+ const mark=n=>{objects[n]=length;put(n+' 0 obj\n')};
+ // A4 landscape 297 x 210 mm, equivalent to 841.89 x 595.28 PDF points.
+ const isPortrait=pixelHeight>pixelWidth,pageW=isPortrait?595.276:841.89,pageH=isPortrait?841.89:595.276;
  put('%PDF-1.4\n');
  mark(1);put('<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
  mark(2);put('<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
@@ -2710,23 +2744,57 @@ function nc39PdfFromJpeg(bytes,pixelWidth,pixelHeight){
  put('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');
  return new Blob(fragments,{type:'application/pdf'});
 }
-async function nc39PdfFromCanvas(canvas){const jpg=await nc39CanvasBlob(canvas,'image/jpeg',.94);return nc39PdfFromJpeg(new Uint8Array(await jpg.arrayBuffer()),canvas.width,canvas.height)}
+async function nc39PdfFromCanvas(canvas,alreadyA4=false){
+ const page=alreadyA4?canvas:nc40A4Canvas(canvas,canvas.height>canvas.width);
+ const jpg=await nc39CanvasBlob(page,'image/jpeg',.94);
+ return nc39PdfFromJpeg(new Uint8Array(await jpg.arrayBuffer()),page.width,page.height);
+}
 async function nc39PdfFromImage(blob){
- let img=null,objectUrl=null;
- if(typeof createImageBitmap==='function')img=await createImageBitmap(blob).catch(()=>null);
- if(!img){objectUrl=URL.createObjectURL(blob);img=await new Promise((resolve,reject)=>{const element=new Image();element.onload=()=>resolve(element);element.onerror=()=>reject(Error('ไม่สามารถเปิดภาพต้นฉบับเพื่อสร้าง PDF'));element.src=objectUrl});}
- const canvas=document.createElement('canvas');canvas.width=img.width||img.naturalWidth;canvas.height=img.height||img.naturalHeight;canvas.getContext('2d').drawImage(img,0,0);img.close?.();if(objectUrl)URL.revokeObjectURL(objectUrl);return nc39PdfFromCanvas(canvas);
+ let image=null,objectUrl=null;
+ if(typeof createImageBitmap==='function')image=await createImageBitmap(blob).catch(()=>null);
+ if(!image){objectUrl=URL.createObjectURL(blob);image=await new Promise((resolve,reject)=>{const element=new Image();element.onload=()=>resolve(element);element.onerror=()=>reject(Error('เปิดไฟล์ภาพไม่ได้'));element.src=objectUrl});}
+ const width=image.width||image.naturalWidth,height=image.height||image.naturalHeight;
+ const scale=Math.min(1,4000/Math.max(width,height));
+ const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(width*scale));canvas.height=Math.max(1,Math.round(height*scale));
+ canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);
+ image.close?.();if(objectUrl)URL.revokeObjectURL(objectUrl);
+ return nc39PdfFromCanvas(canvas);
+}
+function nc40LoadPdfLib(){
+ if(window.PDFLib)return Promise.resolve(window.PDFLib);
+ if(window.nc40PdfPromise)return window.nc40PdfPromise;
+ window.nc40PdfPromise=new Promise((resolve,reject)=>{
+ const el=document.createElement('script');el.src='https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';el.async=true;
+ el.onload=()=>window.PDFLib?resolve(window.PDFLib):reject(Error('โหลดเครื่องมือจัดหน้า PDF ไม่สำเร็จ'));
+ el.onerror=()=>reject(Error('เชื่อมต่อเครื่องมือจัดหน้า PDF ไม่สำเร็จ โปรดตรวจสอบอินเทอร์เน็ต'));
+ document.head.appendChild(el)
+ });return window.nc40PdfPromise;
+}
+async function nc40PdfToA4(blob){
+ const {PDFDocument}=await nc40LoadPdfLib();
+ const source=await PDFDocument.load(await blob.arrayBuffer());const target=await PDFDocument.create();
+ const pages=source.getPages();if(!pages.length)throw Error('ไม่พบหน้าในเอกสาร PDF');
+ const mm=72/25.4,margin=10*mm;
+ for(let i=0;i<pages.length;i++){
+  const origin=pages[i],sz=origin.getSize(),landscape=sz.width>=sz.height;
+  const W=landscape?841.8898:595.2756,H=landscape?595.2756:841.8898;
+  const [embedded]=await target.embedPages([origin]);
+  const page=target.addPage([W,H]);
+  const scale=Math.min((W-2*margin)/sz.width,(H-2*margin)/sz.height);
+  page.drawPage(embedded,{x:(W-sz.width*scale)/2,y:(H-sz.height*scale)/2,width:sz.width*scale,height:sz.height*scale});
+ }
+ return new Blob([await target.save()],{type:'application/pdf'});
 }
 async function nc38ExportImage(record){
- if(record.kind==='image'){let blob=await nc38GetFile(record.fileId);if(!blob)throw Error('ไม่พบไฟล์ภาพต้นฉบับ');nc33Download(blob,record.name);return}
+ if(record.kind==='image'){let blob=await nc38GetFile(record.fileId);if(!blob)throw Error('ไม่พบไฟล์ภาพต้นฉบับ');let image=null,objectUrl=null;if(typeof createImageBitmap==='function')image=await createImageBitmap(blob).catch(()=>null);if(!image){objectUrl=URL.createObjectURL(blob);image=await new Promise((ok,bad)=>{const el=new Image();el.onload=()=>ok(el);el.onerror=()=>bad(Error('ไม่สามารถเปิดภาพต้นฉบับ'));el.src=objectUrl})}const canvas=document.createElement('canvas');canvas.width=image.width||image.naturalWidth;canvas.height=image.height||image.naturalHeight;canvas.getContext('2d').drawImage(image,0,0);image.close?.();if(objectUrl)URL.revokeObjectURL(objectUrl);const page=nc40A4Canvas(canvas,canvas.height>canvas.width);nc33Download(await nc39CanvasBlob(page,'image/png'),record.name.replace(/\.[^.]+$/, '')+'_A4.png');return}
  if(record.kind==='pdf'){alert('PDF อาจมีหลายหน้า จึงไม่สามารถแปลงเป็นรูปภาพเดียวแล้วรับประกันว่าเหมือนต้นฉบับได้ กรุณาส่งออก PDF ต้นฉบับแทน');return}
- const canvas=nc39TableCanvas(record),blob=await nc39CanvasBlob(canvas,'image/png');nc33Download(blob,'ตารางเวร_'+nc33Key()+'.png');
+ const canvas=nc40A4Canvas(nc39TableCanvas(record)),blob=await nc39CanvasBlob(canvas,'image/png');nc33Download(blob,'ตารางเวร_'+nc33Key()+'_A4.png');
 }
 async function nc38Export(type){const record=nc38Chosen();if(!record){alert('ยังไม่มีตารางสำหรับส่งออก');return}
  const original=record.fileId?await nc38GetFile(record.fileId):null,ext=nc38Ext(record.name),isDocument=record.kind==='pdf'||record.kind==='image';
  if(type==='image')return nc38ExportImage(record);
  if(type==='pdf'){
-  if(record.kind==='pdf'&&original){nc33Download(original,record.name);return}
+  if(record.kind==='pdf'&&original){let pdf=await nc40PdfToA4(original);nc33Download(pdf,record.name.replace(/\.[^.]+$/, '')+'_A4.pdf');return}
   if(record.kind==='image'&&original){let pdf=await nc39PdfFromImage(original);nc33Download(pdf,record.name.replace(/\.[^.]+$/, '')+'.pdf');return}
   let pdf=await nc39PdfFromCanvas(nc39TableCanvas(record));nc33Download(pdf,'ตารางเวร_'+nc33Key()+'.pdf');return;
  }
@@ -2737,5 +2805,14 @@ async function nc38Export(type){const record=nc38Chosen();if(!record){alert('ย
  let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'ตารางเวร');XLSX.writeFile(wb,'ตารางเวร_'+nc33Key()+'.xlsx')
 }
 document.querySelectorAll('[data-export]').forEach(b=>b.onclick=async()=>{try{await nc38Export(b.dataset.export)}catch(e){alert('ส่งออกไม่สำเร็จ: '+e.message)}});
+// V40: highlight only the currently selected mode; visual only, without changing existing handlers.
+(function(){
+ const add=document.getElementById('nc33Add'),toggle=document.getElementById('nc33ExportToggle'),menu=document.getElementById('nc33ExportMenu');
+ const set=mode=>{add.classList.toggle('nc40-mode-on',mode==='add');toggle.classList.toggle('nc40-mode-on',mode==='export')};
+ add.addEventListener('click',()=>{menu.hidden=true;set('add')});
+ toggle.addEventListener('click',()=>set(menu.hidden?null:'export'));
+ document.getElementById('nc33File').addEventListener('change',()=>set(null));
+ menu.querySelectorAll('[data-export]').forEach(b=>b.addEventListener('click',()=>{menu.hidden=true;set(null)}));
+})();
 </script></body>
 </html>
