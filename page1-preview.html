@@ -1486,6 +1486,23 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 #nc42EditDialog h3{font-size:20px;color:#215546;margin:0 0 7px}
 #nc42EditDialog p{color:#7d988f;font-size:13px;margin:0 0 13px}
 #nc42EditDialog label{display:block;font-size:13px;color:#305d50;margin-bottom:8px}
+.nc42-roster{width:max-content;min-width:100%;font-size:12px}
+.nc42-roster th,.nc42-roster td{min-width:94px;height:42px;padding:4px 5px;white-space:normal}
+.nc42-roster th:first-child,.nc42-roster td:first-child{position:sticky;left:0;z-index:3;min-width:52px;max-width:52px;background:#f2fbf7;text-align:center}
+.nc42-roster-main th:first-child,.nc42-roster-main td:first-child,.nc42-roster-sdmc th:first-child,.nc42-roster-sdmc td:first-child{left:0}
+.nc42-roster-main thead th,.nc42-roster-sdmc thead th{background:#e6f6ef;text-align:center}
+.nc42-roster-main thead th.nc42-head-duty{background:#f5eadf}
+.nc42-roster-main thead th.nc42-head-ot{background:#f9e6ee}
+.nc42-roster-main thead th.nc42-head-extra{background:#f8efc9}
+.nc42-roster-sdmc thead tr:first-child th{background:#eef5ff}
+.nc42-roster-sdmc thead tr:last-child th{background:#f6fbff;font-weight:600}
+.nc42-roster tbody th{font-weight:700;color:#33584f;background:#f6fbf9;position:sticky;left:0;z-index:2}
+.nc42-roster td{background:#fff}
+.nc42-roster tbody tr:nth-child(even) td,.nc42-roster tbody tr:nth-child(even) th{background:#fbfdfc}
+.nc42-roster button.nc42-cell{width:100%;min-width:0;min-height:34px;white-space:pre-line;line-height:1.2;padding:5px 6px;color:#9ab4ac}
+.nc42-roster-sdmc button.nc42-cell{font-size:11px}
+.nc42-viewbox{max-height:650px}
+
 #nc42EditDialog select,#nc42EditDialog input{width:100%;padding:10px;border:1px solid #cde6da;border-radius:11px;background:white;color:#31574d;font-size:15px;margin-top:5px}
 .nc42-dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.nc42-dialog-actions button{padding:12px;border:1px solid #d4eadd;background:#fff;color:#387364;border-radius:11px}.nc42-dialog-actions button:last-child{background:#189e82;color:#fff;border:0}
 @media(min-width:650px){#nc42DeptPage{padding-left:12px;padding-right:12px}.nc42-import-grid{gap:10px}.nc42-import-grid button{min-height:102px;font-size:13px}.nc42-roster{font-size:12px}}
@@ -2930,6 +2947,29 @@ const KEY='nurse-calendar-v42-department-rosters';
 const MON=nc38Names;
 const WEEK=['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
 const NAMES=['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const MAIN_GRID_COLS=[
+ {code:'เวร1',label:'เวร1',kind:'duty'},
+ {code:'เวร2',label:'เวร2',kind:'duty'},
+ {code:'OT1',label:'OT1',kind:'ot'},
+ {code:'OT2',label:'OT2',kind:'ot'},
+ {code:'EXTRA1',label:'Extra1',kind:'extra'},
+ {code:'EXTRA2',label:'Extra2',kind:'extra'},
+ {code:'EXTRA3',label:'Extra3',kind:'extra'}
+];
+const SDMC_GRID_COLS=[
+ {code:'SDMC1-AM',group:'SDMC1',label:'เช้า',kind:'sdmc'},
+ {code:'SDMC1-PM',group:'SDMC1',label:'บ่าย-ดึก',kind:'sdmc'},
+ {code:'SDMC2-AM',group:'SDMC2',label:'เช้า',kind:'sdmc'},
+ {code:'SDMC2-PM',group:'SDMC2',label:'บ่าย-ดึก',kind:'sdmc'},
+ {code:'SDMC3-AM',group:'SDMC3',label:'เช้า',kind:'sdmc'},
+ {code:'SDMC3-PM',group:'SDMC3',label:'บ่าย-ดึก',kind:'sdmc'},
+ {code:'SDMC4-AM',group:'SDMC4',label:'เช้า',kind:'sdmc'},
+ {code:'SDMC4-PM',group:'SDMC4',label:'บ่าย-ดึก',kind:'sdmc'},
+ {code:'SDMC5',group:'SDMC5',label:'เช้า-บ่าย',kind:'sdmc'},
+ {code:'SDMC6',group:'SDMC6',label:'เช้า-บ่าย',kind:'sdmc'},
+ {code:'SDMC7',group:'SDMC7',label:'บ่าย',kind:'sdmc'},
+ {code:'SDMC8',group:'SDMC8',label:'บ่าย',kind:'sdmc'}
+];
 const units=['main','sdmc'];
 let year=2026,month=10,selected='main',zoom=1,fullUnit='main',editing=null,docURL=null;
 let store={}; try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object')store=s}catch(e){}
@@ -2938,83 +2978,100 @@ function key(){return year+'-'+String(month).padStart(2,'0')}
 function days(){return new Date(year,month,0).getDate()}
 function unitLabel(unit){return unit==='main'?'อาคารหลัก':'SDMC'}
 function monthLabel(){return NAMES[month]+' '+(year+543)}
-function empty(){return {people:[],entries:{},docId:'',docName:'',kind:'',updated:0}}
-function demoData(unit){const names=unit==='main'?['เจ้าหน้าที่ตัวอย่าง 01','เจ้าหน้าที่ตัวอย่าง 02','เจ้าหน้าที่ตัวอย่าง 03']:['เจ้าหน้าที่ตัวอย่าง 04','เจ้าหน้าที่ตัวอย่าง 05'];const d={...empty(),people:names, demo:true}; ['ot1','n1','n2','sdmc1','ot2'].forEach((x,i)=>{d.entries[i%names.length+':'+(i+1)]=x.toUpperCase().replace('N','เวร')});return d}
-function record(unit){if(!store[key()])store[key()]={};return store[key()][unit]||(demo?demoData(unit):empty())}
-function mutable(unit){if(!store[key()])store[key()]={};if(!store[key()][unit])store[key()][unit]=demo?demoData(unit):empty();return store[key()][unit]}
+function empty(){return {people:[],entries:{},grid:null,docId:'',docName:'',kind:'',updated:0}}
+function record(unit){if(!store[key()])store[key()]={};return store[key()][unit]||(demo?empty():empty())}
+function mutable(unit){if(!store[key()])store[key()]={};if(!store[key()][unit])store[key()][unit]=empty();return store[key()][unit]}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){alert('พื้นที่จัดเก็บในเครื่องเต็ม กรุณาส่งออกไฟล์ตารางก่อน')}}
 function status(message){$42('nc42Status').textContent=message}
 function monthOptions(){const el=$42('nc42Period'), val=key();el.innerHTML='';for(let y=2025;y<=2047;y++)for(let m=1;m<=12;m++){const v=y+'-'+String(m).padStart(2,'0'),o=new Option(NAMES[m]+' '+(y+543),v);el.add(o)}el.value=val;$42('nc42MonthLabel').textContent=monthLabel()}
-function monthMove(delta){const d=new Date(year,month-1+delta,1);year=d.getFullYear();month=d.getMonth()+1;render();}
-function kinds(v){const s=String(v||'').toLowerCase();if(!s||s==='-')return '';if(s.includes('ot'))return 'ot';if(s.includes('sdmc'))return 'sdmc';if(s.includes('extra'))return 'extra';return 'duty'}
-function group(v){return kinds(v)||'duty'}
-function colors(v){const t=group(v);return ({ot:'#ffe5ef',sdmc:'#d8f0fc',extra:'#fff2c3',duty:'#e9ddfc'})[t]}
-function rosterMarkup(unit,fullscreen=false){const d=record(unit),num=days();const dateHeaders=Array.from({length:num},(_,n)=>{const day=n+1,w=new Date(year,month-1,day).getDay();return `<th class="${w===0?'nc42-sun':w===6?'nc42-sat':''}">${day}<br><small>${WEEK[w]}</small></th>`}).join('');
- const people=d.people.length?d.people:[];
- let rows=people.map((person,index)=>`<tr><td>${index+1}</td><td><button type="button" data-nc42-rename="${unit}:${index}" style="border:0;background:transparent;padding:3px;text-align:left;color:#255c4c;font:inherit;max-width:115px;white-space:normal">${E(person)}</button></td>${Array.from({length:num},(_,i)=>{const v=d.entries[index+':'+(i+1)]||'';return `<td><button type="button" class="nc42-cell ${v?'filled':''}" data-kind="${kinds(v)}" data-nc42-edit="${unit}:${index}:${i+1}" title="${E(person)} วันที่ ${i+1}">${v?E(v):'＋'}</button></td>`}).join('')}</tr>`).join('');
- if(!rows)rows=`<tr><td colspan="${num+2}" style="padding:22px;text-align:center;color:#869d94;font-weight:400">ยังไม่มีตารางของ${unitLabel(unit)} · เลือกนำเข้าไฟล์หรือเพิ่มบุคลากร</td></tr>`;
- return `<table class="nc42-roster" aria-label="ตารางเวร${unitLabel(unit)}"><thead><tr><th>ลำดับ</th><th>ชื่อ-สกุล</th>${dateHeaders}</tr></thead><tbody>${rows}</tbody></table>`;
+function monthMove(delta){const d=new Date(year,month-1+delta,1);year=d.getFullYear();month=d.getMonth()+1;render()}
+function blankGrid(unit){const cols=(unit==='main'?MAIN_GRID_COLS:SDMC_GRID_COLS);return {unit,cols:cols.map(c=>({...c})),rows:Array.from({length:days()},(_,i)=>({day:i+1,cells:Object.fromEntries(cols.map(c=>[c.code,'']))}))}}
+function gridCols(unit){return unit==='main'?MAIN_GRID_COLS:SDMC_GRID_COLS}
+function norm(val){return String(val||'').trim()}
+function splitNames(val){return norm(val).split(/[\/\n,;]+/).map(v=>v.trim()).filter(Boolean)}
+function uniqueNamesFromGrid(grid){const set=new Set();(grid?.rows||[]).forEach(r=>Object.values(r.cells||{}).forEach(v=>splitNames(v).forEach(n=>{if(n&&n!=='-')set.add(n)})));return [...set]}
+function personCount(unit){const d=record(unit), set=new Set([...(d.people||[]).filter(Boolean), ...uniqueNamesFromGrid(gridFor(unit))]); return set.size}
+function gridFor(unit){const d=mutable(unit);if(!d.grid||d.grid.unit!==unit||!Array.isArray(d.grid.rows)||d.grid.rows.length!==days())d.grid=legacyToGrid(unit,d);return d.grid}
+function codeKind(code){return /^OT/.test(code)?'ot':/^SDMC/.test(code)?'sdmc':/^EXTRA/.test(code)?'extra':'duty'}
+function colors(code){const t=codeKind(code);return ({ot:'#ffe5ef',sdmc:'#d8f0fc',extra:'#fff2c3',duty:'#e9ddfc'})[t]}
+function setCell(cells, code, value){cells[code]=norm(value)}
+function appendCell(cells, code, value){value=norm(value);if(!value)return;if(!cells[code])cells[code]=value;else cells[code]=cells[code]+' / '+value}
+function legacyToGrid(unit,d){const g=blankGrid(unit);const people=d.people||[];const entries=d.entries||{};
+ const sdmcSlots={'SDMC1':['SDMC1-AM','SDMC1-PM'],'SDMC2':['SDMC2-AM','SDMC2-PM'],'SDMC3':['SDMC3-AM','SDMC3-PM'],'SDMC4':['SDMC4-AM','SDMC4-PM'],'SDMC5':['SDMC5'],'SDMC6':['SDMC6'],'SDMC7':['SDMC7'],'SDMC8':['SDMC8']};
+ const counters={};
+ Object.entries(entries).forEach(([k,val])=>{const [i,dayRaw]=k.split(':');const day=+dayRaw,name=people[+i]||'';const shift=norm(val).toUpperCase();if(!day||day>days())return;const row=g.rows[day-1];if(unit==='main'){
+   if(/^เวร1$|^N1$/.test(shift))appendCell(row.cells,'เวร1',name||val);
+   else if(/^เวร2$|^N2$/.test(shift))appendCell(row.cells,'เวร2',name||val);
+   else if(/^OT1$/.test(shift))appendCell(row.cells,'OT1',name||val);
+   else if(/^OT2$/.test(shift))appendCell(row.cells,'OT2',name||val);
+   else if(/^EXTRA1$/.test(shift))appendCell(row.cells,'EXTRA1',name||val);
+   else if(/^EXTRA2$/.test(shift))appendCell(row.cells,'EXTRA2',name||val);
+   else if(/^EXTRA3$/.test(shift))appendCell(row.cells,'EXTRA3',name||val);
+ } else {
+   const m=shift.match(/SDMC\s*([1-8])/); if(!m)return; const group='SDMC'+m[1], slots=sdmcSlots[group]||[group]; const counterKey=day+'-'+group; const idx=(counters[counterKey]||0); const code=slots[Math.min(idx, slots.length-1)]; counters[counterKey]=idx+1; appendCell(row.cells,code,name||val);
+ }});
+ return g;
+}
+function parseDay(raw){const x=String(raw??'').trim(),m=x.match(/(?:^|[.\s])([1-9]|[12]\d|3[01])$/);if(m)return +m[1];const first=x.match(/^([1-9]|[12]\d|3[01])(?=[.\s\/])/);if(first)return +first[1];if(/^([1-9]|[12]\d|3[01])$/.test(x))return +x;return null}
+function rowsToGrid(rows,unit){const g=blankGrid(unit);const dayRows=rows.map(r=>({r,day:parseDay(r?.[0])})).filter(x=>x.day&&x.day<=days());
+ if(dayRows.length){
+   const mapping = unit==='main' ? [[1,'เวร1'],[2,'เวร2'],[3,'OT1'],[4,'OT2'],[17,'EXTRA1'],[18,'EXTRA2'],[19,'EXTRA3']] : [[5,'SDMC1-AM'],[6,'SDMC1-PM'],[7,'SDMC2-AM'],[8,'SDMC2-PM'],[9,'SDMC3-AM'],[10,'SDMC3-PM'],[11,'SDMC4-AM'],[12,'SDMC4-PM'],[13,'SDMC5'],[14,'SDMC6'],[15,'SDMC7'],[16,'SDMC8']];
+   let found=0; dayRows.forEach(({r,day})=>{const row=g.rows[day-1]; mapping.forEach(([c,code])=>{const v=norm(r?.[c]); if(v&&v!=='-'){setCell(row.cells,code,v); found++;}})});
+   if(found)return g;
+ }
+ const legacy=convertSheetToRoster(rows,unit);const d={people:legacy.people,entries:legacy.entries};return legacyToGrid(unit,d)
+}
+function dateCell(day){const w=new Date(year,month-1,day).getDay();return `${day}<br><small>${WEEK[w]}</small>`}
+function rosterMarkup(unit){const g=gridFor(unit), rows=(g.rows||[]).map(row=>{
+   const cells=gridCols(unit).map(col=>{const v=norm(row.cells?.[col.code]);return `<td><button type="button" class="nc42-cell ${v?'filled':''}" data-kind="${codeKind(col.code)}" data-nc42-slot="${unit}:${row.day}:${col.code}" title="${E(unitLabel(unit))} วันที่ ${row.day} ${E(col.code)}">${v?E(v):'＋'}</button></td>`}).join('');
+   return `<tr><th scope="row" class="${new Date(year,month-1,row.day).getDay()===0?'nc42-sun':new Date(year,month-1,row.day).getDay()===6?'nc42-sat':''}">${dateCell(row.day)}</th>${cells}</tr>`
+ }).join('');
+ if(unit==='main'){
+   const heads=MAIN_GRID_COLS.map(c=>`<th class="nc42-head-${c.kind}">${E(c.label)}</th>`).join('');
+   return `<table class="nc42-roster nc42-roster-main" aria-label="ตารางเวร${unitLabel(unit)}"><thead><tr><th>วันที่</th>${heads}</tr></thead><tbody>${rows}</tbody></table>`
+ }
+ const groupMap={}; SDMC_GRID_COLS.forEach(c=>{groupMap[c.group]=(groupMap[c.group]||0)+1});
+ const top=Object.entries(groupMap).map(([g,count])=>`<th colspan="${count}">${g}</th>`).join('');
+ const sub=SDMC_GRID_COLS.map(c=>`<th>${E(c.label)}</th>`).join('');
+ return `<table class="nc42-roster nc42-roster-sdmc" aria-label="ตารางเวร${unitLabel(unit)}"><thead><tr><th rowspan="2">วันที่</th>${top}</tr><tr>${sub}</tr></thead><tbody>${rows}</tbody></table>`
 }
 function cardMarkup(unit){const d=record(unit),label=unitLabel(unit);return `<section class="nc42-panel nc42-unit-card" id="nc42Card-${unit}">
-<div class="nc42-unit-title"><span class="nc42-round ${unit==='sdmc'?'sdmc':''}">▥</span><div><h3>ตารางเวร ${label}</h3><p>ประจำเดือน ${monthLabel()}${d.demo?' · ข้อมูลสาธิต':''}</p></div><span class="nc42-count">♟ จำนวน ${d.people.length} คน</span></div>
+<div class="nc42-unit-title"><span class="nc42-round ${unit==='sdmc'?'sdmc':''}">▥</span><div><h3>ตารางเวร ${label}</h3><p>ประจำเดือน ${monthLabel()}</p></div><span class="nc42-count">♟ จำนวน ${personCount(unit)} คน</span></div>
 <div class="nc42-tools"><button type="button" data-nc42-add="${unit}">＋ เพิ่มบุคลากร</button><button type="button" data-nc42-source="${unit}">คัดลอกจากเวรต้นฉบับ</button><button type="button" class="nc42-danger" data-nc42-clear="${unit}">ล้างตารางนี้</button></div>
 ${d.docName?`<div class="nc42-doc">เอกสารแนบ: ${E(d.docName)} <button type="button" data-nc42-doc="${unit}">เปิดดูต้นฉบับ</button><p>ไฟล์รูปภาพ/PDF แสดงเป็นเอกสาร และเพิ่มหรือแก้ไขเวรในตารางด้านล่างได้ด้วยตนเอง</p></div>`:''}
 <div class="nc42-viewbox">${rosterMarkup(unit)}</div>
 <div class="nc42-actions"><button type="button" data-nc42-full="${unit}">⛶ ดูเต็มจอ</button><button type="button" data-nc42-export="${unit}:pdf">▣ PDF</button><button type="button" data-nc42-send="${unit}">➤ ส่งตรวจ</button></div>
 <div class="nc42-more-exports"><button type="button" data-nc42-export="${unit}:image">▧ รูปภาพ</button><button type="button" data-nc42-export="${unit}:pdf">PDF</button><button type="button" data-nc42-export="${unit}:excel">Excel</button><button type="button" data-nc42-export="${unit}:sheet">Sheet</button></div>
 </section>`}
-function render(){if(!$42('nc42DeptPage'))return;monthOptions();$42('nc42Cards').innerHTML=units.map(cardMarkup).join('');units.forEach(u=>{const b=document.querySelector(`[data-nc42-unit="${u}"]`);b.setAttribute('aria-pressed',String(u===selected))});}
-function selectUnit(u,scroll=false){selected=u;document.querySelectorAll('[data-nc42-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nc42Unit===u)));if(scroll)$42('nc42Card-'+u)?.scrollIntoView({behavior:'smooth',block:'start'});}
-function shiftChoices(){let saved=[];try{saved=(JSON.parse(localStorage.getItem('nurse_calendar_page1_reference_match_v2')||'{}').shifts||[]).filter(s=>!s.archived).map(s=>s.name)}catch(e){}const list=[...new Set(['เวร1','เวร2','OT1','OT2','SDMC','EXTRA1','EXTRA2','EXTRA3',...saved])];return list}
-function showEdit(unit,index,day){editing={unit,index,day};const data=record(unit),val=data.entries[index+':'+day]||'';const options=shiftChoices();if(val&&!options.includes(val))options.unshift(val);const dialog=$42('nc42EditDialog');dialog.innerHTML=`<h3>แก้ไขเวร วันที่ ${day}</h3><p>${E(unitLabel(unit))} · ${E(data.people[index]||'')}</p><label>ประเภทเวร<select id="nc42DutyPick"><option value="">ไม่มีเวร / ลบเวร</option>${options.map(x=>`<option value="${E(x)}" ${x===val?'selected':''}>${E(x)}</option>`).join('')}</select></label><label>หรือกรอกชื่อเวรเอง<input id="nc42DutyCustom" maxlength="45" placeholder="เวรพิเศษ (ถ้าต้องการ)" autocomplete="off"></label><div class="nc42-dialog-actions"><button id="nc42CancelEdit" type="button">ยกเลิก</button><button id="nc42SaveEdit" type="button">บันทึก</button></div>`;
- $42('nc42EditBackdrop').hidden=false;document.body.style.overflow='hidden';$42('nc42CancelEdit').onclick=closeEdit;$42('nc42SaveEdit').onclick=()=>{const value=$42('nc42DutyCustom').value.trim()||$42('nc42DutyPick').value;const d=mutable(unit);if(value)d.entries[index+':'+day]=value;else delete d.entries[index+':'+day];d.updated=Date.now();save();closeEdit();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true);status('บันทึกเวรในตารางแก้ไขแล้ว · ไม่เปลี่ยนข้อมูลตารางต้นฉบับ')};}
-function closeEdit(){$42('nc42EditBackdrop').hidden=true;if($42('nc42DeptViewer').hidden)document.body.style.overflow='';}
-function addPerson(unit){let name=prompt('ชื่อบุคลากรที่จะเพิ่มใน '+unitLabel(unit));if(!name)return;name=name.trim();if(!name)return;const d=mutable(unit);d.people.push(name);d.updated=Date.now();save();render();}
-function rename(unit,index){const d=record(unit),old=d.people[index];if(!old)return;const value=prompt('แก้ไขชื่อบุคลากร (เว้นว่างเพื่อลบรายชื่อและข้อมูลเวรทั้งหมดในแถว)',old);if(value===null)return;const rec=mutable(unit);if(!value.trim()){if(!confirm('ลบ '+old+' พร้อมเวรในแถวนี้?'))return;rec.people.splice(index,1);const next={};for(const [k,v] of Object.entries(rec.entries)){const [i,day]=k.split(':').map(Number);if(i===index)continue;next[(i>index?i-1:i)+':'+day]=v}rec.entries=next}else rec.people[index]=value.trim();rec.updated=Date.now();save();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true)}
-function clear(unit){if(!confirm('ลบเฉพาะตารางเวรแก้ไขของ '+unitLabel(unit)+' เดือน '+monthLabel()+'? ข้อมูลต้นฉบับและหน้าอื่นไม่ถูกลบ'))return;const d=mutable(unit);d.people=[];d.entries={};d.updated=Date.now();save();render();}
-function showFullscreen(unit,keepScroll=false){fullUnit=unit;zoom=1;$42('nc42FullTitle').textContent='ตารางเวร '+unitLabel(unit)+' · '+monthLabel();$42('nc42FullInner').innerHTML=rosterMarkup(unit,true);$42('nc42DeptViewer').hidden=false;$42('nc42FullInner').style.zoom='1';$42('nc42ZoomValue').textContent='100%';document.body.style.overflow='hidden';if(!keepScroll)$42('nc42FullContent').scrollTo(0,0);}
-function closeFullscreen(){$42('nc42DeptViewer').hidden=true;if($42('nc42EditBackdrop').hidden)document.body.style.overflow='';}
+function render(){if(!$42('nc42DeptPage'))return;monthOptions();$42('nc42Cards').innerHTML=cardMarkup(selected);units.forEach(u=>{const b=document.querySelector(`[data-nc42-unit="${u}"]`);if(b)b.setAttribute('aria-pressed',String(u===selected))})}
+function selectUnit(u){selected=u;render()}
+function showSlotEdit(unit,day,code){editing={unit,day,code};const grid=gridFor(unit), row=grid.rows[day-1], val=norm(row.cells?.[code]); const choices=[...new Set([...(record(unit).people||[]), ...uniqueNamesFromGrid(grid)])].filter(Boolean).sort((a,b)=>a.localeCompare(b,'th')); const dialog=$42('nc42EditDialog');
+ dialog.innerHTML=`<h3>แก้ไขเวร วันที่ ${day}</h3><p>${E(unitLabel(unit))} · ${E(code)}</p><label>รายชื่อบุคลากร<select id="nc42DutyPick"><option value="">ไม่เลือก</option>${choices.map(x=>`<option value="${E(x)}" ${x===val?'selected':''}>${E(x)}</option>`).join('')}</select></label><label>หรือกรอกข้อความเอง<input id="nc42DutyCustom" maxlength="80" value="${E(val)}" placeholder="เช่น สุภาวดี หรือ ชื่อเวรพิเศษ" autocomplete="off"></label><div class="nc42-dialog-actions"><button id="nc42CancelEdit" type="button">ยกเลิก</button><button id="nc42ClearEdit" type="button">ล้างค่า</button><button id="nc42SaveEdit" type="button">บันทึก</button></div>`;
+ $42('nc42EditBackdrop').hidden=false;document.body.style.overflow='hidden';$42('nc42CancelEdit').onclick=closeEdit;$42('nc42ClearEdit').onclick=()=>{const d=mutable(unit);gridFor(unit).rows[day-1].cells[code]='';d.updated=Date.now();save();closeEdit();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true)};$42('nc42SaveEdit').onclick=()=>{const value=norm($42('nc42DutyCustom').value)||$42('nc42DutyPick').value;const d=mutable(unit);gridFor(unit).rows[day-1].cells[code]=value;if(value&&!d.people.includes(value))d.people.push(value);d.updated=Date.now();save();closeEdit();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true);status('บันทึกตารางเวรแก้ไขแล้ว')};}
+function closeEdit(){$42('nc42EditBackdrop').hidden=true;if($42('nc42DeptViewer').hidden)document.body.style.overflow=''}
+function addPerson(unit){let name=prompt('ชื่อบุคลากรที่จะเพิ่มในรายการเลือกของ '+unitLabel(unit));if(!name)return;name=name.trim();if(!name)return;const d=mutable(unit);if(!d.people.includes(name))d.people.push(name);d.updated=Date.now();save();status('เพิ่มรายชื่อบุคลากรในรายการเลือกแล้ว')}
+function clear(unit){if(!confirm('ลบเฉพาะตารางเวรแก้ไขของ '+unitLabel(unit)+' เดือน '+monthLabel()+'? ข้อมูลต้นฉบับและหน้าอื่นไม่ถูกลบ'))return;const d=mutable(unit);d.people=[];d.entries={};d.grid=blankGrid(unit);d.updated=Date.now();save();render()}
+function showFullscreen(unit,keepScroll=false){fullUnit=unit;zoom=1;$42('nc42FullTitle').textContent='ตารางเวร '+unitLabel(unit)+' · '+monthLabel();$42('nc42FullInner').innerHTML=rosterMarkup(unit);$42('nc42DeptViewer').hidden=false;$42('nc42FullInner').style.zoom='1';$42('nc42ZoomValue').textContent='100%';document.body.style.overflow='hidden';if(!keepScroll)$42('nc42FullContent').scrollTo(0,0)}
+function closeFullscreen(){$42('nc42DeptViewer').hidden=true;if($42('nc42EditBackdrop').hidden)document.body.style.overflow=''}
 function applyZoom(delta){zoom=Math.max(.5,Math.min(2.5,zoom+delta));$42('nc42FullInner').style.zoom=zoom;$42('nc42ZoomValue').textContent=Math.round(zoom*100)+'%'}
-function parseDay(raw){const x=String(raw??'').trim(),m=x.match(/(?:^|[.\s])([1-9]|[12]\d|3[01])$/);if(m)return +m[1];const first=x.match(/^([1-9]|[12]\d|3[01])(?=[.\s\/])/);if(first)return +first[1];if(/^([1-9]|[12]\d|3[01])$/.test(x))return +x;return null}
 function staffName(raw){return String(raw??'').replace(/^\s*\d{1,3}\s*[.)]\s*/,'').replace(/\s+/g,' ').trim()}
 function convertSheetToRoster(rows,unit){let people=[],entries={},found=false;const limit=days();const put=(name,day,shift)=>{if(!name||!day||day>limit)return;if(!people.includes(name))people.push(name);const i=people.indexOf(name);entries[i+':'+day]=shift};
- // A personnel-by-date table, with a staff-name heading and dates across columns.
  const headerIndex=rows.findIndex(r=>r.slice(0,5).some(v=>/ชื่อ.{0,5}(สกุล|บุคลากร)|รายชื่อ|name/i.test(String(v))));
  if(headerIndex>=0){const header=rows[headerIndex],personCol=header.findIndex(v=>/ชื่อ|รายชื่อ|name/i.test(String(v)));const dateCols=[];header.forEach((h,c)=>{const day=parseDay(h);if(c!==personCol&&day&&day<=limit)dateCols.push({c,day})});if(personCol>=0&&dateCols.length>=2){rows.slice(headerIndex+1).forEach(r=>{const person=staffName(r[personCol]);if(!person||person==='-'||/รวม|หมายเหตุ/.test(person))return;const index=people.length;people.push(person);dateCols.forEach(({c,day})=>{const v=String(r[c]??'').trim();if(v&&v!=='-')entries[index+':'+day]=v})});found=people.length>0;}}
- // Original nurse duty table: date rows and shift-type columns (do not touch the original data).
  if(!found){const hr=rows.slice(0,3),dayRows=rows.map((r,i)=>({r,i,day:parseDay(r[0])})).filter(a=>a.day);if(dayRows.length>2){for(const {r,day} of dayRows){for(let c=1;c<r.length;c++){const title=hr.map(h=>String(h?.[c]||'')).find(x=>/^(เวร|OT|SDMC|EXTRA)/i.test(x))||String(hr[0]?.[c]||'');const isSdmc=c>=5&&c<=16||/SDMC/i.test(title);if(unit==='sdmc'&&!isSdmc)continue;if(unit==='main'&&isSdmc)continue;const raw=String(r[c]??'').trim();if(!raw||raw==='-'||/^\d+(?:\.\d+)?$/.test(raw))continue;const correctedTitle=isSdmc?(['SDMC1','SDMC1','SDMC2','SDMC2','SDMC3','SDMC3','SDMC4','SDMC4','SDMC5','SDMC6','SDMC7','SDMC8'][c-5]||'SDMC'):(c>=17?'EXTRA'+(c-16):title||'เวร');raw.split(/[\n;,]+/).map(staffName).filter(Boolean).forEach(name=>put(name,day,correctedTitle))}}found=people.length>0;}}
  if(!found)throw Error('ไฟล์นี้ไม่พบแถววันที่/ชื่อบุคลากรที่อ่านได้ กรุณาใช้ตาราง Excel ที่มีหัววันที่และชื่อบุคลากร หรือเริ่มกรอกตารางเอง');
  return {people,entries};}
 async function parseImport(file,kind,unit){if(file.size>15*1024*1024)throw Error('ไฟล์ต้องไม่เกิน 15 MB');const d=mutable(unit);
- if(kind==='image'||kind==='pdf'){const id='dept-'+Date.now()+'-'+Math.random().toString(36).slice(2);await nc38PutFile(id,file);d.docId=id;d.docName=file.name;d.kind=kind;d.updated=Date.now();save();render();status('เก็บไฟล์ '+file.name+' แล้ว · เปิดดูไฟล์ได้ และแก้ไขข้อมูลเวรด้วยการกรอกตารางด้านล่าง (ยังไม่มี OCR อัตโนมัติ)');return}
+ if(kind==='image'||kind==='pdf'){const id='dept-'+Date.now()+'-'+Math.random().toString(36).slice(2);await nc38PutFile(id,file);d.docId=id;d.docName=file.name;d.kind=kind;if(!d.grid)d.grid=blankGrid(unit);d.updated=Date.now();save();render();status('เก็บไฟล์ '+file.name+' แล้ว · เปิดดูไฟล์ได้ และแก้ไขข้อมูลเวรในตารางด้านล่างได้ด้วยตนเอง');return}
  let rows=[];if(kind==='sheet'&&/\.csv$/i.test(file.name)){const text=await file.text();rows=nc37ParseCsv?nc37ParseCsv(text):text.split(/\r?\n/).map(line=>line.split(','))}else{await nc37EnsureXlsx();const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:false});rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});}
- const transformed=convertSheetToRoster(rows,unit);if(!confirm('พบชื่อบุคลากร '+transformed.people.length+' คนจาก '+file.name+'\nนำเข้าแทนตารางเวรแก้ไข '+unitLabel(unit)+' ของ '+monthLabel()+'? (ไม่เปลี่ยนตารางต้นฉบับ)'))return;
- d.people=transformed.people;d.entries=transformed.entries;d.kind='excel';d.docName=file.name;d.docId='';d.updated=Date.now();save();render();status('นำเข้า '+file.name+' สำหรับ '+unitLabel(unit)+' แล้ว · แตะช่องวันที่เพื่อแก้เวร');}
-function sourceImport(unit){const src=nc33Data?.[(year+543)+'-'+String(month).padStart(2,'0')];if(!src||!src.rows?.length){alert('ไม่พบไฟล์ตารางเวรต้นฉบับของเดือน '+monthLabel()+' กรุณานำเข้าที่หน้าเวรต้นฉบับก่อน');return}try{const data=convertSheetToRoster(src.rows,unit);if(!confirm('คัดลอกข้อมูล '+data.people.length+' คน จากเวรต้นฉบับมายังเวรแก้ไข '+unitLabel(unit)+'?'))return;const d=mutable(unit);d.people=data.people;d.entries=data.entries;d.kind='original-copy';d.docName='คัดลอกจากเวรต้นฉบับ';d.updated=Date.now();save();render();}catch(e){alert(e.message)}}
+ const grid=rowsToGrid(rows,unit);if(!confirm('นำเข้าแทนตารางเวรแก้ไข '+unitLabel(unit)+' ของ '+monthLabel()+' จาก '+file.name+' ?'))return; d.grid=grid; d.people=uniqueNamesFromGrid(grid); d.kind='excel'; d.docName=file.name; d.docId=''; d.updated=Date.now();save();render();status('นำเข้า '+file.name+' สำหรับ '+unitLabel(unit)+' แล้ว · แตะช่องตารางเพื่อแก้ไข')}
+function sourceImport(unit){const src=nc33Data?.[(year+543)+'-'+String(month).padStart(2,'0')];if(!src||!src.rows?.length){alert('ไม่พบไฟล์ตารางเวรต้นฉบับของเดือน '+monthLabel()+' กรุณานำเข้าที่หน้าเวรต้นฉบับก่อน');return}try{const grid=rowsToGrid(src.rows,unit);if(!confirm('คัดลอกข้อมูลจากเวรต้นฉบับมายังเวรแก้ไข '+unitLabel(unit)+' ของ '+monthLabel()+'?'))return;const d=mutable(unit);d.grid=grid;d.people=uniqueNamesFromGrid(grid);d.kind='original-copy';d.docName='คัดลอกจากเวรต้นฉบับ';d.updated=Date.now();save();render();status('คัดลอกข้อมูลจากเวรต้นฉบับแล้ว')}catch(e){alert(e.message)}}
 let fileKind='excel';function chooseFile(k){fileKind=k;const input=$42('nc42File');input.accept={excel:'.xlsx,.xls',sheet:'.csv,.xlsx',pdf:'.pdf',image:'image/png,image/jpeg,image/webp'}[k];input.value='';input.click()}
-async function openDoc(unit){const d=record(unit);if(!d.docId)return;const blob=await nc38GetFile(d.docId);if(!blob){alert('ไม่พบไฟล์เอกสารแนบในเครื่อง');return}if(docURL)URL.revokeObjectURL(docURL);docURL=URL.createObjectURL(blob);fullUnit=unit;$42('nc42FullTitle').textContent='เอกสารต้นฉบับ '+unitLabel(unit);$42('nc42FullInner').innerHTML=d.kind==='pdf'?`<iframe title="เอกสาร PDF" src="${docURL}" style="width:100vw;height:calc(100vh - 90px);border:0"></iframe>`:`<img src="${docURL}" alt="เอกสารที่นำเข้า" style="width:auto;max-width:none;height:auto">`;$42('nc42DeptViewer').hidden=false;document.body.style.overflow='hidden';}
-function rowsForExport(unit){const d=record(unit);return [['ลำดับ','ชื่อ-สกุล',...Array.from({length:days()},(_,i)=>String(i+1))],...d.people.map((p,i)=>[i+1,p,...Array.from({length:days()},(_,j)=>d.entries[i+':'+(j+1)]||'')])]}
-function makeA4Canvas(unit){const data=rowsForExport(unit),out=document.createElement('canvas');out.width=3508;out.height=2480;const c=out.getContext('2d');if(!c)throw Error('สร้างภาพตารางไม่ได้');c.fillStyle='#fff';c.fillRect(0,0,out.width,out.height);c.fillStyle='#20574a';c.textAlign='center';c.font='bold 48px Mali, Thonburi, Tahoma, sans-serif';c.fillText('ตารางเวรแก้ไข '+unitLabel(unit)+' · '+monthLabel(),out.width/2,105);const safe=125,top=180,tableWidth=out.width-safe*2,staffCol=370,indexCol=95,small=(tableWidth-staffCol-indexCol)/days(),rowH=Math.min(87,Math.max(25,(out.height-top-safe)/Math.max(data.length,1)));if(rowH<28)throw Error('จำนวนบุคลากรมากเกินขนาด A4 หน้าเดียว กรุณาส่งออก Excel');const widths=Array.from({length:days()+2},(_,i)=>i===0?indexCol:i===1?staffCol:small);let xPositions=[safe];widths.forEach(w=>xPositions.push(xPositions.at(-1)+w));for(let r=0;r<data.length;r++){let y=top+r*rowH;for(let col=0;col<widths.length;col++){const x=xPositions[col],w=widths[col],v=String(data[r][col]??'');const groupName=group(v);c.fillStyle=r===0?'#e4f6ed':(r%2?'#fff':'#f9fcfa');if(r>0&&col>1&&v)c.fillStyle=colors(v);c.fillRect(x,y,w,rowH);c.strokeStyle='#cfdfd8';c.lineWidth=2;c.strokeRect(x,y,w,rowH);c.fillStyle='#264e43';c.font=(r===0?'bold ':'')+(col===1?25:col<2?23:19)+'px Mali, Thonburi, Tahoma, sans-serif';c.textBaseline='middle';c.textAlign=col===1?'left':'center';let text=v;if(col===1){while(c.measureText(text).width>w-20&&text.length>1)text=text.slice(0,-2)+'…'}else{while(c.measureText(text).width>w-9&&text.length>1)text=text.slice(0,-2)+'…'}c.fillText(text,col===1?x+12:x+w/2,y+rowH/2);}}return out;}
-async function exportRoster(unit,type){const d=record(unit);if(!d.people.length)throw Error('ยังไม่มีข้อมูลบุคลากรในตาราง '+unitLabel(unit));const name='ตารางเวรแก้ไข_'+unitLabel(unit)+'_'+key();const rows=rowsForExport(unit);
- if(type==='sheet'){const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');nc33Download(new Blob([csv],{type:'text/csv;charset=utf-8'}),name+'.csv');return}
- if(type==='excel'){await nc37EnsureXlsx();const wb=XLSX.utils.book_new(),sheet=XLSX.utils.aoa_to_sheet(rows);sheet['!cols']=[{wch:8},{wch:25},...Array.from({length:days()},()=>({wch:11}))];XLSX.utils.book_append_sheet(wb,sheet,unitLabel(unit));XLSX.writeFile(wb,name+'.xlsx');return}
- const page=makeA4Canvas(unit);
- if(type==='image'){const blob=await nc39CanvasBlob(page,'image/png');nc33Download(blob,name+'_A4.png');return}
- if(type==='pdf'){const pdf=await nc39PdfFromCanvas(page,true);nc33Download(pdf,name+'_A4.pdf');return}
- throw Error('ไม่รู้จักประเภทไฟล์');}
-function clicked(e){const btn=e.target.closest('button');if(!btn)return;let attr;
- if((attr=btn.dataset.nc42Unit)){selectUnit(attr,true);return}
- if((attr=btn.dataset.nc42Add)){addPerson(attr);return}
- if((attr=btn.dataset.nc42Rename)){const [unit,i]=attr.split(':');rename(unit,+i);return}
- if((attr=btn.dataset.nc42Edit)){const [unit,i,day]=attr.split(':');showEdit(unit,+i,+day);return}
- if((attr=btn.dataset.nc42Clear)){clear(attr);return}
- if((attr=btn.dataset.nc42Full)){showFullscreen(attr);return}
- if((attr=btn.dataset.nc42Source)){sourceImport(attr);return}
- if((attr=btn.dataset.nc42Doc)){openDoc(attr).catch(err=>alert(err.message));return}
- if((attr=btn.dataset.nc42Export)){const [u,k]=attr.split(':');exportRoster(u,k).catch(err=>alert('ส่งออกไม่สำเร็จ: '+err.message));return}
- if((attr=btn.dataset.nc42Send)){exportRoster(attr,'pdf').then(()=>alert('เตรียมไฟล์ PDF สำหรับส่งตรวจแล้ว\nยังไม่ได้ส่งให้ภาควิชาผ่านระบบอัตโนมัติ')).catch(err=>alert(err.message));return}
- if((attr=btn.dataset.nc42Import)){chooseFile(attr);return}
-}
+async function openDoc(unit){const d=record(unit);if(!d.docId)return;const blob=await nc38GetFile(d.docId);if(!blob){alert('ไม่พบไฟล์เอกสารแนบในเครื่อง');return}if(docURL)URL.revokeObjectURL(docURL);docURL=URL.createObjectURL(blob);fullUnit=unit;$42('nc42FullTitle').textContent='เอกสารต้นฉบับ '+unitLabel(unit);$42('nc42FullInner').innerHTML=d.kind==='pdf'?`<iframe title="เอกสาร PDF" src="${docURL}" style="width:100vw;height:calc(100vh - 90px);border:0"></iframe>`:`<img src="${docURL}" alt="เอกสารที่นำเข้า" style="width:auto;max-width:none;height:auto">`;$42('nc42DeptViewer').hidden=false;document.body.style.overflow='hidden'}
+function rowsForExport(unit){const g=gridFor(unit); if(unit==='main'){return [['วันที่',...MAIN_GRID_COLS.map(c=>c.label)], ...g.rows.map(r=>[r.day,...MAIN_GRID_COLS.map(c=>r.cells[c.code]||'')])]} return [['วันที่', ...SDMC_GRID_COLS.map(c=>c.group)], ['', ...SDMC_GRID_COLS.map(c=>c.label)], ...g.rows.map(r=>[r.day,...SDMC_GRID_COLS.map(c=>r.cells[c.code]||'')])]}
+function makeA4Canvas(unit){const data=rowsForExport(unit), out=document.createElement('canvas'); out.width=3508; out.height=2480; const c=out.getContext('2d'); if(!c)throw Error('สร้างภาพตารางไม่ได้'); c.fillStyle='#fff'; c.fillRect(0,0,out.width,out.height); c.fillStyle='#1f5549'; c.textAlign='center'; c.font='bold 44px Mali, Thonburi, Tahoma, sans-serif'; c.fillText('ตารางเวร '+unitLabel(unit)+' ประจำเดือน '+monthLabel(), out.width/2, 90); const margin=110, top=150, availW=out.width-margin*2, cols=data[0].length; const colWidths=[]; if(unit==='main'){colWidths.push(90); for(let i=1;i<cols;i++)colWidths.push((availW-90)/(cols-1)); } else {colWidths.push(80); for(let i=1;i<cols;i++)colWidths.push((availW-80)/(cols-1)); } const rowH=Math.min(78, Math.max(26, (out.height-top-margin)/data.length)); if(rowH<24)throw Error('ข้อมูลมากเกินไปสำหรับ A4 หน้าเดียว กรุณาส่งออก Excel'); const xs=[margin]; colWidths.forEach(w=>xs.push(xs.at(-1)+w)); for(let r=0;r<data.length;r++){const y=top+r*rowH; for(let col=0; col<cols; col++){const x=xs[col], w=colWidths[col], v=String(data[r][col]??''); let bg='#fff'; if(r===0||(unit==='sdmc'&&r===1)) bg=unit==='main'?(col===0?'#eaf6f1':MAIN_GRID_COLS[col-1]?.kind==='ot'?'#fbe8ef':MAIN_GRID_COLS[col-1]?.kind==='extra'?'#fbf3cd':'#f7ede4'):(r===0?'#eef5ff':'#f7fbff'); else if(col>0&&v) bg=colors(unit==='main'?(MAIN_GRID_COLS[col-1]?.code||''):(SDMC_GRID_COLS[col-1]?.code||'')); c.fillStyle=bg; c.fillRect(x,y,w,rowH); c.strokeStyle='#cfded8'; c.lineWidth=2; c.strokeRect(x,y,w,rowH); c.fillStyle='#214d42'; c.font=(r< (unit==='sdmc'?2:1)?'bold ':'')+(col===0?18:16)+'px Mali, Thonburi, Tahoma, sans-serif'; c.textBaseline='middle'; c.textAlign='center'; let txt=v; while(c.measureText(txt).width>w-8&&txt.length>1)txt=txt.slice(0,-2)+'…'; c.fillText(txt, x+w/2, y+rowH/2); } } return out }
+async function exportRoster(unit,type){const rows=rowsForExport(unit); const hasData=rows.slice(unit==='sdmc'?2:1).some(r=>r.slice(1).some(v=>norm(v))); if(!hasData)throw Error('ยังไม่มีข้อมูลในตาราง '+unitLabel(unit)); const name='ตารางเวรแก้ไข_'+unitLabel(unit)+'_'+key(); if(type==='sheet'){const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n'); nc33Download(new Blob([csv],{type:'text/csv;charset=utf-8'}),name+'.csv'); return} if(type==='excel'){await nc37EnsureXlsx(); const wb=XLSX.utils.book_new(),sheet=XLSX.utils.aoa_to_sheet(rows); sheet['!cols']=rows[0].map((_,i)=>i===0?{wch:8}:{wch:16}); XLSX.utils.book_append_sheet(wb,sheet,unitLabel(unit)); XLSX.writeFile(wb,name+'.xlsx'); return} const page=makeA4Canvas(unit); if(type==='image'){const blob=await nc39CanvasBlob(page,'image/png'); nc33Download(blob,name+'_A4.png'); return} if(type==='pdf'){const pdf=await nc39PdfFromCanvas(page,true); nc33Download(pdf,name+'_A4.pdf'); return} throw Error('ไม่รู้จักประเภทไฟล์')}
+function clicked(e){const btn=e.target.closest('button');if(!btn)return;let attr; if((attr=btn.dataset.nc42Unit)){selectUnit(attr);return} if((attr=btn.dataset.nc42Add)){addPerson(attr);return} if((attr=btn.dataset.nc42Slot)){const [u,day,code]=attr.split(':');showSlotEdit(u,+day,code);return} if((attr=btn.dataset.nc42Clear)){clear(attr);return} if((attr=btn.dataset.nc42Full)){showFullscreen(attr);return} if((attr=btn.dataset.nc42Source)){sourceImport(attr);return} if((attr=btn.dataset.nc42Doc)){openDoc(attr).catch(err=>alert(err.message));return} if((attr=btn.dataset.nc42Export)){const [u,k]=attr.split(':');exportRoster(u,k).catch(err=>alert('ส่งออกไม่สำเร็จ: '+err.message));return} if((attr=btn.dataset.nc42Send)){exportRoster(attr,'pdf').then(()=>alert('เตรียมไฟล์ PDF สำหรับส่งตรวจแล้ว\nยังไม่ได้ส่งให้ภาควิชาผ่านระบบอัตโนมัติ')).catch(err=>alert(err.message));return} if((attr=btn.dataset.nc42Import)){chooseFile(attr);return} }
 $42('nc42DeptPage').addEventListener('click',clicked);$42('nc42FullInner').addEventListener('click',clicked);
 $42('nc42File').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{status('กำลังอ่านไฟล์ '+file.name);await parseImport(file,fileKind,selected)}catch(err){alert('นำเข้าไม่สำเร็จ: '+err.message);status('เลือกไฟล์ใหม่ได้โดยไม่กระทบข้อมูลเดิม')}});
 $42('nc42Prev').onclick=()=>monthMove(-1);$42('nc42Next').onclick=()=>monthMove(1);$42('nc42Today').onclick=()=>{const n=new Date();year=n.getFullYear();month=n.getMonth()+1;render()};$42('nc42Period').onchange=e=>{[year,month]=e.target.value.split('-').map(Number);render()};
