@@ -1419,6 +1419,87 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 .tabbar .tab[data-tab="mine"] svg{color:#729ec5;background:#e9f2fd}
 .tabbar .tab.active svg{filter:saturate(1.14)}
 @media(max-width:360px){.tabbar .tab{font-size:6.7px;letter-spacing:-.5px}.tabbar .tab svg{width:24px;height:24px}}
+</style><style id="nc42-department-only">
+/* V42: ONLY department roster page. The shared header, bottom navigation and all pre-existing pages stay untouched. */
+#nc42DeptPage[hidden],#nc42DeptViewer[hidden],#nc42EditBackdrop[hidden]{display:none!important}
+#nc42DeptPage{box-sizing:border-box;width:100%;max-width:800px;margin:0 auto;padding:0 10px 132px;color:#26544a;font-family:inherit}
+#nc42DeptPage *,#nc42DeptViewer *,#nc42EditBackdrop *{box-sizing:border-box}
+#nc42DeptPage button,#nc42DeptPage select,#nc42DeptPage input{font:inherit}
+.nc42-panel{border:1px solid #e0eee8;border-radius:24px;background:#fff;box-shadow:0 4px 22px #3b9b7011;margin-bottom:13px;padding:14px 12px}
+.nc42-title{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.nc42-round{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#e2f7f0;flex-shrink:0;color:#188e75}
+.nc42-title h2{font-size:clamp(23px,6vw,29px);line-height:1.2;margin:0;font-weight:700;color:#194b40}
+.nc42-title p{font-size:12px;color:#8b9f99;margin:4px 0 0;font-weight:400}
+.nc42-svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.nc42-monthbar{display:flex;align-items:center;gap:8px;border-radius:16px;background:linear-gradient(120deg,#effcf6,#f5fffc);padding:7px;margin-bottom:16px}
+.nc42-monthbar strong{margin-right:auto;font-size:17px;white-space:nowrap;color:#215849}
+.nc42-monthbar select{width:32px;min-width:0;border:0;background:transparent;color:#268e79;appearance:none;font-size:15px;text-align:center;cursor:pointer}
+.nc42-monthbar button{width:35px;height:35px;border:1px solid #d6eae3;border-radius:12px;background:#fff;color:#268b72;font-size:21px;line-height:1}
+.nc42-monthbar .nc42-today{width:auto;padding:0 9px;background:#dff7ed;font-size:13px;font-weight:600}
+.nc42-section-label{font-size:15px;font-weight:700;margin:10px 0 11px}
+.nc42-import-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.nc42-import-grid button{border:1px solid #d5eae2;background:linear-gradient(145deg,#effdf8,#fff);min-width:0;min-height:94px;border-radius:15px;padding:10px 3px 8px;display:flex;align-items:center;justify-content:center;gap:4px;flex-direction:column;color:#244d43;font-size:11px;cursor:pointer}
+.nc42-import-grid button:nth-child(3){background:#fff1f5;border-color:#f2d9e1}.nc42-import-grid button:nth-child(4){background:#f7f1ff;border-color:#e2d5f8}
+.nc42-import-grid img{width:33px;height:33px;object-fit:contain}.nc42-import-grid span{white-space:nowrap;font-weight:600}.nc42-import-grid small{font-size:9px;white-space:nowrap;color:#8b9b9b}
+.nc42-unit-selector{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;background:#eaf8f3;border-radius:16px;margin:0 0 11px}
+.nc42-unit-selector button{border:none;border-radius:12px;padding:10px 4px;background:#f9fffd;color:#346255;font-weight:700;font-size:14px;cursor:pointer}
+.nc42-unit-selector button[aria-pressed="true"]{background:linear-gradient(120deg,#169b7e,#39c3a2);color:#fff;box-shadow:0 4px 9px #17a2842c}
+.nc42-tip{font-size:11px;line-height:1.65;color:#849d96;margin:10px 0 0;font-weight:400}
+.nc42-unit-card{padding:11px 9px}
+.nc42-unit-title{display:flex;align-items:center;gap:7px;margin-bottom:9px}
+.nc42-unit-title .nc42-round{width:38px;height:38px;border-radius:12px;background:#e5f9f3}.nc42-unit-title .nc42-round.sdmc{background:#e5f2ff;color:#3474cd}
+.nc42-unit-title h3{margin:0;font-size:16px;color:#224b40;line-height:1.3}.nc42-unit-title p{margin:2px 0 0;font-size:11px;color:#859a94}
+.nc42-count{font-size:10px;padding:7px;border-radius:14px;background:#e8fbf3;color:#138466;margin-left:auto;white-space:nowrap}
+.nc42-tools{display:flex;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+.nc42-tools button{border:1px solid #cbebdd;background:#f4fcf8;border-radius:11px;color:#287e69;padding:7px 9px;font-size:11px;cursor:pointer}
+.nc42-tools button.nc42-danger{color:#b76275;background:#fff5f7;border-color:#f7dce1}
+.nc42-viewbox{position:relative;overflow:auto;max-height:335px;border:1px solid #dcece7;border-radius:14px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.nc42-roster{border-collapse:separate;border-spacing:0;min-width:max-content;width:max-content;font-size:10px;line-height:1.3;color:#264d43}
+.nc42-roster th,.nc42-roster td{border-right:1px solid #dbece6;border-bottom:1px solid #dbece6;height:34px;min-width:58px;padding:5px 3px;text-align:center;background:#fff;font-weight:400;vertical-align:middle;white-space:nowrap}
+.nc42-roster th{background:#e9f8f2;font-weight:700;position:sticky;top:0;z-index:3}
+.nc42-roster thead th.nc42-sun{color:#dc6286}.nc42-roster thead th.nc42-sat{color:#568ac9}
+.nc42-roster th:first-child,.nc42-roster td:first-child{position:sticky;left:0;z-index:2;min-width:35px;max-width:35px;background:#f3fcf8}
+.nc42-roster th:nth-child(2),.nc42-roster td:nth-child(2){position:sticky;left:35px;z-index:2;min-width:125px;max-width:125px;text-align:left;padding-left:7px;background:#fff}
+.nc42-roster thead th:first-child,.nc42-roster thead th:nth-child(2){z-index:5;background:#e3f7ed}
+.nc42-roster tbody tr:nth-child(even) td{background:#f9fcfb}.nc42-roster tbody tr:nth-child(even) td:nth-child(-n+2){background:#f6faf8}
+.nc42-roster button.nc42-cell{border:0;background:transparent;font-size:10px;white-space:nowrap;cursor:pointer;min-width:47px;min-height:28px;padding:4px;color:#a8c0b9;border-radius:6px}
+.nc42-roster button.nc42-cell:focus-visible{outline:2px solid #24ab8c;outline-offset:-2px}
+.nc42-roster button.nc42-cell.filled{color:#234b43;font-weight:600}.nc42-roster button.nc42-cell[data-kind="ot"]{background:#ffe5ef;color:#99506c}.nc42-roster button.nc42-cell[data-kind="sdmc"]{background:#d9f0ff;color:#3979b5}.nc42-roster button.nc42-cell[data-kind="extra"]{background:#fff2c8;color:#87602e}.nc42-roster button.nc42-cell[data-kind="duty"]{background:#ede1ff;color:#765ab1}
+.nc42-empty{font-size:12px;color:#869d94;text-align:center;padding:19px 8px}
+.nc42-actions{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:5px;margin-top:8px}
+.nc42-actions button{min-height:40px;border:1px solid #d9ebe5;border-radius:12px;background:#ebfbf4;color:#226c5d;font-size:12px;font-weight:600;cursor:pointer;padding:7px 3px;white-space:nowrap}
+.nc42-actions button:nth-child(2){background:#fff0f4;color:#c54e75;border-color:#f7dce7}
+.nc42-actions button:last-child{background:linear-gradient(120deg,#24b59a,#158970);color:#fff;border:0}
+.nc42-more-exports{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px}
+.nc42-more-exports button{border:1px solid #d9eee5;border-radius:11px;background:#f9fdfa;color:#347c69;padding:6px 3px;min-height:33px;font-size:10px;cursor:pointer}
+.nc42-doc{border:1px solid #d9eee4;border-radius:11px;padding:10px;margin:8px 0;background:#f8fdfa;font-size:11px}
+.nc42-doc button{color:#168e73;border:0;background:none;text-decoration:underline;padding:4px;cursor:pointer}
+#nc42DeptViewer,#nc42EditBackdrop{position:fixed;inset:0;background:#fff;z-index:999999;display:flex;flex-direction:column}
+#nc42DeptViewer .nc42-fulltoolbar{display:flex;align-items:center;gap:6px;padding:calc(env(safe-area-inset-top) + 8px) 10px 8px;background:#e6faf1;flex-shrink:0;color:#225a4b}
+#nc42DeptViewer .nc42-fulltoolbar button{border:1px solid #bee7d5;background:#fff;border-radius:9px;padding:7px;color:#247c68}
+#nc42DeptViewer .nc42-fulltoolbar strong{margin-right:auto;font-size:14px}
+#nc42FullContent{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#f8fcfa;padding:12px}
+#nc42FullInner{width:max-content;transform-origin:top left}
+#nc42FullInner .nc42-roster{font-size:13px}#nc42FullInner .nc42-roster td,#nc42FullInner .nc42-roster th{height:44px}
+#nc42EditBackdrop{background:#173d3299;align-items:center;justify-content:center;padding:14px}
+#nc42EditDialog{width:min(100%,410px);background:#fff;border:1px solid #d9eee3;border-radius:22px;padding:18px;box-shadow:0 15px 40px #05291b35}
+#nc42EditDialog h3{font-size:20px;color:#215546;margin:0 0 7px}
+#nc42EditDialog p{color:#7d988f;font-size:13px;margin:0 0 13px}
+#nc42EditDialog label{display:block;font-size:13px;color:#305d50;margin-bottom:8px}
+#nc42EditDialog select,#nc42EditDialog input{width:100%;padding:10px;border:1px solid #cde6da;border-radius:11px;background:white;color:#31574d;font-size:15px;margin-top:5px}
+.nc42-dialog-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.nc42-dialog-actions button{padding:12px;border:1px solid #d4eadd;background:#fff;color:#387364;border-radius:11px}.nc42-dialog-actions button:last-child{background:#189e82;color:#fff;border:0}
+@media(min-width:650px){#nc42DeptPage{padding-left:12px;padding-right:12px}.nc42-import-grid{gap:10px}.nc42-import-grid button{min-height:102px;font-size:13px}.nc42-roster{font-size:12px}}
+
+/* V42 mobile polish: month chooser overlays only the month title; buttons remain individually tappable. */
+.nc42-monthbar{position:relative}
+.nc42-monthbar strong{flex:1;min-width:0;font-size:clamp(14px,4vw,18px);overflow:hidden;text-overflow:ellipsis}
+.nc42-monthbar select{position:absolute;left:25px;top:0;width:calc(100% - 190px);height:100%;opacity:0;cursor:pointer;z-index:1}
+.nc42-monthbar button{position:relative;z-index:2;flex-shrink:0}
+.nc42-import-grid button span{font-size:clamp(9px,2.6vw,12px);line-height:1.25;font-weight:600;white-space:normal;overflow-wrap:break-word;text-align:center;max-width:100%}
+.nc42-import-grid button small{font-size:clamp(8px,2vw,10px)}
+.nc42-import-grid button{overflow:hidden}
+@media(max-width:360px){.nc42-monthbar select{width:calc(100% - 158px);left:14px}.nc42-monthbar{gap:5px}}
+
 </style></head>
 <body>
   <div class="app-shell" id="appShell">
@@ -1515,6 +1596,29 @@ body :is(p,small,.muted,.tiny,.day-pill,.nc2-row-sub,.nc2-row-info,.nc2-row-meta
 </main>
 
     <main id="nc33OriginalPage" hidden aria-label="ตารางเวรต้นฉบับ"><section class="nc33-card nc36-unified"><div class="nc33-heading"><svg viewBox="0 0 48 48" fill="none"><rect x="9" y="7" width="30" height="36" rx="6" fill="#A3EBDD" stroke="#17A98F" stroke-width="3"/><path d="M17 18h14M17 25h14M17 32h10" stroke="#188D77" stroke-width="3" stroke-linecap="round"/><rect x="19" y="3" width="10" height="8" rx="2" fill="#3BC5A8"/></svg><div><h2>ตารางเวรต้นฉบับ</h2><p>นำเข้าและจัดการตารางเวร</p></div></div><h3>นำเข้าตารางเวร</h3><div class="nc33-import"><button data-import="excel"><img class="nc36-icon" src="assets/nc36-icons/02_excel_xlsx.svg" alt=""><span class="nc39-import-label">นำเข้า Excel</span><small>xlsx, xls</small></button><button data-import="sheet"><img class="nc36-icon" src="assets/nc36-icons/03_google_sheets.svg" alt=""><span class="nc39-import-label">นำเข้า Sheet</span><small>csv, xlsx</small></button><button data-import="pdf"><img class="nc36-icon" src="assets/nc36-icons/01_pdf.svg" alt=""><span class="nc39-import-label">นำเข้า PDF</span><small>.pdf</small></button><button data-import="image"><img class="nc36-icon" src="assets/nc36-icons/07_png_image.svg" alt=""><span class="nc39-import-label">นำเข้า รูปภาพ</span><small>jpg, png</small></button></div><div class="nc33-actions"><button id="nc33Add"><img class="nc36-action-icon" src="assets/nc36-icons/21_import_file.svg" alt=""> เพิ่มข้อมูล</button><button id="nc33ExportToggle"><img class="nc36-action-icon" src="assets/nc36-icons/22_export_file.svg" alt=""> ส่งออกตาราง</button></div><div class="nc33-export" id="nc33ExportMenu" hidden><button data-export="image">รูปภาพ</button><button data-export="pdf">PDF</button><button data-export="excel">Excel</button><button data-export="sheet">Sheet</button></div><div class="nc33-status" id="nc33Status">✓ พร้อมใช้งาน · ตารางตัวอย่างจากไฟล์พฤศจิกายน 2569</div></section><section class="nc33-card"><div class="nc37-table-head"><h3>ตารางเวรประจำเดือน <span class="nc39-table-month-caption" id="nc33TableMonth">พฤศจิกายน 2569</span></h3><button id="nc37Fullscreen" type="button" aria-label="ดูตารางเต็มหน้า" title="ดูตารางเต็มหน้า"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="nc33-month nc37-month"><button id="nc33Prev" aria-label="เดือนก่อนหน้า">‹</button><select id="nc37PeriodSelect" aria-label="เลือกเดือนและปี"></select><button id="nc33Next" aria-label="เดือนถัดไป">›</button></div><div class="nc37-history"><label>ประวัติตารางต้นฉบับ <select id="nc37HistorySelect" aria-label="เลือกฉบับย้อนหลัง"></select></label><button type="button" id="nc37Delete">ลบฉบับที่เลือก</button></div><div class="nc33-scroll" id="nc33Scroll"><table class="nc33-table" id="nc33Table"></table><div id="nc38Document" hidden></div></div><p class="nc33-note">เลื่อนตารางแนวนอนเพื่อดูคอลัมน์ทั้งหมด · ตรึงวันที่และหัวตาราง · ไม่อนุญาตให้แก้ไขช่องข้อมูล</p></section><input id="nc33File" type="file" hidden><div id="nc37Viewer" hidden role="dialog" aria-modal="true" aria-label="ตารางเวรเต็มหน้า"><div class="nc37-toolbar"><button id="nc37Close">✕ ปิด</button><span>ตารางเวรต้นฉบับ</span><button id="nc37ZoomOut">−</button><output id="nc37ZoomLabel">100%</output><button id="nc37ZoomIn">＋</button></div><div id="nc37Viewport"><div id="nc37ZoomContent"></div></div></div></main>
+<main id="nc42DeptPage" hidden aria-label="ตารางเวรแก้ไข">
+  <section class="nc42-panel">
+    <div class="nc42-title"><span class="nc42-round"><svg class="nc42-svg" viewBox="0 0 24 24"><path d="M3 11 21 3l-7 18-3-8zM11 13 21 3"/></svg></span><div><h2>ตารางเวรแก้ไข</h2><p>จัดการตารางเวรสำหรับส่งภาควิชา</p></div></div>
+    <div class="nc42-monthbar"><span aria-hidden="true" style="color:#18a183">▣</span><strong id="nc42MonthLabel">ตุลาคม 2569</strong><select id="nc42Period" aria-label="เลือกเดือนและปี"></select><button type="button" id="nc42Prev" aria-label="เดือนก่อน">‹</button><button type="button" id="nc42Next" aria-label="เดือนถัดไป">›</button><button type="button" class="nc42-today" id="nc42Today">วันนี้</button></div>
+    <p class="nc42-section-label">นำเข้าข้อมูลจากไฟล์</p>
+    <div class="nc42-import-grid">
+      <button type="button" data-nc42-import="excel"><img src="assets/nc36-icons/02_excel_xlsx.svg" alt=""><span>นำเข้า Excel</span><small>.xlsx, .xls</small></button>
+      <button type="button" data-nc42-import="sheet"><img src="assets/nc36-icons/03_google_sheets.svg" alt=""><span>นำเข้า Sheet</span><small>.csv, .xlsx</small></button>
+      <button type="button" data-nc42-import="pdf"><img src="assets/nc36-icons/01_pdf.svg" alt=""><span>นำเข้า PDF</span><small>.pdf</small></button>
+      <button type="button" data-nc42-import="image"><img src="assets/nc36-icons/07_png_image.svg" alt=""><span>นำเข้ารูปภาพ</span><small>.jpg, .png</small></button>
+    </div>
+    <p class="nc42-tip" id="nc42Status" aria-live="polite">เลือกอาคารที่ต้องการก่อนนำเข้า ข้อมูลตารางแก้ไขแยกจากตารางเวรต้นฉบับ</p>
+  </section>
+  <div class="nc42-unit-selector" role="group" aria-label="เลือกพื้นที่หน่วยงาน"><button type="button" data-nc42-unit="main" aria-pressed="true">✚ อาคารหลัก</button><button type="button" data-nc42-unit="sdmc" aria-pressed="false">▦ SDMC</button></div>
+  <div id="nc42Cards"></div>
+  <input id="nc42File" type="file" hidden>
+</main>
+<div id="nc42DeptViewer" hidden role="dialog" aria-modal="true" aria-label="ตารางเวรแก้ไขเต็มหน้าจอ">
+ <div class="nc42-fulltoolbar"><button id="nc42FullClose" type="button">✕</button><strong id="nc42FullTitle">ตารางเวรแก้ไข</strong><button type="button" id="nc42ZoomOut">−</button><output id="nc42ZoomValue">100%</output><button type="button" id="nc42ZoomIn">＋</button></div>
+ <div id="nc42FullContent"><div id="nc42FullInner"></div></div>
+</div>
+<div id="nc42EditBackdrop" hidden role="dialog" aria-modal="true" aria-label="แก้ไขรายการเวร"><div id="nc42EditDialog"></div></div>
+
 <div class="selection-banner" id="selectionBanner" hidden role="status" aria-live="polite">
       <div class="banner-text"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16" rx="2"/><rect x="9" y="2" width="6" height="5" rx="1"/><path d="M9 11h6M9 15h6"/></svg></span><span id="selectionText">เลือกวันที่ในปฏิทินเพื่อวางเวร</span></div>
       <button type="button" class="banner-close" id="cancelSelectionBtn" aria-label="ยกเลิกเลือกเวร"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
@@ -2334,12 +2438,14 @@ function nc2Render(){
  v9TouchDrag([...list.querySelectorAll('.nc2-row')],nc2Render);
 }
 function nc2SetPage(page){
- if(page!=='types'&&page!=='calendar'&&page!=='summary'&&page!=='original')return false;
+ if(page!=='types'&&page!=='calendar'&&page!=='summary'&&page!=='original'&&page!=='department')return false;
  $('nc33OriginalPage').hidden=page!=='original';
+  $('nc42DeptPage').hidden=page!=='department';
+  if(page==='department')window.nc42Render?.();
  if(page==='original')nc33Render();
  nc2Visible=page==='types';
  nc3Visible=page==='summary';
- $('mainContent').hidden=nc2Visible||nc3Visible||page==='original';
+ $('mainContent').hidden=nc2Visible||nc3Visible||page==='original'||page==='department';
  $('nc2TypesPage').hidden=!nc2Visible;
  $('nc3SummaryPage').hidden=!nc3Visible;
  $('appShell').classList.toggle('nc2-types-open',nc2Visible);
@@ -2814,5 +2920,109 @@ document.querySelectorAll('[data-export]').forEach(b=>b.onclick=async()=>{try{aw
  document.getElementById('nc33File').addEventListener('change',()=>set(null));
  menu.querySelectorAll('[data-export]').forEach(b=>b.addEventListener('click',()=>{menu.hidden=true;set(null)}));
 })();
+</script>
+<script id="nc42-department-script">
+/* V42 department duty roster, isolated data + UI; existing pages and their storage keys unchanged. */
+(function(){
+'use strict';
+const $42=id=>document.getElementById(id), E=nc33Escape;
+const KEY='nurse-calendar-v42-department-rosters';
+const MON=nc38Names;
+const WEEK=['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
+const NAMES=['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const units=['main','sdmc'];
+let year=2026,month=10,selected='main',zoom=1,fullUnit='main',editing=null,docURL=null;
+let store={}; try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');if(s&&typeof s==='object')store=s}catch(e){}
+const demo=new URLSearchParams(location.search).get('demo')==='1';
+function key(){return year+'-'+String(month).padStart(2,'0')}
+function days(){return new Date(year,month,0).getDate()}
+function unitLabel(unit){return unit==='main'?'อาคารหลัก':'SDMC'}
+function monthLabel(){return NAMES[month]+' '+(year+543)}
+function empty(){return {people:[],entries:{},docId:'',docName:'',kind:'',updated:0}}
+function demoData(unit){const names=unit==='main'?['เจ้าหน้าที่ตัวอย่าง 01','เจ้าหน้าที่ตัวอย่าง 02','เจ้าหน้าที่ตัวอย่าง 03']:['เจ้าหน้าที่ตัวอย่าง 04','เจ้าหน้าที่ตัวอย่าง 05'];const d={...empty(),people:names, demo:true}; ['ot1','n1','n2','sdmc1','ot2'].forEach((x,i)=>{d.entries[i%names.length+':'+(i+1)]=x.toUpperCase().replace('N','เวร')});return d}
+function record(unit){if(!store[key()])store[key()]={};return store[key()][unit]||(demo?demoData(unit):empty())}
+function mutable(unit){if(!store[key()])store[key()]={};if(!store[key()][unit])store[key()][unit]=demo?demoData(unit):empty();return store[key()][unit]}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){alert('พื้นที่จัดเก็บในเครื่องเต็ม กรุณาส่งออกไฟล์ตารางก่อน')}}
+function status(message){$42('nc42Status').textContent=message}
+function monthOptions(){const el=$42('nc42Period'), val=key();el.innerHTML='';for(let y=2025;y<=2047;y++)for(let m=1;m<=12;m++){const v=y+'-'+String(m).padStart(2,'0'),o=new Option(NAMES[m]+' '+(y+543),v);el.add(o)}el.value=val;$42('nc42MonthLabel').textContent=monthLabel()}
+function monthMove(delta){const d=new Date(year,month-1+delta,1);year=d.getFullYear();month=d.getMonth()+1;render();}
+function kinds(v){const s=String(v||'').toLowerCase();if(!s||s==='-')return '';if(s.includes('ot'))return 'ot';if(s.includes('sdmc'))return 'sdmc';if(s.includes('extra'))return 'extra';return 'duty'}
+function group(v){return kinds(v)||'duty'}
+function colors(v){const t=group(v);return ({ot:'#ffe5ef',sdmc:'#d8f0fc',extra:'#fff2c3',duty:'#e9ddfc'})[t]}
+function rosterMarkup(unit,fullscreen=false){const d=record(unit),num=days();const dateHeaders=Array.from({length:num},(_,n)=>{const day=n+1,w=new Date(year,month-1,day).getDay();return `<th class="${w===0?'nc42-sun':w===6?'nc42-sat':''}">${day}<br><small>${WEEK[w]}</small></th>`}).join('');
+ const people=d.people.length?d.people:[];
+ let rows=people.map((person,index)=>`<tr><td>${index+1}</td><td><button type="button" data-nc42-rename="${unit}:${index}" style="border:0;background:transparent;padding:3px;text-align:left;color:#255c4c;font:inherit;max-width:115px;white-space:normal">${E(person)}</button></td>${Array.from({length:num},(_,i)=>{const v=d.entries[index+':'+(i+1)]||'';return `<td><button type="button" class="nc42-cell ${v?'filled':''}" data-kind="${kinds(v)}" data-nc42-edit="${unit}:${index}:${i+1}" title="${E(person)} วันที่ ${i+1}">${v?E(v):'＋'}</button></td>`}).join('')}</tr>`).join('');
+ if(!rows)rows=`<tr><td colspan="${num+2}" style="padding:22px;text-align:center;color:#869d94;font-weight:400">ยังไม่มีตารางของ${unitLabel(unit)} · เลือกนำเข้าไฟล์หรือเพิ่มบุคลากร</td></tr>`;
+ return `<table class="nc42-roster" aria-label="ตารางเวร${unitLabel(unit)}"><thead><tr><th>ลำดับ</th><th>ชื่อ-สกุล</th>${dateHeaders}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+function cardMarkup(unit){const d=record(unit),label=unitLabel(unit);return `<section class="nc42-panel nc42-unit-card" id="nc42Card-${unit}">
+<div class="nc42-unit-title"><span class="nc42-round ${unit==='sdmc'?'sdmc':''}">▥</span><div><h3>ตารางเวร ${label}</h3><p>ประจำเดือน ${monthLabel()}${d.demo?' · ข้อมูลสาธิต':''}</p></div><span class="nc42-count">♟ จำนวน ${d.people.length} คน</span></div>
+<div class="nc42-tools"><button type="button" data-nc42-add="${unit}">＋ เพิ่มบุคลากร</button><button type="button" data-nc42-source="${unit}">คัดลอกจากเวรต้นฉบับ</button><button type="button" class="nc42-danger" data-nc42-clear="${unit}">ล้างตารางนี้</button></div>
+${d.docName?`<div class="nc42-doc">เอกสารแนบ: ${E(d.docName)} <button type="button" data-nc42-doc="${unit}">เปิดดูต้นฉบับ</button><p>ไฟล์รูปภาพ/PDF แสดงเป็นเอกสาร และเพิ่มหรือแก้ไขเวรในตารางด้านล่างได้ด้วยตนเอง</p></div>`:''}
+<div class="nc42-viewbox">${rosterMarkup(unit)}</div>
+<div class="nc42-actions"><button type="button" data-nc42-full="${unit}">⛶ ดูเต็มจอ</button><button type="button" data-nc42-export="${unit}:pdf">▣ PDF</button><button type="button" data-nc42-send="${unit}">➤ ส่งตรวจ</button></div>
+<div class="nc42-more-exports"><button type="button" data-nc42-export="${unit}:image">▧ รูปภาพ</button><button type="button" data-nc42-export="${unit}:pdf">PDF</button><button type="button" data-nc42-export="${unit}:excel">Excel</button><button type="button" data-nc42-export="${unit}:sheet">Sheet</button></div>
+</section>`}
+function render(){if(!$42('nc42DeptPage'))return;monthOptions();$42('nc42Cards').innerHTML=units.map(cardMarkup).join('');units.forEach(u=>{const b=document.querySelector(`[data-nc42-unit="${u}"]`);b.setAttribute('aria-pressed',String(u===selected))});}
+function selectUnit(u,scroll=false){selected=u;document.querySelectorAll('[data-nc42-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.nc42Unit===u)));if(scroll)$42('nc42Card-'+u)?.scrollIntoView({behavior:'smooth',block:'start'});}
+function shiftChoices(){let saved=[];try{saved=(JSON.parse(localStorage.getItem('nurse_calendar_page1_reference_match_v2')||'{}').shifts||[]).filter(s=>!s.archived).map(s=>s.name)}catch(e){}const list=[...new Set(['เวร1','เวร2','OT1','OT2','SDMC','EXTRA1','EXTRA2','EXTRA3',...saved])];return list}
+function showEdit(unit,index,day){editing={unit,index,day};const data=record(unit),val=data.entries[index+':'+day]||'';const options=shiftChoices();if(val&&!options.includes(val))options.unshift(val);const dialog=$42('nc42EditDialog');dialog.innerHTML=`<h3>แก้ไขเวร วันที่ ${day}</h3><p>${E(unitLabel(unit))} · ${E(data.people[index]||'')}</p><label>ประเภทเวร<select id="nc42DutyPick"><option value="">ไม่มีเวร / ลบเวร</option>${options.map(x=>`<option value="${E(x)}" ${x===val?'selected':''}>${E(x)}</option>`).join('')}</select></label><label>หรือกรอกชื่อเวรเอง<input id="nc42DutyCustom" maxlength="45" placeholder="เวรพิเศษ (ถ้าต้องการ)" autocomplete="off"></label><div class="nc42-dialog-actions"><button id="nc42CancelEdit" type="button">ยกเลิก</button><button id="nc42SaveEdit" type="button">บันทึก</button></div>`;
+ $42('nc42EditBackdrop').hidden=false;document.body.style.overflow='hidden';$42('nc42CancelEdit').onclick=closeEdit;$42('nc42SaveEdit').onclick=()=>{const value=$42('nc42DutyCustom').value.trim()||$42('nc42DutyPick').value;const d=mutable(unit);if(value)d.entries[index+':'+day]=value;else delete d.entries[index+':'+day];d.updated=Date.now();save();closeEdit();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true);status('บันทึกเวรในตารางแก้ไขแล้ว · ไม่เปลี่ยนข้อมูลตารางต้นฉบับ')};}
+function closeEdit(){$42('nc42EditBackdrop').hidden=true;if($42('nc42DeptViewer').hidden)document.body.style.overflow='';}
+function addPerson(unit){let name=prompt('ชื่อบุคลากรที่จะเพิ่มใน '+unitLabel(unit));if(!name)return;name=name.trim();if(!name)return;const d=mutable(unit);d.people.push(name);d.updated=Date.now();save();render();}
+function rename(unit,index){const d=record(unit),old=d.people[index];if(!old)return;const value=prompt('แก้ไขชื่อบุคลากร (เว้นว่างเพื่อลบรายชื่อและข้อมูลเวรทั้งหมดในแถว)',old);if(value===null)return;const rec=mutable(unit);if(!value.trim()){if(!confirm('ลบ '+old+' พร้อมเวรในแถวนี้?'))return;rec.people.splice(index,1);const next={};for(const [k,v] of Object.entries(rec.entries)){const [i,day]=k.split(':').map(Number);if(i===index)continue;next[(i>index?i-1:i)+':'+day]=v}rec.entries=next}else rec.people[index]=value.trim();rec.updated=Date.now();save();render();if(!$42('nc42DeptViewer').hidden)showFullscreen(unit,true)}
+function clear(unit){if(!confirm('ลบเฉพาะตารางเวรแก้ไขของ '+unitLabel(unit)+' เดือน '+monthLabel()+'? ข้อมูลต้นฉบับและหน้าอื่นไม่ถูกลบ'))return;const d=mutable(unit);d.people=[];d.entries={};d.updated=Date.now();save();render();}
+function showFullscreen(unit,keepScroll=false){fullUnit=unit;zoom=1;$42('nc42FullTitle').textContent='ตารางเวร '+unitLabel(unit)+' · '+monthLabel();$42('nc42FullInner').innerHTML=rosterMarkup(unit,true);$42('nc42DeptViewer').hidden=false;$42('nc42FullInner').style.zoom='1';$42('nc42ZoomValue').textContent='100%';document.body.style.overflow='hidden';if(!keepScroll)$42('nc42FullContent').scrollTo(0,0);}
+function closeFullscreen(){$42('nc42DeptViewer').hidden=true;if($42('nc42EditBackdrop').hidden)document.body.style.overflow='';}
+function applyZoom(delta){zoom=Math.max(.5,Math.min(2.5,zoom+delta));$42('nc42FullInner').style.zoom=zoom;$42('nc42ZoomValue').textContent=Math.round(zoom*100)+'%'}
+function parseDay(raw){const x=String(raw??'').trim(),m=x.match(/(?:^|[.\s])([1-9]|[12]\d|3[01])$/);if(m)return +m[1];const first=x.match(/^([1-9]|[12]\d|3[01])(?=[.\s\/])/);if(first)return +first[1];if(/^([1-9]|[12]\d|3[01])$/.test(x))return +x;return null}
+function staffName(raw){return String(raw??'').replace(/^\s*\d{1,3}\s*[.)]\s*/,'').replace(/\s+/g,' ').trim()}
+function convertSheetToRoster(rows,unit){let people=[],entries={},found=false;const limit=days();const put=(name,day,shift)=>{if(!name||!day||day>limit)return;if(!people.includes(name))people.push(name);const i=people.indexOf(name);entries[i+':'+day]=shift};
+ // A personnel-by-date table, with a staff-name heading and dates across columns.
+ const headerIndex=rows.findIndex(r=>r.slice(0,5).some(v=>/ชื่อ.{0,5}(สกุล|บุคลากร)|รายชื่อ|name/i.test(String(v))));
+ if(headerIndex>=0){const header=rows[headerIndex],personCol=header.findIndex(v=>/ชื่อ|รายชื่อ|name/i.test(String(v)));const dateCols=[];header.forEach((h,c)=>{const day=parseDay(h);if(c!==personCol&&day&&day<=limit)dateCols.push({c,day})});if(personCol>=0&&dateCols.length>=2){rows.slice(headerIndex+1).forEach(r=>{const person=staffName(r[personCol]);if(!person||person==='-'||/รวม|หมายเหตุ/.test(person))return;const index=people.length;people.push(person);dateCols.forEach(({c,day})=>{const v=String(r[c]??'').trim();if(v&&v!=='-')entries[index+':'+day]=v})});found=people.length>0;}}
+ // Original nurse duty table: date rows and shift-type columns (do not touch the original data).
+ if(!found){const hr=rows.slice(0,3),dayRows=rows.map((r,i)=>({r,i,day:parseDay(r[0])})).filter(a=>a.day);if(dayRows.length>2){for(const {r,day} of dayRows){for(let c=1;c<r.length;c++){const title=hr.map(h=>String(h?.[c]||'')).find(x=>/^(เวร|OT|SDMC|EXTRA)/i.test(x))||String(hr[0]?.[c]||'');const isSdmc=c>=5&&c<=16||/SDMC/i.test(title);if(unit==='sdmc'&&!isSdmc)continue;if(unit==='main'&&isSdmc)continue;const raw=String(r[c]??'').trim();if(!raw||raw==='-'||/^\d+(?:\.\d+)?$/.test(raw))continue;const correctedTitle=isSdmc?(['SDMC1','SDMC1','SDMC2','SDMC2','SDMC3','SDMC3','SDMC4','SDMC4','SDMC5','SDMC6','SDMC7','SDMC8'][c-5]||'SDMC'):(c>=17?'EXTRA'+(c-16):title||'เวร');raw.split(/[\n;,]+/).map(staffName).filter(Boolean).forEach(name=>put(name,day,correctedTitle))}}found=people.length>0;}}
+ if(!found)throw Error('ไฟล์นี้ไม่พบแถววันที่/ชื่อบุคลากรที่อ่านได้ กรุณาใช้ตาราง Excel ที่มีหัววันที่และชื่อบุคลากร หรือเริ่มกรอกตารางเอง');
+ return {people,entries};}
+async function parseImport(file,kind,unit){if(file.size>15*1024*1024)throw Error('ไฟล์ต้องไม่เกิน 15 MB');const d=mutable(unit);
+ if(kind==='image'||kind==='pdf'){const id='dept-'+Date.now()+'-'+Math.random().toString(36).slice(2);await nc38PutFile(id,file);d.docId=id;d.docName=file.name;d.kind=kind;d.updated=Date.now();save();render();status('เก็บไฟล์ '+file.name+' แล้ว · เปิดดูไฟล์ได้ และแก้ไขข้อมูลเวรด้วยการกรอกตารางด้านล่าง (ยังไม่มี OCR อัตโนมัติ)');return}
+ let rows=[];if(kind==='sheet'&&/\.csv$/i.test(file.name)){const text=await file.text();rows=nc37ParseCsv?nc37ParseCsv(text):text.split(/\r?\n/).map(line=>line.split(','))}else{await nc37EnsureXlsx();const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:false});rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});}
+ const transformed=convertSheetToRoster(rows,unit);if(!confirm('พบชื่อบุคลากร '+transformed.people.length+' คนจาก '+file.name+'\nนำเข้าแทนตารางเวรแก้ไข '+unitLabel(unit)+' ของ '+monthLabel()+'? (ไม่เปลี่ยนตารางต้นฉบับ)'))return;
+ d.people=transformed.people;d.entries=transformed.entries;d.kind='excel';d.docName=file.name;d.docId='';d.updated=Date.now();save();render();status('นำเข้า '+file.name+' สำหรับ '+unitLabel(unit)+' แล้ว · แตะช่องวันที่เพื่อแก้เวร');}
+function sourceImport(unit){const src=nc33Data?.[(year+543)+'-'+String(month).padStart(2,'0')];if(!src||!src.rows?.length){alert('ไม่พบไฟล์ตารางเวรต้นฉบับของเดือน '+monthLabel()+' กรุณานำเข้าที่หน้าเวรต้นฉบับก่อน');return}try{const data=convertSheetToRoster(src.rows,unit);if(!confirm('คัดลอกข้อมูล '+data.people.length+' คน จากเวรต้นฉบับมายังเวรแก้ไข '+unitLabel(unit)+'?'))return;const d=mutable(unit);d.people=data.people;d.entries=data.entries;d.kind='original-copy';d.docName='คัดลอกจากเวรต้นฉบับ';d.updated=Date.now();save();render();}catch(e){alert(e.message)}}
+let fileKind='excel';function chooseFile(k){fileKind=k;const input=$42('nc42File');input.accept={excel:'.xlsx,.xls',sheet:'.csv,.xlsx',pdf:'.pdf',image:'image/png,image/jpeg,image/webp'}[k];input.value='';input.click()}
+async function openDoc(unit){const d=record(unit);if(!d.docId)return;const blob=await nc38GetFile(d.docId);if(!blob){alert('ไม่พบไฟล์เอกสารแนบในเครื่อง');return}if(docURL)URL.revokeObjectURL(docURL);docURL=URL.createObjectURL(blob);fullUnit=unit;$42('nc42FullTitle').textContent='เอกสารต้นฉบับ '+unitLabel(unit);$42('nc42FullInner').innerHTML=d.kind==='pdf'?`<iframe title="เอกสาร PDF" src="${docURL}" style="width:100vw;height:calc(100vh - 90px);border:0"></iframe>`:`<img src="${docURL}" alt="เอกสารที่นำเข้า" style="width:auto;max-width:none;height:auto">`;$42('nc42DeptViewer').hidden=false;document.body.style.overflow='hidden';}
+function rowsForExport(unit){const d=record(unit);return [['ลำดับ','ชื่อ-สกุล',...Array.from({length:days()},(_,i)=>String(i+1))],...d.people.map((p,i)=>[i+1,p,...Array.from({length:days()},(_,j)=>d.entries[i+':'+(j+1)]||'')])]}
+function makeA4Canvas(unit){const data=rowsForExport(unit),out=document.createElement('canvas');out.width=3508;out.height=2480;const c=out.getContext('2d');if(!c)throw Error('สร้างภาพตารางไม่ได้');c.fillStyle='#fff';c.fillRect(0,0,out.width,out.height);c.fillStyle='#20574a';c.textAlign='center';c.font='bold 48px Mali, Thonburi, Tahoma, sans-serif';c.fillText('ตารางเวรแก้ไข '+unitLabel(unit)+' · '+monthLabel(),out.width/2,105);const safe=125,top=180,tableWidth=out.width-safe*2,staffCol=370,indexCol=95,small=(tableWidth-staffCol-indexCol)/days(),rowH=Math.min(87,Math.max(25,(out.height-top-safe)/Math.max(data.length,1)));if(rowH<28)throw Error('จำนวนบุคลากรมากเกินขนาด A4 หน้าเดียว กรุณาส่งออก Excel');const widths=Array.from({length:days()+2},(_,i)=>i===0?indexCol:i===1?staffCol:small);let xPositions=[safe];widths.forEach(w=>xPositions.push(xPositions.at(-1)+w));for(let r=0;r<data.length;r++){let y=top+r*rowH;for(let col=0;col<widths.length;col++){const x=xPositions[col],w=widths[col],v=String(data[r][col]??'');const groupName=group(v);c.fillStyle=r===0?'#e4f6ed':(r%2?'#fff':'#f9fcfa');if(r>0&&col>1&&v)c.fillStyle=colors(v);c.fillRect(x,y,w,rowH);c.strokeStyle='#cfdfd8';c.lineWidth=2;c.strokeRect(x,y,w,rowH);c.fillStyle='#264e43';c.font=(r===0?'bold ':'')+(col===1?25:col<2?23:19)+'px Mali, Thonburi, Tahoma, sans-serif';c.textBaseline='middle';c.textAlign=col===1?'left':'center';let text=v;if(col===1){while(c.measureText(text).width>w-20&&text.length>1)text=text.slice(0,-2)+'…'}else{while(c.measureText(text).width>w-9&&text.length>1)text=text.slice(0,-2)+'…'}c.fillText(text,col===1?x+12:x+w/2,y+rowH/2);}}return out;}
+async function exportRoster(unit,type){const d=record(unit);if(!d.people.length)throw Error('ยังไม่มีข้อมูลบุคลากรในตาราง '+unitLabel(unit));const name='ตารางเวรแก้ไข_'+unitLabel(unit)+'_'+key();const rows=rowsForExport(unit);
+ if(type==='sheet'){const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');nc33Download(new Blob([csv],{type:'text/csv;charset=utf-8'}),name+'.csv');return}
+ if(type==='excel'){await nc37EnsureXlsx();const wb=XLSX.utils.book_new(),sheet=XLSX.utils.aoa_to_sheet(rows);sheet['!cols']=[{wch:8},{wch:25},...Array.from({length:days()},()=>({wch:11}))];XLSX.utils.book_append_sheet(wb,sheet,unitLabel(unit));XLSX.writeFile(wb,name+'.xlsx');return}
+ const page=makeA4Canvas(unit);
+ if(type==='image'){const blob=await nc39CanvasBlob(page,'image/png');nc33Download(blob,name+'_A4.png');return}
+ if(type==='pdf'){const pdf=await nc39PdfFromCanvas(page,true);nc33Download(pdf,name+'_A4.pdf');return}
+ throw Error('ไม่รู้จักประเภทไฟล์');}
+function clicked(e){const btn=e.target.closest('button');if(!btn)return;let attr;
+ if((attr=btn.dataset.nc42Unit)){selectUnit(attr,true);return}
+ if((attr=btn.dataset.nc42Add)){addPerson(attr);return}
+ if((attr=btn.dataset.nc42Rename)){const [unit,i]=attr.split(':');rename(unit,+i);return}
+ if((attr=btn.dataset.nc42Edit)){const [unit,i,day]=attr.split(':');showEdit(unit,+i,+day);return}
+ if((attr=btn.dataset.nc42Clear)){clear(attr);return}
+ if((attr=btn.dataset.nc42Full)){showFullscreen(attr);return}
+ if((attr=btn.dataset.nc42Source)){sourceImport(attr);return}
+ if((attr=btn.dataset.nc42Doc)){openDoc(attr).catch(err=>alert(err.message));return}
+ if((attr=btn.dataset.nc42Export)){const [u,k]=attr.split(':');exportRoster(u,k).catch(err=>alert('ส่งออกไม่สำเร็จ: '+err.message));return}
+ if((attr=btn.dataset.nc42Send)){exportRoster(attr,'pdf').then(()=>alert('เตรียมไฟล์ PDF สำหรับส่งตรวจแล้ว\nยังไม่ได้ส่งให้ภาควิชาผ่านระบบอัตโนมัติ')).catch(err=>alert(err.message));return}
+ if((attr=btn.dataset.nc42Import)){chooseFile(attr);return}
+}
+$42('nc42DeptPage').addEventListener('click',clicked);$42('nc42FullInner').addEventListener('click',clicked);
+$42('nc42File').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{status('กำลังอ่านไฟล์ '+file.name);await parseImport(file,fileKind,selected)}catch(err){alert('นำเข้าไม่สำเร็จ: '+err.message);status('เลือกไฟล์ใหม่ได้โดยไม่กระทบข้อมูลเดิม')}});
+$42('nc42Prev').onclick=()=>monthMove(-1);$42('nc42Next').onclick=()=>monthMove(1);$42('nc42Today').onclick=()=>{const n=new Date();year=n.getFullYear();month=n.getMonth()+1;render()};$42('nc42Period').onchange=e=>{[year,month]=e.target.value.split('-').map(Number);render()};
+$42('nc42FullClose').onclick=()=>{closeFullscreen();if(docURL){URL.revokeObjectURL(docURL);docURL=null}};$42('nc42ZoomOut').onclick=()=>applyZoom(-.2);$42('nc42ZoomIn').onclick=()=>applyZoom(.2);
+$42('nc42EditBackdrop').addEventListener('click',e=>{if(e.target===$42('nc42EditBackdrop'))closeEdit()});
+window.nc42Render=render;
+if(new URLSearchParams(location.search).get('preview')==='department')document.querySelector('.tab[data-tab="department"]')?.click();
+})();
+
 </script></body>
 </html>
